@@ -34,6 +34,7 @@ android {
 dependencies {
     //versions
     def roomVersion = "2.4.2"
+    def navVersion = "2.4.2"
 
     //implementations
     implementation 'androidx.core:core-ktx:1.7.0'
@@ -47,4 +48,8 @@ dependencies {
     //Room database
     implementation "androidx.room:room-runtime:$roomVersion"
     annotationProcessor "androidx.room:room-compiler:$roomVersion"
+
+    //Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
 }

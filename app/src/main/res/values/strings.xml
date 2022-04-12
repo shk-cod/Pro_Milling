@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Pro Milling</string>
+    <string name="spiral_contact_menu_title">Spiral Contact Length</string>
+    <string name="cutting_width_menu_title">Cutting width in corner</string>
+    <string name="trochoid_width_menu_title">Trochoid cutting width</string>
+    <string name="calculations_list_menu_title">Calculations list</string>
 </resources>
