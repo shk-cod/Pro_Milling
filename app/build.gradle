@@ -32,6 +32,8 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
     //versions
     def roomVersion = "2.4.2"
     def navVersion = "2.4.2"
