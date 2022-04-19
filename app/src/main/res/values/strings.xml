@@ -4,6 +4,13 @@
     <string name="cutting_width_menu_title">Cutting width in corner</string>
     <string name="trochoid_width_menu_title">Trochoid cutting width</string>
     <string name="calculations_list_menu_title">Calculations list</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hint_tool_diameter">Tool diameter</string>
+    <string name="hint_spiral_angle">Spiral angle</string>
+    <string name="hint_cutting_height">Cutting height</string>
+    <string name="hint_cutting_width">Cutting width</string>
+    <string name="hint_flute_count">Flute count</string>
+    <string name="hint_flute_position">Flute position</string>
+    <string name="hint_tool_radius">Tool radius</string>
+    <string name="hint_path_rouding_radius">Path rouding radius</string>
+    <string name="hint_trochoid_step">Trochoid step</string>
 </resources>
