@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="@string/spiral_contact_menu_title" android:id="@+id/spiral_contact_menu_item"/>
-    <item android:title="@string/cutting_width_menu_title" android:id="@+id/cutting_width_menu_item"/>
-    <item android:title="@string/trochoid_width_menu_title" android:id="@+id/trochoid_width_menu_item"/>
+    <item android:title="@string/spiral_contact_menu_title" android:id="@+id/spiral_contact"/>
+    <item android:title="@string/cutting_width_menu_title" android:id="@+id/cutting_width"/>
+    <item android:title="@string/trochoid_width_menu_title" android:id="@+id/trochoid_width"/>
     <item android:title="@string/calculations_list_menu_title" android:id="@+id/calculations_list_menu_item"/>
 </menu>

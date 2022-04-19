@@ -3,20 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/spiralContactFragment">
+    app:startDestination="@id/spiral_contact">
 
     <fragment
-        android:id="@+id/spiralContactFragment"
+        android:id="@+id/spiral_contact"
         android:name="com.kou.promilling.spiralcontactcalc.SpiralContactFragment"
         android:label="fragment_spiral_contact"
         tools:layout="@layout/fragment_spiral_contact" />
     <fragment
-        android:id="@+id/cuttingWidthFragment"
+        android:id="@+id/cutting_width"
         android:name="com.kou.promilling.cuttingwidthcalc.CuttingWidthFragment"
         android:label="fragment_cutting_width"
         tools:layout="@layout/fragment_cutting_width" />
     <fragment
-        android:id="@+id/trochoidWidthFragment"
+        android:id="@+id/trochoid_width"
         android:name="com.kou.promilling.trochoidwidthcalc.TrochoidWidthFragment"
         android:label="fragment_trochoid_width"
         tools:layout="@layout/fragment_trochoid_width" />
