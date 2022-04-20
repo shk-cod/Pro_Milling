@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
@@ -21,9 +22,8 @@ class MainActivity : AppCompatActivity() {
 
         setupNavigation()
     }
-
-    override fun onSupportNavigateUp() =
-        navigateUp(findNavController(R.id.nav_host_fragment), binding.drawerLayout)
+    override fun onSupportNavigateUp()
+            = navigateUp(findNavController(R.id.nav_host_fragment), binding.drawerLayout)
 
     private fun setupNavigation() {
         val navController = findNavController(R.id.nav_host_fragment)

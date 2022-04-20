@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/spiral_contact">
+    app:startDestination="@id/results">
 
     <fragment
         android:id="@+id/spiral_contact"
@@ -20,4 +20,8 @@
         android:name="com.kou.promilling.trochoidwidthcalc.TrochoidWidthFragment"
         android:label="fragment_trochoid_width"
         tools:layout="@layout/fragment_trochoid_width" />
+    <fragment
+        android:id="@+id/results"
+        android:name="com.kou.promilling.results.ResultsFragment"
+        android:label="ResultsFragment" />
 </navigation>
