@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="com.kou.promilling.Converter"/>
         <variable
             name="viewModel"
             type="com.kou.promilling.spiralcontactcalc.SpiralContactViewModel" />
@@ -21,6 +22,7 @@
             android:layout_marginTop="@dimen/margin_default"
             android:fontFamily="@font/roboto_light"
             android:textSize="@dimen/text_size_result"
+            android:text="@{viewModel.result}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -61,6 +63,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/text_input_diameter"
+                android:text="@={Converter.doubleToString(textInputDiameter, viewModel.diameter, viewModel.diameter)}"
+                android:inputType="numberDecimal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -79,6 +83,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/text_input_spiral_angle"
+                android:inputType="numberDecimal"
+                android:text="@={Converter.doubleToString(textInputSpiralAngle, viewModel.spiralAngle, viewModel.spiralAngle)}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -97,6 +103,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/text_input_cutting_height"
+                android:inputType="numberDecimal"
+                android:text="@={Converter.doubleToString(textInputCuttingHeight, viewModel.cuttingHeight, viewModel.cuttingHeight)}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -115,6 +123,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/text_input_cutting_width"
+                android:inputType="numberDecimal"
+                android:text="@={Converter.doubleToString(textInputCuttingWidth, viewModel.cuttingWidth, viewModel.cuttingWidth)}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -133,6 +143,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/text_input_flute_count"
+                android:inputType="numberDecimal"
+                android:text="@={Converter.intToString(viewModel.fluteCount)}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -152,6 +164,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/text_input_flute_position"
+                android:inputType="numberDecimal"
+                android:text="@={Converter.doubleToString(textInputFlutePosition, viewModel.flutePosition, viewModel.flutePosition)}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -164,6 +178,7 @@
         <Button
             android:id="@+id/button_result"
             android:text="@string/button_result_text"
+            android:onClick="@{viewModel::result}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_default"
