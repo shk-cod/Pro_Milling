@@ -20,6 +20,8 @@ class CuttingWidthFragment : Fragment() {
         val viewModel = ViewModelProvider(this).get(CuttingWidthViewModel::class.java)
         binding.viewModel = viewModel
 
+        binding.lifecycleOwner = this
+
         return binding.root
     }
 

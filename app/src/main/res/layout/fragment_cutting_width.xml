@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="com.kou.promilling.Converter"/>
         <variable
             name="viewModel"
             type="com.kou.promilling.cuttingwidthcalc.CuttingWidthViewModel" />
@@ -21,6 +22,7 @@
             android:layout_marginTop="@dimen/margin_default"
             android:fontFamily="@font/roboto_light"
             android:textSize="@dimen/text_size_result"
+            android:text="@{viewModel.result}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -50,6 +52,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/text_input_radius"
+                android:text="@={Converter.doubleToString(textInputRadius, viewModel.radius, viewModel.radius)}"
+                android:inputType="numberDecimal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -68,6 +72,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/text_input_rounding_radius"
+                android:text="@={Converter.doubleToString(textInputRoundingRadius, viewModel.roundingRadius, viewModel.roundingRadius)}"
+                android:inputType="numberDecimal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -86,6 +92,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/text_input_cutting_width"
+                android:text="@={Converter.doubleToString(textInputCuttingWidth, viewModel.cuttingWidth, viewModel.cuttingWidth)}"
+                android:inputType="numberDecimal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -94,6 +102,7 @@
         <Button
             android:id="@+id/button_result"
             android:text="@string/button_result_text"
+            android:onClick="@{viewModel::result}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_default"
