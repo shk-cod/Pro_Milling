@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.kou.promilling.Converter"/>
+
+        <import type="com.kou.promilling.Converter" />
+
         <variable
             name="viewModel"
             type="com.kou.promilling.spiralcontactcalc.SpiralContactViewModel" />
@@ -21,8 +23,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_default"
             android:fontFamily="@font/roboto_light"
-            android:textSize="@dimen/text_size_result"
             android:text="@{viewModel.result}"
+            android:textSize="@dimen/text_size_result"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -33,158 +35,157 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_default"
-            app:dividerInsetStart="@dimen/margin_default"
             app:dividerInsetEnd="@dimen/margin_default"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_result"
+            app:dividerInsetStart="@dimen/margin_default"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_result" />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/divider">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_layout_diameter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/hint_tool_diameter"
-            android:layout_marginTop="@dimen/margin_default"
-            android:layout_marginStart="@dimen/margin_default"
-            android:layout_marginEnd="@dimen/margin_default"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-            app:layout_constraintTop_toBottomOf="@+id/divider">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/text_input_diameter"
-                android:text="@={Converter.doubleToString(textInputDiameter, viewModel.diameter, viewModel.diameter)}"
-                android:inputType="numberDecimal"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_layout_diameter"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_default"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:layout_marginEnd="@dimen/margin_default"
+                    android:hint="@string/hint_tool_diameter"
+                    app:layout_constraintTop_toBottomOf="@+id/divider">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_layout_spiral_angle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/hint_spiral_angle"
-            android:layout_marginTop="@dimen/margin_default"
-            android:layout_marginStart="@dimen/margin_default"
-            android:layout_marginEnd="@dimen/margin_default"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-            app:layout_constraintTop_toBottomOf="@+id/text_layout_diameter">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/text_input_diameter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:text="@={Converter.doubleToString(textInputDiameter, viewModel.diameter, viewModel.diameter)}" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/text_input_spiral_angle"
-                android:inputType="numberDecimal"
-                android:text="@={Converter.doubleToString(textInputSpiralAngle, viewModel.spiralAngle, viewModel.spiralAngle)}"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_layout_spiral_angle"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_default"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:layout_marginEnd="@dimen/margin_default"
+                    android:hint="@string/hint_spiral_angle"
+                    app:layout_constraintTop_toBottomOf="@+id/text_layout_diameter">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_layout_cutting_height"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/hint_cutting_height"
-            android:layout_marginTop="@dimen/margin_default"
-            android:layout_marginStart="@dimen/margin_default"
-            android:layout_marginEnd="@dimen/margin_default"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-            app:layout_constraintTop_toBottomOf="@+id/text_layout_spiral_angle">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/text_input_spiral_angle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:text="@={Converter.doubleToString(textInputSpiralAngle, viewModel.spiralAngle, viewModel.spiralAngle)}" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/text_input_cutting_height"
-                android:inputType="numberDecimal"
-                android:text="@={Converter.doubleToString(textInputCuttingHeight, viewModel.cuttingHeight, viewModel.cuttingHeight)}"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_layout_cutting_height"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_default"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:layout_marginEnd="@dimen/margin_default"
+                    android:hint="@string/hint_cutting_height"
+                    app:layout_constraintTop_toBottomOf="@+id/text_layout_spiral_angle">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_layout_cutting_width"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/hint_cutting_width"
-            android:layout_marginTop="@dimen/margin_default"
-            android:layout_marginStart="@dimen/margin_default"
-            android:layout_marginEnd="@dimen/margin_default"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-            app:layout_constraintTop_toBottomOf="@+id/text_layout_cutting_height">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/text_input_cutting_height"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:text="@={Converter.doubleToString(textInputCuttingHeight, viewModel.cuttingHeight, viewModel.cuttingHeight)}" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/text_input_cutting_width"
-                android:inputType="numberDecimal"
-                android:text="@={Converter.doubleToString(textInputCuttingWidth, viewModel.cuttingWidth, viewModel.cuttingWidth)}"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_layout_cutting_width"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_default"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:layout_marginEnd="@dimen/margin_default"
+                    android:hint="@string/hint_cutting_width"
+                    app:layout_constraintTop_toBottomOf="@+id/text_layout_cutting_height">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_layout_flute_count"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/hint_flute_count"
-            android:layout_marginTop="@dimen/margin_default"
-            android:layout_marginStart="@dimen/margin_default"
-            android:layout_marginEnd="@dimen/margin_default"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-            app:layout_constraintTop_toBottomOf="@+id/text_layout_cutting_width">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/text_input_cutting_width"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:text="@={Converter.doubleToString(textInputCuttingWidth, viewModel.cuttingWidth, viewModel.cuttingWidth)}" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/text_input_flute_count"
-                android:inputType="numberSigned"
-                android:text="@={Converter.intToString(textInputFluteCount, viewModel.fluteCount, viewModel.fluteCount)}"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_layout_flute_count"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_default"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:layout_marginEnd="@dimen/margin_default"
+                    android:hint="@string/hint_flute_count"
+                    app:layout_constraintTop_toBottomOf="@+id/text_layout_cutting_width">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_layout_flute_position"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/hint_flute_position"
-            android:layout_marginTop="@dimen/margin_default"
-            android:layout_marginBottom="@dimen/margin_default"
-            android:layout_marginStart="@dimen/margin_default"
-            android:layout_marginEnd="@dimen/margin_default"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-            app:layout_constraintTop_toBottomOf="@+id/text_layout_flute_count">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/text_input_flute_count"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberSigned"
+                        android:text="@={Converter.intToString(textInputFluteCount, viewModel.fluteCount, viewModel.fluteCount)}" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/text_input_flute_position"
-                android:inputType="numberDecimal"
-                android:text="@={Converter.doubleToString(textInputFlutePosition, viewModel.flutePosition, viewModel.flutePosition)}"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_layout_flute_position"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_default"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:layout_marginEnd="@dimen/margin_default"
+                    android:layout_marginBottom="@dimen/margin_default"
+                    android:hint="@string/hint_flute_position"
+                    app:layout_constraintTop_toBottomOf="@+id/text_layout_flute_count">
 
-        </LinearLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/text_input_flute_position"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:text="@={Converter.doubleToString(textInputFlutePosition, viewModel.flutePosition, viewModel.flutePosition)}" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
 
         </ScrollView>
 
         <Button
             android:id="@+id/button_result"
-            android:text="@string/button_result_text"
-            android:onClick="@{viewModel::result}"
+            style="@style/Widget.Material3.Button.ElevatedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_default"
             android:layout_marginEnd="@dimen/margin_default"
+            android:layout_marginBottom="@dimen/margin_default"
+            android:onClick="@{viewModel::result}"
+            android:text="@string/button_result_text"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            style="@style/Widget.Material3.Button.ElevatedButton"/>
+            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

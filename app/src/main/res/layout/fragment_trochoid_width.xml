@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="com.kou.promilling.Converter" />
+
         <variable
             name="viewModel"
             type="com.kou.promilling.trochoidwidthcalc.TrochoidWidthViewModel" />
@@ -19,6 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_default"
+            android:text="@{viewModel.result}"
             android:textAppearance="?attr/textAppearanceHeadline6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -30,76 +34,83 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_default"
-            app:dividerInsetStart="@dimen/margin_default"
             app:dividerInsetEnd="@dimen/margin_default"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_result"
+            app:dividerInsetStart="@dimen/margin_default"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_result" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/text_layout_radius"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_tool_radius"
-            android:layout_marginTop="@dimen/margin_default"
             android:layout_marginStart="@dimen/margin_default"
+            android:layout_marginTop="@dimen/margin_default"
             android:layout_marginEnd="@dimen/margin_default"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:hint="@string/hint_tool_radius"
             app:layout_constraintTop_toBottomOf="@+id/divider">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/text_input_radius"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:text="@={Converter.doubleToString(textInputRadius, viewModel.radius, viewModel.radius)}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/text_layout_rounding_radius"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_path_rouding_radius"
-            android:layout_marginTop="@dimen/margin_default"
             android:layout_marginStart="@dimen/margin_default"
+            android:layout_marginTop="@dimen/margin_default"
             android:layout_marginEnd="@dimen/margin_default"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:hint="@string/hint_path_rouding_radius"
             app:layout_constraintTop_toBottomOf="@+id/text_layout_radius">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/text_input_rounding_radius"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:text="@={Converter.doubleToString(textInputRoundingRadius, viewModel.roundingRadius, viewModel.roundingRadius)}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/text_layout_trochoid_step"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_trochoid_step"
-            android:layout_marginTop="@dimen/margin_default"
             android:layout_marginStart="@dimen/margin_default"
+            android:layout_marginTop="@dimen/margin_default"
             android:layout_marginEnd="@dimen/margin_default"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:hint="@string/hint_trochoid_step"
             app:layout_constraintTop_toBottomOf="@+id/text_layout_rounding_radius">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/text_input_trochoid_step"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:text="@={Converter.doubleToString(textInputTrochoidStep, viewModel.trochoidStep, viewModel.trochoidStep)}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/button_result"
-            android:text="@string/button_result_text"
+            style="@style/Widget.Material3.Button.ElevatedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_default"
             android:layout_marginEnd="@dimen/margin_default"
+            android:layout_marginBottom="@dimen/margin_default"
+            android:onClick="@{viewModel::result}"
+            android:text="@string/button_result_text"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            style="@style/Widget.Material3.Button.ElevatedButton"/>
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

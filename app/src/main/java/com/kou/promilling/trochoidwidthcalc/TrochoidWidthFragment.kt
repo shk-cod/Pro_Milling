@@ -19,6 +19,8 @@ class TrochoidWidthFragment : Fragment() {
         val viewModel = ViewModelProvider(this).get(TrochoidWidthViewModel::class.java)
         binding.viewModel = viewModel
 
+        binding.lifecycleOwner = this
+
         return binding.root
     }
 
