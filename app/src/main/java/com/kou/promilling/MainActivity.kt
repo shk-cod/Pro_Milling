@@ -22,16 +22,14 @@ class MainActivity : AppCompatActivity() {
 
         setupNavigation()
     }
-    override fun onSupportNavigateUp()
-            = navigateUp(findNavController(R.id.nav_host_fragment), binding.drawerLayout)
+
 
     private fun setupNavigation() {
         val navController = findNavController(R.id.nav_host_fragment)
 
         setSupportActionBar(binding.toolbar)
-        setupActionBarWithNavController(navController, binding.drawerLayout)
 
-        binding.navigationView.setupWithNavController(navController)
+        binding.bottomNav.setupWithNavController(navController)
 
     }
 }
