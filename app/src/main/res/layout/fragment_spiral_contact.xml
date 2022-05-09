@@ -144,7 +144,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/text_input_flute_count"
                 android:inputType="numberDecimal"
-                android:text="@={Converter.intToString(viewModel.fluteCount)}"
+                android:text="@={Converter.intToString(textInputFluteCount, viewModel.fluteCount, viewModel.fluteCount)}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

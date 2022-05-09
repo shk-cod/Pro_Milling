@@ -15,12 +15,12 @@ class SpiralContactViewModel: ViewModel() {
         get() = _result
 
     //Two-way data binding
-    val diameter = MutableLiveData<Double>(0.0)
-    val spiralAngle = MutableLiveData<Double>(0.0)
-    val cuttingHeight = MutableLiveData<Double>(0.0)
-    val cuttingWidth = MutableLiveData<Double>(0.0)
-    val fluteCount = MutableLiveData<Int>(0)
-    val flutePosition = MutableLiveData<Double>(0.0)
+    val diameter = MutableLiveData(Double.MIN_VALUE)
+    val spiralAngle = MutableLiveData(Double.MIN_VALUE)
+    val cuttingHeight = MutableLiveData(Double.MIN_VALUE)
+    val cuttingWidth = MutableLiveData(Double.MIN_VALUE)
+    val fluteCount = MutableLiveData(Int.MIN_VALUE)
+    val flutePosition = MutableLiveData(Double.MIN_VALUE)
 
 
     //TODO: add field errors
@@ -28,6 +28,7 @@ class SpiralContactViewModel: ViewModel() {
     val cuttingHeightError: LiveData<String>
         get() = _cuttingHeightError
 
+    @Suppress("UNUSED_PARAMETER")
     fun result(v: View) {
         if (!checkInput()) return
 
@@ -42,11 +43,14 @@ class SpiralContactViewModel: ViewModel() {
     }
 
     private fun checkInput(): Boolean {
-        if (diameter.value == 0.0 ||
-                spiralAngle.value == 0.0 ||
-                cuttingHeight.value == 0.0 ||
-                cuttingWidth.value == 0.0 ||
-                fluteCount.value == 0) return false
+        if (
+            diameter.value == Double.MIN_VALUE ||
+            spiralAngle.value == Double.MIN_VALUE ||
+            cuttingHeight.value == Double.MIN_VALUE ||
+            cuttingWidth.value == Double.MIN_VALUE ||
+            fluteCount.value == Int.MIN_VALUE ||
+            flutePosition.value == Double.MIN_VALUE
+        ) return false
 
 //        if (cuttingHeight.value > _diameter.value) {
 
