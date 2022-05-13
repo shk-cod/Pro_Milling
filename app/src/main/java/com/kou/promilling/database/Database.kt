@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase
     DatabaseSpiralContactLength::class,
     DatabaseCuttingWidth::class,
     DatabaseTrochoidWidth::class
-], version = 1)
+], version = 1, exportSchema = false)
 abstract class MillingDatabase: RoomDatabase() {
     abstract val millingDao: MillingDao
 }

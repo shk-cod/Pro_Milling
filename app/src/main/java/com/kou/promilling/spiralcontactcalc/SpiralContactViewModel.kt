@@ -1,14 +1,20 @@
 package com.kou.promilling.spiralcontactcalc
 
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.kou.promilling.calculateSpiralContact
+import com.kou.promilling.database.DatabaseSpiralContactLength
+import com.kou.promilling.database.MillingDao
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class SpiralContactViewModel: ViewModel() {
+class SpiralContactViewModel(
+    private val database: MillingDao
+): ViewModel() {
 
     private val _result = MutableLiveData<String>()
     val result: LiveData<String>
@@ -32,14 +38,27 @@ class SpiralContactViewModel: ViewModel() {
     fun result(v: View) {
         if (!checkInput()) return
 
-        _result.value = calculateSpiralContact(
-            diameter.value!!,
-            spiralAngle.value!!,
-            cuttingHeight.value!!,
-            cuttingWidth.value!!,
-            fluteCount.value!!,
-            flutePosition.value!!
-        ).toString()
+        val diameter = diameter.value!!
+        val spiralAngle = spiralAngle.value!!
+        val cuttingHeight = cuttingHeight.value!!
+        val cuttingWidth = cuttingWidth.value!!
+        val fluteCount = fluteCount.value!!
+        val flutePosition = flutePosition.value!!
+        val result = calculateSpiralContact(
+            diameter,
+            spiralAngle,
+            cuttingHeight,
+            cuttingWidth,
+            fluteCount,
+            flutePosition
+        )
+
+        _result.value = result.toString()
+
+        viewModelScope.launch {
+            writeToDatabase(result = result)
+        }
+
     }
 
     private fun checkInput(): Boolean {
@@ -56,5 +75,30 @@ class SpiralContactViewModel: ViewModel() {
 
 //        }
         return true
+    }
+
+    private suspend fun writeToDatabase(
+        timeMillis: Long = System.currentTimeMillis(),
+        diameter: Double = this.diameter.value!!,
+        spiralAngle: Double = this.spiralAngle.value!!,
+        cuttingHeight: Double = this.cuttingHeight.value!!,
+        cuttingWidth: Double = this.cuttingWidth.value!!,
+        fluteCount: Int = this.fluteCount.value!!,
+        flutePosition: Double = this.flutePosition.value!!,
+        result: Double
+    ) {
+        val entry = DatabaseSpiralContactLength(
+            timeMillis = timeMillis,
+            toolDiameter = diameter,
+            spiralAngle = spiralAngle,
+            cuttingDepth = cuttingHeight,
+            cuttingWidth = cuttingWidth,
+            fluteCount = fluteCount,
+            flutePosition = flutePosition,
+            result = result
+        )
+        withContext(Dispatchers.IO) {
+            database.insertEntry(entry)
+        }
     }
 }

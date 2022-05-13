@@ -2,7 +2,6 @@ package com.kou.promilling
 
 import androidx.databinding.InverseMethod
 import com.google.android.material.textfield.TextInputEditText
-import kotlin.math.roundToInt
 
 object Converter {
     @InverseMethod("stringToDouble")
