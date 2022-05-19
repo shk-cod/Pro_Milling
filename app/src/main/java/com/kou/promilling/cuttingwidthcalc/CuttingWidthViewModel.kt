@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.kou.promilling.calculateCuttingWidth
+import com.kou.promilling.formatResult
 
 class CuttingWidthViewModel: ViewModel() {
     private val _result = MutableLiveData<String>()
@@ -24,7 +25,7 @@ class CuttingWidthViewModel: ViewModel() {
             radius.value!!,
             roundingRadius.value!!,
             cuttingWidth.value!!
-        ).toString()
+        ).formatResult()
     }
 
     private fun checkInput(): Boolean {

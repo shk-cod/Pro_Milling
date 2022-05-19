@@ -8,9 +8,11 @@ import androidx.lifecycle.viewModelScope
 import com.kou.promilling.calculateSpiralContact
 import com.kou.promilling.database.DatabaseSpiralContactLength
 import com.kou.promilling.database.MillingDao
+import com.kou.promilling.formatResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.*
 
 class SpiralContactViewModel(
     private val database: MillingDao
@@ -53,7 +55,7 @@ class SpiralContactViewModel(
             flutePosition
         )
 
-        _result.value = result.toString()
+        _result.value = result.formatResult()
 
         viewModelScope.launch {
             writeToDatabase(result = result)
@@ -88,7 +90,7 @@ class SpiralContactViewModel(
         result: Double
     ) {
         val entry = DatabaseSpiralContactLength(
-            timeMillis = timeMillis,
+            date = Date(timeMillis),
             toolDiameter = diameter,
             spiralAngle = spiralAngle,
             cuttingDepth = cuttingHeight,

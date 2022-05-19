@@ -17,7 +17,7 @@ object Converter {
             return ""
         }
 
-        return value.toString()
+        return value.formatResult()
     }
 
     @Suppress("UNUSED_PARAMETER")

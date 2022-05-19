@@ -4,12 +4,14 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 
 @Database(entities = [
     DatabaseSpiralContactLength::class,
     DatabaseCuttingWidth::class,
     DatabaseTrochoidWidth::class
 ], version = 1, exportSchema = false)
+@TypeConverters(DatabaseTypeConverters::class)
 abstract class MillingDatabase: RoomDatabase() {
     abstract val millingDao: MillingDao
 }
@@ -23,7 +25,9 @@ fun getDatabase(context: Context): MillingDatabase {
                 context.applicationContext,
                 MillingDatabase::class.java,
                 "milling_database"
-            ).build()
+            )
+                .fallbackToDestructiveMigration()
+                .build()
         }
         return INSTANCE
     }
