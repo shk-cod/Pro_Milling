@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.kou.promilling.R
+import com.kou.promilling.database.getDatabase
 import com.kou.promilling.databinding.FragmentTrochoidWidthBinding
 
 class TrochoidWidthFragment : Fragment() {
@@ -16,10 +17,13 @@ class TrochoidWidthFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentTrochoidWidthBinding.inflate(inflater)
-        val viewModel = ViewModelProvider(this).get(TrochoidWidthViewModel::class.java)
-        binding.viewModel = viewModel
-
         binding.lifecycleOwner = this
+
+        val application = requireNotNull(this.activity).application
+        val dataSource = getDatabase(application).millingDao
+        val viewModelFactory = TrochoidWidthViewModelFactory(dataSource)
+        val viewModel = ViewModelProvider(this, viewModelFactory)[TrochoidWidthViewModel::class.java]
+        binding.viewModel = viewModel
 
         return binding.root
     }

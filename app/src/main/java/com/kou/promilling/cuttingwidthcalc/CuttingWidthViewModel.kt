@@ -4,10 +4,19 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.kou.promilling.calculateCuttingWidth
+import com.kou.promilling.database.DatabaseCuttingWidth
+import com.kou.promilling.database.MillingDao
 import com.kou.promilling.formatResult
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.util.*
 
-class CuttingWidthViewModel: ViewModel() {
+class CuttingWidthViewModel(
+    private val database: MillingDao
+): ViewModel() {
     private val _result = MutableLiveData<String>()
     val result: LiveData<String>
         get() = _result
@@ -21,11 +30,20 @@ class CuttingWidthViewModel: ViewModel() {
     fun result(v: View) {
         if (!checkInput()) return
 
-        _result.value = calculateCuttingWidth(
-            radius.value!!,
-            roundingRadius.value!!,
-            cuttingWidth.value!!
-        ).formatResult()
+        val radius = radius.value!!
+        val roundingRadius = roundingRadius.value!!
+        val cuttingWidth = cuttingWidth.value!!
+        val result = calculateCuttingWidth(
+            radius,
+            roundingRadius,
+            cuttingWidth
+        )
+
+        _result.value = result.formatResult()
+
+        viewModelScope.launch {
+            writeToDatabase(result = result)
+        }
     }
 
     private fun checkInput(): Boolean {
@@ -35,5 +53,24 @@ class CuttingWidthViewModel: ViewModel() {
         ) return false
 
         return true
+    }
+
+    private suspend fun writeToDatabase(
+        timeMillis: Long = System.currentTimeMillis(),
+        radius: Double = this.radius.value!!,
+        roundingRadius: Double = this.roundingRadius.value!!,
+        cuttingWidth: Double = this.cuttingWidth.value!!,
+        result: Double
+    ) {
+        val entry = DatabaseCuttingWidth(
+            date = Date(timeMillis),
+            toolRadius = radius,
+            curvatureRadius = roundingRadius,
+            cuttingWidth = cuttingWidth,
+            result = result
+        )
+        withContext(Dispatchers.IO) {
+            database.insertEntry(entry)
+        }
     }
 }
