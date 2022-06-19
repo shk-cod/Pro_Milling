@@ -16,4 +16,6 @@
     <string name="drawer_header_title">Pro Milling</string>
     <string name="drawer_body_title">Milling calculators</string>
     <string name="button_result_text">Calculate</string>
+    <string name="button_close_text">Close</string>
+    <string name="button_reuse_text">Reuse</string>
 </resources>

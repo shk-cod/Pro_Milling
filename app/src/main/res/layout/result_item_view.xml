@@ -35,6 +35,7 @@
             app:layout_constraintTop_toBottomOf="@+id/type_text_view"
             tools:text="15.568" />
 
+        <!-- TODO: improve date format (Util.kt) -->
         <TextView
             android:id="@+id/date_text_view"
             android:layout_width="wrap_content"
