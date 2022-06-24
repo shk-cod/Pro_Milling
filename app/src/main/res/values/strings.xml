@@ -18,4 +18,14 @@
     <string name="button_result_text">Calculate</string>
     <string name="button_close_text">Close</string>
     <string name="button_reuse_text">Reuse</string>
+    <string name="display_tool_diameter">Tool diameter: %,.3f mm</string>
+    <string name="display_spiral_angle">Spiral angle: %,.0f dg</string>
+    <string name="display_cutting_height">Cutting height: %,.3f mm</string>
+    <string name="display_cutting_width">Cutting width: %,.3f mm</string>
+    <string name="display_flute_count">Flute count: %d</string>
+    <string name="display_flute_position">Flute position: %,.0f dg</string>
+    <string name="display_result">Result: %,.3f mm</string>
+    <string name="display_tool_radius">Tool radius: %,.3f mm</string>
+    <string name="display_rounding_radius">Rounding radius: %,.3f mm</string>
+    <string name="display_trochoid_step">Trochoid step: %,.3f mm</string>
 </resources>

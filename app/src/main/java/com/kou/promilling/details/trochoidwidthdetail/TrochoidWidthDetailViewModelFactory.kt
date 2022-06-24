@@ -1,16 +1,18 @@
 package com.kou.promilling.details.trochoidwidthdetail
 
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.kou.promilling.database.DatabaseTrochoidWidth
 
 class TrochoidWidthDetailViewModelFactory(
-    private val item: DatabaseTrochoidWidth
+    private val item: DatabaseTrochoidWidth,
+    private val app: Application
 ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(TrochoidWidthDetailViewModel::class.java)) {
-            return TrochoidWidthDetailViewModel(item) as T
+            return TrochoidWidthDetailViewModel(item, app) as T
         }
         throw IllegalArgumentException("unknown viewModel class")
     }

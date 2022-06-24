@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.kou.promilling.database.DatabaseCuttingWidth
 import com.kou.promilling.databinding.CuttingWidthItemDetailBinding
 
 class CuttingWidthDetailFragment: Fragment() {
@@ -15,12 +14,12 @@ class CuttingWidthDetailFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        val app = requireNotNull(activity).application
         val binding = CuttingWidthItemDetailBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
-        @Suppress("unresolved_reference")
-        //TODO: add item from navigation arguments!!!
-        val viewModelFactory = CuttingWidthDetailViewModelFactory(item)
+        val item = CuttingWidthDetailFragmentArgs.fromBundle(arguments!!).item
+        val viewModelFactory = CuttingWidthDetailViewModelFactory(item, app)
         binding.viewModel = ViewModelProvider(this, viewModelFactory)
             .get(CuttingWidthDetailViewModel::class.java)
 

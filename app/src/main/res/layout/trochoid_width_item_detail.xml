@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.kou.promilling.details.trochoidwidthdetail.TrochoidWidthDetailViewModel" />
@@ -19,6 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_default"
             android:layout_marginEnd="@dimen/margin_default"
+            android:text="@{viewModel.displayToolRadius}"
             app:layout_constraintBottom_toTopOf="@+id/text_view_rounding_radius"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -34,6 +36,7 @@
             android:layout_marginStart="@dimen/margin_default"
             android:layout_marginTop="@dimen/margin_default"
             android:layout_marginEnd="@dimen/margin_default"
+            android:text="@{viewModel.displayRoundingRadius}"
             app:layout_constraintBottom_toTopOf="@+id/text_view_trochoid_step"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -48,7 +51,8 @@
             android:layout_marginStart="@dimen/margin_default"
             android:layout_marginTop="@dimen/margin_default"
             android:layout_marginEnd="@dimen/margin_default"
-            app:layout_constraintBottom_toTopOf="@+id/button_close"
+            android:text="@{viewModel.displayTrochoidStep}"
+            app:layout_constraintBottom_toTopOf="@+id/text_view_detail_result"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -82,6 +86,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/button_close" />
+
+        <TextView
+            android:id="@+id/text_view_detail_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_default"
+            android:text="@{viewModel.displayResult}"
+            app:layout_constraintBottom_toTopOf="@+id/button_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_trochoid_step"
+            tools:text="12345.67" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

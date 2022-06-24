@@ -2,7 +2,6 @@ package com.kou.promilling.trochoidwidthcalc
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.kou.promilling.cuttingwidthcalc.CuttingWidthViewModel
 import com.kou.promilling.database.MillingDao
 
 class TrochoidWidthViewModelFactory(

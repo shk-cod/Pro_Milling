@@ -5,11 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.kou.promilling.database.ResultItem
-import com.kou.promilling.database.getDatabase
+import com.kou.promilling.database.*
 import com.kou.promilling.databinding.FragmentResultsBinding
 
 class ResultsFragment : Fragment() {
@@ -29,8 +28,28 @@ class ResultsFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory)[ResultsViewModel::class.java]
         binding.viewModel = viewModel
 
+        viewModel.navigateToItemDetail.observe(viewLifecycleOwner) { item ->
+            item?.let {
+                val navController = this.findNavController()
+                when (it) {
+                    is DatabaseSpiralContactLength -> {
+                        navController.navigate(ResultsFragmentDirections.actionResultsToSpiralContactDetailFragment(it))
+                    }
+                    is DatabaseCuttingWidth -> {
+                        navController.navigate(ResultsFragmentDirections.actionResultsToCuttingWidthDetailFragment(it))
+                    }
+                    is DatabaseTrochoidWidth -> {
+                        navController.navigate(ResultsFragmentDirections.actionResultsToTrochoidWidthDetailFragment(it))
+                    }
+                }
+                viewModel.displayItemDetailComplete()
+            }
+        }
 
-        val adapter = ResultsAdapter()
+
+        val adapter = ResultsAdapter(ResultsAdapter.OnClickListener {
+            viewModel.displayItemDetail(it)
+        })
         binding.resultsList.adapter = adapter
         //TODO: deal with item decoration
         binding.resultsList.addItemDecoration(DividerItemDecoration(

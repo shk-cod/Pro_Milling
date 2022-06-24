@@ -12,12 +12,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ResultsAdapter: ListAdapter<ResultItem, ViewHolder>(ResultItemDiffCallback()) {
+class ResultsAdapter(private val onClickListener: OnClickListener): ListAdapter<ResultItem, ViewHolder>(ResultItemDiffCallback()) {
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val resultItem = getItem(position) as ResultItem
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(resultItem)
+        }
         holder.bind(resultItem)
     }
 
@@ -31,6 +34,10 @@ class ResultsAdapter: ListAdapter<ResultItem, ViewHolder>(ResultItemDiffCallback
                 submitList(list)
             }
         }
+    }
+
+    class OnClickListener(val clickListener: (item: ResultItem) -> Unit) {
+        fun onClick(item: ResultItem) = clickListener(item)
     }
 }
 

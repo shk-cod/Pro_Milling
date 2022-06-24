@@ -1,6 +1,9 @@
 package com.kou.promilling.database
 
+import android.os.Parcelable
 import androidx.room.*
+import kotlinx.parcelize.IgnoredOnParcel
+import kotlinx.parcelize.Parcelize
 import java.util.*
 
 interface ResultItem {
@@ -11,6 +14,7 @@ interface ResultItem {
 }
 
 @Entity
+@Parcelize
 data class DatabaseSpiralContactLength(
     @PrimaryKey(autoGenerate = true)
     override val id: Long = 0L,
@@ -22,12 +26,12 @@ data class DatabaseSpiralContactLength(
     @ColumnInfo(name = "flute_count") val fluteCount: Int,
     @ColumnInfo(name = "flute_position") val flutePosition: Double,
     override val result: Double
-): ResultItem {
-    @Ignore
-    override val type = "spiral_contact"
+): ResultItem, Parcelable {
+    @Ignore @IgnoredOnParcel override val type = "spiral_contact"
 }
 
 @Entity
+@Parcelize
 data class DatabaseCuttingWidth(
     @PrimaryKey(autoGenerate = true)
     override val id: Long = 0L,
@@ -36,12 +40,12 @@ data class DatabaseCuttingWidth(
     @ColumnInfo(name = "curvature_radius") val curvatureRadius: Double,
     @ColumnInfo(name = "cutting_width") val cuttingWidth: Double,
     override val result: Double
-): ResultItem {
-    @Ignore
-    override val type = "cutting_width"
+): ResultItem, Parcelable {
+    @Ignore @IgnoredOnParcel override val type = "cutting_width"
 }
 
 @Entity
+@Parcelize
 data class DatabaseTrochoidWidth(
     @PrimaryKey(autoGenerate = true)
     override val id: Long = 0L,
@@ -50,9 +54,8 @@ data class DatabaseTrochoidWidth(
     @ColumnInfo(name = "curvature_radius") val curvatureRadius: Double,
     @ColumnInfo(name = "trochoid_step") val trochoidStep: Double,
     override val result: Double
-): ResultItem {
-    @Ignore
-    override val type = "trochoid_width"
+): ResultItem, Parcelable {
+    @Ignore @IgnoredOnParcel override val type = "trochoid_width"
 }
 
 class DatabaseTypeConverters {

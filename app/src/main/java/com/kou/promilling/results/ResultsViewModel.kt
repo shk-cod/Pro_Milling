@@ -1,12 +1,8 @@
 package com.kou.promilling.results
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.kou.promilling.database.MillingDao
 import com.kou.promilling.database.ResultItem
-import kotlinx.coroutines.flow.combine
 
 class ResultsViewModel(
     database: MillingDao
@@ -15,4 +11,15 @@ class ResultsViewModel(
     val cutting = database.getCuttingWidthEntries()
     val trochoid = database.getTrochoidWidthEntries()
 
+    private val _navigateToItemDetail = MutableLiveData<ResultItem>()
+    val navigateToItemDetail: LiveData<ResultItem>
+        get() = _navigateToItemDetail
+
+    fun displayItemDetail(item: ResultItem) {
+        _navigateToItemDetail.value = item
+    }
+
+    fun displayItemDetailComplete() {
+        _navigateToItemDetail.value = null
+    }
 }

@@ -14,12 +14,12 @@ class SpiralContactDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        val app = requireNotNull(activity).application
         val binding = SpiralContactItemDetailBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
-        @Suppress("unresolved_reference")
-        //TODO: add item from navigation arguments!!!
-        val viewModelFactory = SpiralContactDetailViewModelFactory(item)
+        val item = SpiralContactDetailFragmentArgs.fromBundle(arguments!!).item
+        val viewModelFactory = SpiralContactDetailViewModelFactory(item, app)
         binding.viewModel = ViewModelProvider(this, viewModelFactory)
             .get(SpiralContactDetailViewModel::class.java)
 
