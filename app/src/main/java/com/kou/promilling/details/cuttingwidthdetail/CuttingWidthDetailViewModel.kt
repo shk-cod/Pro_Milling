@@ -38,4 +38,16 @@ class CuttingWidthDetailViewModel(
             R.string.display_result, it.result
         )
     }
+
+    private val _navigateToResults = MutableLiveData(false)
+    val navigateToResults: LiveData<Boolean>
+        get() = _navigateToResults
+
+    fun onClose() {
+        _navigateToResults.value = true
+    }
+
+    fun doneNavigatingToResults() {
+        _navigateToResults.value = false
+    }
 }

@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.kou.promilling.databinding.SpiralContactItemDetailBinding
 
 class SpiralContactDetailFragment : Fragment() {
@@ -20,8 +22,18 @@ class SpiralContactDetailFragment : Fragment() {
 
         val item = SpiralContactDetailFragmentArgs.fromBundle(arguments!!).item
         val viewModelFactory = SpiralContactDetailViewModelFactory(item, app)
-        binding.viewModel = ViewModelProvider(this, viewModelFactory)
+        val viewModel = ViewModelProvider(this, viewModelFactory)
             .get(SpiralContactDetailViewModel::class.java)
+        binding.viewModel = viewModel
+
+        viewModel.navigateToResults.observe(viewLifecycleOwner) {
+            if (it == true) {
+                this.findNavController().navigate(
+                    SpiralContactDetailFragmentDirections.actionSpiralContactDetailFragmentToResults()
+                )
+                viewModel.doneNavigatingToResults()
+            }
+        }
 
         return binding.root
     }

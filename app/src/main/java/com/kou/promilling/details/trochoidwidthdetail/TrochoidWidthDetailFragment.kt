@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.kou.promilling.databinding.TrochoidWidthItemDetailBinding
+import com.kou.promilling.details.cuttingwidthdetail.CuttingWidthDetailFragmentDirections
 
 class TrochoidWidthDetailFragment : Fragment() {
     override fun onCreateView(
@@ -20,8 +22,18 @@ class TrochoidWidthDetailFragment : Fragment() {
 
         val item = TrochoidWidthDetailFragmentArgs.fromBundle(arguments!!).item
         val viewModelFactory = TrochoidWidthDetailViewModelFactory(item, app)
-        binding.viewModel = ViewModelProvider(this, viewModelFactory)
+        val viewModel = ViewModelProvider(this, viewModelFactory)
             .get(TrochoidWidthDetailViewModel::class.java)
+        binding.viewModel = viewModel
+
+        viewModel.navigateToResults.observe(viewLifecycleOwner) {
+            if (it == true) {
+                this.findNavController().navigate(
+                    TrochoidWidthDetailFragmentDirections.actionTrochoidWidthDetailFragmentToResults()
+                )
+                viewModel.doneNavigatingToResults()
+            }
+        }
 
         return binding.root
     }

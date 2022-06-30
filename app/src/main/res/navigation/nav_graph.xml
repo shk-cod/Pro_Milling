@@ -44,6 +44,11 @@
         <argument
             android:name="item"
             app:argType="com.kou.promilling.database.DatabaseCuttingWidth" />
+        <action
+            android:id="@+id/action_cuttingWidthDetailFragment_to_results"
+            app:destination="@id/results"
+            app:popUpTo="@id/results"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/trochoidWidthDetailFragment"
@@ -55,6 +60,11 @@
         <argument
             android:name="item"
             app:argType="com.kou.promilling.database.DatabaseTrochoidWidth" />
+        <action
+            android:id="@+id/action_trochoidWidthDetailFragment_to_results"
+            app:destination="@id/results"
+            app:popUpTo="@id/results"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/spiralContactDetailFragment"
@@ -66,5 +76,10 @@
         <argument
             android:name="item"
             app:argType="com.kou.promilling.database.DatabaseSpiralContactLength" />
+        <action
+            android:id="@+id/action_spiralContactDetailFragment_to_results"
+            app:destination="@id/results"
+            app:popUpTo="@id/results"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>
