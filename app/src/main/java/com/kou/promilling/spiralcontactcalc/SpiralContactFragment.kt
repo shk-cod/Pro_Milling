@@ -20,7 +20,8 @@ class SpiralContactFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
         val dataSource = getDatabase(application).millingDao
-        val viewModelFactory = SpiralContactViewModelFactory(dataSource)
+        val item = arguments?.let { SpiralContactFragmentArgs.fromBundle(it).item }
+        val viewModelFactory = SpiralContactViewModelFactory(dataSource, item)
         val viewModel = ViewModelProvider(this, viewModelFactory)[SpiralContactViewModel::class.java]
         binding.viewModel = viewModel
 

@@ -61,11 +61,23 @@ class SpiralContactDetailViewModel(
     val navigateToResults: LiveData<Boolean>
         get() = _navigateToResults
 
+    private val _navigateToCalc = MutableLiveData<DatabaseSpiralContactLength>()
+    val navigateToCalc: LiveData<DatabaseSpiralContactLength>
+        get() = _navigateToCalc
+
     fun onClose() {
         _navigateToResults.value = true
     }
 
+    fun onReuse() {
+        _navigateToCalc.value = selectedItem.value
+    }
+
     fun doneNavigatingToResults() {
         _navigateToResults.value = false
+    }
+
+    fun doneNavigatingToCalc() {
+        _navigateToCalc.value = null
     }
 }

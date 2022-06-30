@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.kou.promilling.spiralcontactcalc
 
 import android.view.View
@@ -15,7 +17,8 @@ import kotlinx.coroutines.withContext
 import java.util.*
 
 class SpiralContactViewModel(
-    private val database: MillingDao
+    private val database: MillingDao,
+    item: DatabaseSpiralContactLength?
 ): ViewModel() {
 
     private val _result = MutableLiveData<String>()
@@ -35,6 +38,17 @@ class SpiralContactViewModel(
     private val _cuttingHeightError = MutableLiveData<String>()
     val cuttingHeightError: LiveData<String>
         get() = _cuttingHeightError
+
+    init {
+        item?.let {
+            diameter.value = it.toolDiameter
+            spiralAngle.value = it.spiralAngle
+            cuttingHeight.value = it.cuttingDepth
+            cuttingWidth.value = it.cuttingWidth
+            fluteCount.value = it.fluteCount
+            flutePosition.value = it.flutePosition
+        }
+    }
 
     @Suppress("UNUSED_PARAMETER")
     fun result(v: View) {

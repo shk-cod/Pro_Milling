@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.kou.promilling.databinding.SpiralContactItemDetailBinding
@@ -33,6 +32,18 @@ class SpiralContactDetailFragment : Fragment() {
                 )
                 viewModel.doneNavigatingToResults()
             }
+        }
+
+        viewModel.navigateToCalc.observe(viewLifecycleOwner) { spiralItem ->
+            spiralItem?.let {
+                this.findNavController().navigate(
+                    SpiralContactDetailFragmentDirections.actionSpiralContactDetailFragmentToSpiralContact2(
+                        it
+                    )
+                )
+                viewModel.doneNavigatingToCalc()
+            }
+
         }
 
         return binding.root

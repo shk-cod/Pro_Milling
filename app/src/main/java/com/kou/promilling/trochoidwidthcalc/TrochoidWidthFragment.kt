@@ -20,7 +20,8 @@ class TrochoidWidthFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
         val dataSource = getDatabase(application).millingDao
-        val viewModelFactory = TrochoidWidthViewModelFactory(dataSource)
+        val item = arguments?.let { TrochoidWidthFragmentArgs.fromBundle(it).item }
+        val viewModelFactory = TrochoidWidthViewModelFactory(dataSource, item)
         val viewModel = ViewModelProvider(this, viewModelFactory)[TrochoidWidthViewModel::class.java]
         binding.viewModel = viewModel
 

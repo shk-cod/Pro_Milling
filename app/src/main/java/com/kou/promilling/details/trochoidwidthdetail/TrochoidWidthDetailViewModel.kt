@@ -1,7 +1,10 @@
 package com.kou.promilling.details.trochoidwidthdetail
 
 import android.app.Application
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.kou.promilling.R
 import com.kou.promilling.database.DatabaseTrochoidWidth
 
@@ -43,11 +46,23 @@ class TrochoidWidthDetailViewModel(
     val navigateToResults: LiveData<Boolean>
         get() = _navigateToResults
 
+    private val _navigateToCalc = MutableLiveData<DatabaseTrochoidWidth>()
+    val navigateToCalc: LiveData<DatabaseTrochoidWidth>
+        get() = _navigateToCalc
+
     fun onClose() {
         _navigateToResults.value = true
     }
 
+    fun onReuse() {
+        _navigateToCalc.value = selectedItem.value
+    }
+
     fun doneNavigatingToResults() {
         _navigateToResults.value = false
+    }
+
+    fun doneNavigatingToCalc() {
+        _navigateToCalc.value = null
     }
 }

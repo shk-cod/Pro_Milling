@@ -20,7 +20,8 @@ class CuttingWidthFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
         val dataSource = getDatabase(application).millingDao
-        val viewModelFactory = CuttingWidthViewModelFactory(dataSource)
+        val item = arguments?.let { CuttingWidthFragmentArgs.fromBundle(it).item }
+        val viewModelFactory = CuttingWidthViewModelFactory(dataSource, item)
         val viewModel = ViewModelProvider(this, viewModelFactory)[CuttingWidthViewModel::class.java]
         binding.viewModel = viewModel
 

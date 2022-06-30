@@ -1,3 +1,5 @@
+@file:Suppress("ReplaceGetOrSet", "ReplaceGetOrSet", "ReplaceGetOrSet")
+
 package com.kou.promilling.details.cuttingwidthdetail
 
 import android.os.Bundle
@@ -8,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.kou.promilling.databinding.CuttingWidthItemDetailBinding
-import com.kou.promilling.details.spiralcontactdetail.SpiralContactDetailFragmentDirections
 
 class CuttingWidthDetailFragment: Fragment() {
     override fun onCreateView(
@@ -32,6 +33,17 @@ class CuttingWidthDetailFragment: Fragment() {
                     CuttingWidthDetailFragmentDirections.actionCuttingWidthDetailFragmentToResults()
                 )
                 viewModel.doneNavigatingToResults()
+            }
+        }
+
+        viewModel.navigateToCalc.observe(viewLifecycleOwner) { cuttingItem ->
+            cuttingItem?.let {
+                this.findNavController().navigate(
+                    CuttingWidthDetailFragmentDirections.actionCuttingWidthDetailFragmentToCuttingWidth2(
+                        it
+                    )
+                )
+                viewModel.doneNavigatingToCalc()
             }
         }
 

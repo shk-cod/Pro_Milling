@@ -8,7 +8,9 @@ object Converter {
     @Suppress("UNUSED_PARAMETER")
     @JvmStatic fun doubleToString(view: TextInputEditText, oldValue: Double, value: Double): String {
         val inView = view.text.toString()
-        if (inView.isBlank()) return ""
+        if (inView.isBlank()) {
+            return if (value == Double.MIN_VALUE) "" else value.formatResult()
+        }
 
         try {
             val parsed = inView.toDouble()
@@ -33,7 +35,9 @@ object Converter {
     @Suppress("UNUSED_PARAMETER")
     @JvmStatic fun intToString(view: TextInputEditText, oldValue: Int, value: Int): String {
         val inView = view.text.toString()
-        if (inView.isBlank()) return ""
+        if (inView.isBlank()) {
+            return if (value == Int.MIN_VALUE) "" else value.toString()
+        }
 
         try {
             val parsed = inView.toInt()

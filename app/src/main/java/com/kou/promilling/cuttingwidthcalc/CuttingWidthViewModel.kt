@@ -15,7 +15,8 @@ import kotlinx.coroutines.withContext
 import java.util.*
 
 class CuttingWidthViewModel(
-    private val database: MillingDao
+    private val database: MillingDao,
+    item: DatabaseCuttingWidth?
 ): ViewModel() {
     private val _result = MutableLiveData<String>()
     val result: LiveData<String>
@@ -25,6 +26,14 @@ class CuttingWidthViewModel(
     val radius = MutableLiveData(Double.MIN_VALUE)
     val roundingRadius = MutableLiveData(Double.MIN_VALUE)
     val cuttingWidth = MutableLiveData(Double.MIN_VALUE)
+
+    init {
+        item?.let {
+            radius.value = it.toolRadius
+            roundingRadius.value = it.curvatureRadius
+            cuttingWidth.value = it.cuttingWidth
+        }
+    }
 
     @Suppress("UNUSED_PARAMETER")
     fun result(v: View) {

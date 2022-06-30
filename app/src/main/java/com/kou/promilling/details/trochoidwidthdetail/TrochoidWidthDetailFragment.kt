@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.kou.promilling.databinding.TrochoidWidthItemDetailBinding
-import com.kou.promilling.details.cuttingwidthdetail.CuttingWidthDetailFragmentDirections
 
 class TrochoidWidthDetailFragment : Fragment() {
     override fun onCreateView(
@@ -32,6 +31,17 @@ class TrochoidWidthDetailFragment : Fragment() {
                     TrochoidWidthDetailFragmentDirections.actionTrochoidWidthDetailFragmentToResults()
                 )
                 viewModel.doneNavigatingToResults()
+            }
+        }
+
+        viewModel.navigateToCalc.observe(viewLifecycleOwner) { trochoidItem ->
+            trochoidItem?.let {
+                this.findNavController().navigate(
+                    TrochoidWidthDetailFragmentDirections.actionTrochoidWidthDetailFragmentToTrochoidWidth2(
+                        it
+                    )
+                )
+                viewModel.doneNavigatingToCalc()
             }
         }
 

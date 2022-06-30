@@ -15,7 +15,8 @@ import kotlinx.coroutines.withContext
 import java.util.*
 
 class TrochoidWidthViewModel(
-    private val database: MillingDao
+    private val database: MillingDao,
+    item: DatabaseTrochoidWidth?
 ): ViewModel() {
     private val _result = MutableLiveData<String>()
     val result: LiveData<String>
@@ -25,6 +26,14 @@ class TrochoidWidthViewModel(
     val radius = MutableLiveData(Double.MIN_VALUE)
     val roundingRadius = MutableLiveData(Double.MIN_VALUE)
     val trochoidStep = MutableLiveData(Double.MIN_VALUE)
+
+    init {
+        item?.let {
+            radius.value = it.toolRadius
+            roundingRadius.value = it.curvatureRadius
+            trochoidStep.value = it.trochoidStep
+        }
+    }
 
     @Suppress("UNUSED_PARAMETER")
     fun result(v: View) {
