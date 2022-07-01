@@ -12,44 +12,43 @@
             type="com.kou.promilling.spiralcontactcalc.SpiralContactViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".spiralcontactcalc.SpiralContactFragment">
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/text_view_result"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_default"
-            android:fontFamily="@font/roboto_light"
-            android:text="@{viewModel.result}"
-            android:textSize="@dimen/text_size_result"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="123456" />
-
-        <com.google.android.material.divider.MaterialDivider
-            android:id="@+id/divider"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_default"
-            app:dividerInsetEnd="@dimen/margin_default"
-            app:dividerInsetStart="@dimen/margin_default"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_result" />
+        android:layout_height="match_parent">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/divider">
+            android:layout_height="match_parent">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                tools:context=".spiralcontactcalc.SpiralContactFragment">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_view_result"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:fontFamily="@font/roboto_light"
+                    android:text="@{viewModel.result}"
+                    android:textSize="@dimen/text_size_result"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="123456" />
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_default"
+                    app:dividerInsetEnd="@dimen/margin_default"
+                    app:dividerInsetStart="@dimen/margin_default"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_result" />
+
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/text_layout_diameter"
@@ -60,7 +59,7 @@
                     android:layout_marginTop="@dimen/margin_default"
                     android:layout_marginEnd="@dimen/margin_default"
                     android:hint="@string/hint_tool_diameter"
-                    app:layout_constraintTop_toBottomOf="@+id/divider">
+                    app:layout_constraintTop_toBottomOf="@id/divider">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/text_input_diameter"
@@ -172,20 +171,22 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-            </LinearLayout>
-
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
 
-        <Button
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/button_result"
-            style="@style/Widget.Material3.Button.ElevatedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
             android:layout_marginEnd="@dimen/margin_default"
             android:layout_marginBottom="@dimen/margin_default"
             android:onClick="@{viewModel::result}"
             android:text="@string/button_result_text"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            app:elevation="12dp" />
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 </layout>
