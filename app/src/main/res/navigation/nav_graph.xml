@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/spiral_contact"
         android:name="com.kou.promilling.spiralcontactcalc.SpiralContactFragment"
-        android:label="fragment_spiral_contact"
+        android:label="@string/spiral_contact_menu_title"
         tools:layout="@layout/fragment_spiral_contact">
         <argument
             android:name="item"
@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/cutting_width"
         android:name="com.kou.promilling.cuttingwidthcalc.CuttingWidthFragment"
-        android:label="fragment_cutting_width"
+        android:label="@string/cutting_width_menu_title"
         tools:layout="@layout/fragment_cutting_width">
         <argument
             android:name="item"
@@ -30,7 +30,7 @@
     <fragment
         android:id="@+id/trochoid_width"
         android:name="com.kou.promilling.trochoidwidthcalc.TrochoidWidthFragment"
-        android:label="fragment_trochoid_width"
+        android:label="@string/trochoid_width_menu_title"
         tools:layout="@layout/fragment_trochoid_width">
         <argument
             android:name="item"
@@ -41,7 +41,7 @@
     <fragment
         android:id="@+id/results"
         android:name="com.kou.promilling.results.ResultsFragment"
-        android:label="ResultsFragment">
+        android:label="@string/calculations_list_menu_title">
         <action
             android:id="@+id/action_results_to_spiralContactDetailFragment"
             app:destination="@id/spiralContactDetailFragment" />
@@ -55,7 +55,7 @@
     <fragment
         android:id="@+id/cuttingWidthDetailFragment"
         android:name="com.kou.promilling.details.cuttingwidthdetail.CuttingWidthDetailFragment"
-        android:label="CuttingWidthDetailFragment">
+        android:label="@string/cutting_width_menu_title">
         <action
             android:id="@+id/action_cuttingWidthDetailFragment_to_cutting_width2"
             app:destination="@id/cutting_width"
@@ -73,7 +73,7 @@
     <fragment
         android:id="@+id/trochoidWidthDetailFragment"
         android:name="com.kou.promilling.details.trochoidwidthdetail.TrochoidWidthDetailFragment"
-        android:label="TrochoidWidthDetailFragment">
+        android:label="@string/trochoid_width_menu_title">
         <action
             android:id="@+id/action_trochoidWidthDetailFragment_to_trochoid_width2"
             app:destination="@id/trochoid_width"
@@ -91,7 +91,7 @@
     <fragment
         android:id="@+id/spiralContactDetailFragment"
         android:name="com.kou.promilling.details.spiralcontactdetail.SpiralContactDetailFragment"
-        android:label="SpiralContactDetailFragment">
+        android:label="@string/spiral_contact_menu_title">
         <action
             android:id="@+id/action_spiralContactDetailFragment_to_spiral_contact2"
             app:destination="@id/spiral_contact"
