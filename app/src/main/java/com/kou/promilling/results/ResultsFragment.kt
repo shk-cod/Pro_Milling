@@ -51,11 +51,6 @@ class ResultsFragment : Fragment() {
             viewModel.displayItemDetail(it)
         })
         binding.resultsList.adapter = adapter
-        //TODO: deal with item decoration
-        binding.resultsList.addItemDecoration(DividerItemDecoration(
-            binding.resultsList.context,
-            DividerItemDecoration.VERTICAL
-        ))
 
         viewModel.spiral.observe(viewLifecycleOwner) {
             adapter.submitData(buildList())

@@ -12,40 +12,50 @@
             type="com.kou.promilling.database.ResultItem" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        style="?attr/materialCardViewElevatedStyle">
 
-        <TextView
-            android:id="@+id/type_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_large"
-            android:layout_marginTop="@dimen/margin_default"
-            android:text="@{resultItem.type}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Spiral contact" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/result_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_default"
-            android:text="@{UtilKt.formatResult(resultItem.result)}"
-            app:layout_constraintStart_toStartOf="@+id/type_text_view"
-            app:layout_constraintTop_toBottomOf="@+id/type_text_view"
-            tools:text="15.568" />
+            <TextView
+                android:id="@+id/type_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginTop="@dimen/margin_default"
+                android:text="@{resultItem.type}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Spiral contact" />
 
-        <!-- TODO: improve date format (Util.kt) -->
-        <TextView
-            android:id="@+id/date_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_large"
-            android:text="@{resultItem.date.toString()}"
-            app:layout_constraintBaseline_toBaselineOf="@+id/result_text_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:text="12.05.2022 12:43" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/result_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_default"
+                android:layout_marginBottom="@dimen/margin_default"
+                android:text="@{UtilKt.formatResult(resultItem.result)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/type_text_view"
+                app:layout_constraintTop_toBottomOf="@+id/type_text_view"
+                tools:text="15.568" />
+
+            <!-- TODO: improve date format (Util.kt) -->
+            <TextView
+                android:id="@+id/date_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:text="@{resultItem.date.toString()}"
+                app:layout_constraintBaseline_toBaselineOf="@+id/result_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="12.05.2022 12:43" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 </layout>

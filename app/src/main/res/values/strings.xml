@@ -28,4 +28,6 @@
     <string name="display_tool_radius">Tool radius: %,.3f mm</string>
     <string name="display_rounding_radius">Rounding radius: %,.3f mm</string>
     <string name="display_trochoid_step">Trochoid step: %,.3f mm</string>
+    <string name="text_input_suffix_mm">mm</string>
+    <string name="text_input_suffix_degrees">dg</string>
 </resources>

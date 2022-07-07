@@ -1,4 +1,4 @@
-package com.kou.promilling.trochoidwidthcalc
+package com.kou.promilling.calcs.trochoidwidthcalc
 
 import android.view.View
 import androidx.lifecycle.LiveData
@@ -48,7 +48,8 @@ class TrochoidWidthViewModel(
             trochoidStep
         )
 
-        _result.value = result.formatResult()
+        //TODO: make ViewModel an AndroidViewModel and extract this to string resources
+        _result.value = "${result.formatResult()} mm"
 
         viewModelScope.launch {
             writeToDatabase(result = result)

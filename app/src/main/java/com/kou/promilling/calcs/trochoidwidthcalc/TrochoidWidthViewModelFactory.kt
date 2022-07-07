@@ -1,4 +1,4 @@
-package com.kou.promilling.trochoidwidthcalc
+package com.kou.promilling.calcs.trochoidwidthcalc
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

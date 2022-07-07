@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package com.kou.promilling.spiralcontactcalc
+package com.kou.promilling.calcs.spiralcontactcalc
 
 import android.view.View
 import androidx.lifecycle.LiveData
@@ -69,7 +69,8 @@ class SpiralContactViewModel(
             flutePosition
         )
 
-        _result.value = result.formatResult()
+        //TODO: make ViewModel an AndroidViewModel and extract this to string resources
+        _result.value = "${result.formatResult()} mm"
 
         viewModelScope.launch {
             writeToDatabase(result = result)

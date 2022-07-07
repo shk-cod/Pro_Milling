@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/spiral_contact"
-        android:name="com.kou.promilling.spiralcontactcalc.SpiralContactFragment"
+        android:name="com.kou.promilling.calcs.spiralcontactcalc.SpiralContactFragment"
         android:label="@string/spiral_contact_menu_title"
         tools:layout="@layout/fragment_spiral_contact">
         <argument
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/cutting_width"
-        android:name="com.kou.promilling.cuttingwidthcalc.CuttingWidthFragment"
+        android:name="com.kou.promilling.calcs.cuttingwidthcalc.CuttingWidthFragment"
         android:label="@string/cutting_width_menu_title"
         tools:layout="@layout/fragment_cutting_width">
         <argument
@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/trochoid_width"
-        android:name="com.kou.promilling.trochoidwidthcalc.TrochoidWidthFragment"
+        android:name="com.kou.promilling.calcs.trochoidwidthcalc.TrochoidWidthFragment"
         android:label="@string/trochoid_width_menu_title"
         tools:layout="@layout/fragment_trochoid_width">
         <argument

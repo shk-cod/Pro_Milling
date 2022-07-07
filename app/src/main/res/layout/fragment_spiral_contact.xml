@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.kou.promilling.spiralcontactcalc.SpiralContactViewModel" />
+            type="com.kou.promilling.calcs.spiralcontactcalc.SpiralContactViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -17,13 +17,15 @@
         android:layout_height="match_parent">
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:context=".spiralcontactcalc.SpiralContactFragment">
+                tools:context=".calcs.spiralcontactcalc.SpiralContactFragment">
+
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/text_view_result"
@@ -31,6 +33,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_default"
                     android:fontFamily="@font/roboto_light"
+                    android:textStyle="bold"
                     android:text="@{viewModel.result}"
                     android:textSize="@dimen/text_size_result"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -43,8 +46,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_default"
-                    app:dividerInsetEnd="@dimen/margin_default"
-                    app:dividerInsetStart="@dimen/margin_default"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/text_view_result" />
@@ -52,13 +53,14 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/text_layout_diameter"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    style="?attr/textInputFilledStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_default"
                     android:layout_marginTop="@dimen/margin_default"
                     android:layout_marginEnd="@dimen/margin_default"
                     android:hint="@string/hint_tool_diameter"
+                    app:suffixText="@string/text_input_suffix_mm"
                     app:layout_constraintTop_toBottomOf="@id/divider">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -72,11 +74,12 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/text_layout_spiral_angle"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    style="?attr/textInputFilledStyle"
+                    app:suffixText="@string/text_input_suffix_degrees"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_default"
-                    android:layout_marginTop="@dimen/margin_default"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_default"
                     android:hint="@string/hint_spiral_angle"
                     app:layout_constraintTop_toBottomOf="@+id/text_layout_diameter">
@@ -92,11 +95,12 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/text_layout_cutting_height"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    style="?attr/textInputFilledStyle"
+                    app:suffixText="@string/text_input_suffix_mm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_default"
-                    android:layout_marginTop="@dimen/margin_default"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_default"
                     android:hint="@string/hint_cutting_height"
                     app:layout_constraintTop_toBottomOf="@+id/text_layout_spiral_angle">
@@ -112,11 +116,12 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/text_layout_cutting_width"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    style="?attr/textInputFilledStyle"
+                    app:suffixText="@string/text_input_suffix_mm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_default"
-                    android:layout_marginTop="@dimen/margin_default"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_default"
                     android:hint="@string/hint_cutting_width"
                     app:layout_constraintTop_toBottomOf="@+id/text_layout_cutting_height">
@@ -132,11 +137,11 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/text_layout_flute_count"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    style="?attr/textInputFilledStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_default"
-                    android:layout_marginTop="@dimen/margin_default"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_default"
                     android:hint="@string/hint_flute_count"
                     app:layout_constraintTop_toBottomOf="@+id/text_layout_cutting_width">
@@ -152,11 +157,12 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/text_layout_flute_position"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    style="?attr/textInputFilledStyle"
+                    app:suffixText="@string/text_input_suffix_degrees"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_default"
-                    android:layout_marginTop="@dimen/margin_default"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_default"
                     android:layout_marginBottom="@dimen/margin_default"
                     android:hint="@string/hint_flute_position"

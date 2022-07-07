@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.kou.promilling.trochoidwidthcalc.TrochoidWidthViewModel" />
+            type="com.kou.promilling.calcs.trochoidwidthcalc.TrochoidWidthViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -17,13 +17,14 @@
         android:layout_height="match_parent">
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context=".trochoidwidthcalc.TrochoidWidthFragment">
+                tools:context=".calcs.trochoidwidthcalc.TrochoidWidthFragment">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/text_view_result"
@@ -31,6 +32,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_default"
                     android:text="@{viewModel.result}"
+                    android:textStyle="bold"
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -42,15 +44,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_default"
-                    app:dividerInsetEnd="@dimen/margin_default"
-                    app:dividerInsetStart="@dimen/margin_default"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/text_view_result" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/text_layout_radius"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    style="?attr/textInputFilledStyle"
+                    app:suffixText="@string/text_input_suffix_mm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_default"
@@ -70,11 +71,12 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/text_layout_rounding_radius"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    style="?attr/textInputFilledStyle"
+                    app:suffixText="@string/text_input_suffix_mm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_default"
-                    android:layout_marginTop="@dimen/margin_default"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_default"
                     android:hint="@string/hint_path_rouding_radius"
                     app:layout_constraintTop_toBottomOf="@+id/text_layout_radius">
@@ -90,11 +92,12 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/text_layout_trochoid_step"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    style="?attr/textInputFilledStyle"
+                    app:suffixText="@string/text_input_suffix_mm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_default"
-                    android:layout_marginTop="@dimen/margin_default"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_default"
                     android:hint="@string/hint_trochoid_step"
                     app:layout_constraintTop_toBottomOf="@+id/text_layout_rounding_radius">
