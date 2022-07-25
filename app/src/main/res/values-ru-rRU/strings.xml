@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="spiral_contact_menu_title">Длина контакта спирали</string>
+    <string name="cutting_width_menu_title">Ширина съема в углу</string>
+    <string name="trochoid_width_menu_title">Ширина съема трохоиды</string>
+    <string name="calculations_list_menu_title">Список вычислений</string>
+    <string name="hint_tool_diameter">Диаметр инструмента</string>
+    <string name="hint_spiral_angle">Угол наклона спирали</string>
+    <string name="hint_cutting_height">Высота съема</string>
+    <string name="hint_cutting_width">Ширина съема</string>
+    <string name="hint_flute_count">Количество зубьев</string>
+    <string name="hint_flute_position">Угол положения зуба</string>
+    <string name="hint_tool_radius">Радиус инструмента</string>
+    <string name="hint_path_rouding_radius">Радиус скругления траектории</string>
+    <string name="hint_trochoid_step">Шаг трохоиды</string>
+    <string name="button_result_text">Вычислить</string>
+    <string name="button_close_text">Закрыть</string>
+    <string name="button_reuse_text">Повторить</string>
+    <string name="display_tool_diameter">Диаметр иструмента: %,.3f мм</string>
+    <string name="display_spiral_angle">Угол наклона спирали: %,.0f град</string>
+    <string name="display_cutting_height">Высота съема: %,.3f мм</string>
+    <string name="display_cutting_width">Ширина съема: %,.3f мм</string>
+    <string name="display_flute_count">Количество зубьев: %d</string>
+    <string name="display_flute_position">Угол полодения зуба: %,.0f град</string>
+    <string name="display_result">Результат: %,.3f мм</string>
+    <string name="display_tool_radius">Радиус инструмента: %,.3f мм</string>
+    <string name="display_rounding_radius">Радиус скругления траектории: %,.3f мм</string>
+    <string name="display_trochoid_step">Шаг трохоиды: %,.3f мм</string>
+    <string name="text_input_suffix_mm">мм</string>
+    <string name="text_input_suffix_degrees">град</string>
+</resources>
