@@ -6,10 +6,12 @@
     <data>
 
         <import type="com.kou.promilling.UtilKt" />
+        <import type="android.text.format.DateFormat"/>
 
         <variable
             name="resultItem"
             type="com.kou.promilling.database.ResultItem" />
+
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -30,7 +32,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_large"
                 android:layout_marginTop="@dimen/margin_default"
-                android:text="@{resultItem.type}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Spiral contact" />
@@ -47,13 +48,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/type_text_view"
                 tools:text="15.568" />
 
-            <!-- TODO: improve date format (Util.kt) -->
             <TextView
                 android:id="@+id/date_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_large"
-                android:text="@{resultItem.date.toString()}"
                 app:layout_constraintBaseline_toBaselineOf="@+id/result_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:text="12.05.2022 12:43" />

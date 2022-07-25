@@ -6,9 +6,15 @@ import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 import java.util.*
 
+enum class EntityType {
+    TYPE_SPIRAL_CONTACT,
+    TYPE_CUTTING_WIDTH,
+    TYPE_TROCHOID_WIDTH
+}
+
 interface ResultItem {
     val id: Long
-    val type: String
+    val type: EntityType
     val date: Date
     val result: Double
 }
@@ -27,7 +33,7 @@ data class DatabaseSpiralContactLength(
     @ColumnInfo(name = "flute_position") val flutePosition: Double,
     override val result: Double
 ): ResultItem, Parcelable {
-    @Ignore @IgnoredOnParcel override val type = "spiral_contact"
+    @Ignore @IgnoredOnParcel override val type = EntityType.TYPE_SPIRAL_CONTACT
 }
 
 @Entity
@@ -41,7 +47,7 @@ data class DatabaseCuttingWidth(
     @ColumnInfo(name = "cutting_width") val cuttingWidth: Double,
     override val result: Double
 ): ResultItem, Parcelable {
-    @Ignore @IgnoredOnParcel override val type = "cutting_width"
+    @Ignore @IgnoredOnParcel override val type = EntityType.TYPE_CUTTING_WIDTH
 }
 
 @Entity
@@ -55,7 +61,7 @@ data class DatabaseTrochoidWidth(
     @ColumnInfo(name = "trochoid_step") val trochoidStep: Double,
     override val result: Double
 ): ResultItem, Parcelable {
-    @Ignore @IgnoredOnParcel override val type = "trochoid_width"
+    @Ignore @IgnoredOnParcel override val type = EntityType.TYPE_TROCHOID_WIDTH
 }
 
 class DatabaseTypeConverters {

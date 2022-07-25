@@ -49,7 +49,7 @@ class ResultsFragment : Fragment() {
 
         val adapter = ResultsAdapter(ResultsAdapter.OnClickListener {
             viewModel.displayItemDetail(it)
-        })
+        }, application)
         binding.resultsList.adapter = adapter
 
         viewModel.spiral.observe(viewLifecycleOwner) {
