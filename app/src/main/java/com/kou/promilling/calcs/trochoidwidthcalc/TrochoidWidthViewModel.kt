@@ -1,10 +1,9 @@
 package com.kou.promilling.calcs.trochoidwidthcalc
 
+import android.app.Application
 import android.view.View
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.kou.promilling.R
 import com.kou.promilling.calculateTrochoidWidth
 import com.kou.promilling.database.DatabaseTrochoidWidth
 import com.kou.promilling.database.MillingDao
@@ -16,8 +15,10 @@ import java.util.*
 
 class TrochoidWidthViewModel(
     private val database: MillingDao,
-    item: DatabaseTrochoidWidth?
-): ViewModel() {
+    item: DatabaseTrochoidWidth?,
+    private val app: Application
+): AndroidViewModel(app) {
+
     private val _result = MutableLiveData<String>()
     val result: LiveData<String>
         get() = _result
@@ -35,25 +36,24 @@ class TrochoidWidthViewModel(
         }
     }
 
-    @Suppress("UNUSED_PARAMETER")
-    fun result(v: View) {
-        if (!checkInput()) return
+    fun result(): Boolean {
+        if (!checkInput()) return false
 
-        val radius = radius.value!!
-        val roundingRadius = roundingRadius.value!!
-        val trochoidStep = trochoidStep.value!!
         val result = calculateTrochoidWidth(
-            radius,
-            roundingRadius,
-            trochoidStep
+            radius.value!!,
+            roundingRadius.value!!,
+            trochoidStep.value!!
         )
 
-        //TODO: make ViewModel an AndroidViewModel and extract this to string resources
-        _result.value = "${result.formatResult()} mm"
+        _result.value = app.applicationContext.getString(
+            R.string.result, result
+        )
 
         viewModelScope.launch {
             writeToDatabase(result = result)
         }
+
+        return true
     }
 
     private fun checkInput(): Boolean {

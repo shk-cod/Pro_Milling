@@ -1,10 +1,9 @@
 package com.kou.promilling.calcs.cuttingwidthcalc
 
+import android.app.Application
 import android.view.View
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.kou.promilling.R
 import com.kou.promilling.calculateCuttingWidth
 import com.kou.promilling.database.DatabaseCuttingWidth
 import com.kou.promilling.database.MillingDao
@@ -16,8 +15,9 @@ import java.util.*
 
 class CuttingWidthViewModel(
     private val database: MillingDao,
-    item: DatabaseCuttingWidth?
-): ViewModel() {
+    item: DatabaseCuttingWidth?,
+    private val app: Application
+): AndroidViewModel(app) {
     private val _result = MutableLiveData<String>()
     val result: LiveData<String>
         get() = _result
@@ -35,25 +35,25 @@ class CuttingWidthViewModel(
         }
     }
 
-    @Suppress("UNUSED_PARAMETER")
-    fun result(v: View) {
-        if (!checkInput()) return
+    fun result(): Boolean {
+        if (!checkInput()) return false
 
-        val radius = radius.value!!
-        val roundingRadius = roundingRadius.value!!
-        val cuttingWidth = cuttingWidth.value!!
+
         val result = calculateCuttingWidth(
-            radius,
-            roundingRadius,
-            cuttingWidth
+            radius.value!!,
+            roundingRadius.value!!,
+            cuttingWidth.value!!
         )
 
-        //TODO: make ViewModel an AndroidViewModel and extract this to string resources
-        _result.value = "${result.formatResult()} mm"
+        _result.value = app.applicationContext.getString(
+            R.string.result, result
+        )
 
         viewModelScope.launch {
             writeToDatabase(result = result)
         }
+
+        return true
     }
 
     private fun checkInput(): Boolean {

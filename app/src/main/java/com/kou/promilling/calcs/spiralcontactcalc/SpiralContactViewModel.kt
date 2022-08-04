@@ -2,11 +2,9 @@
 
 package com.kou.promilling.calcs.spiralcontactcalc
 
-import android.view.View
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.app.Application
+import androidx.lifecycle.*
+import com.kou.promilling.R
 import com.kou.promilling.calculateSpiralContact
 import com.kou.promilling.database.DatabaseSpiralContactLength
 import com.kou.promilling.database.MillingDao
@@ -18,8 +16,9 @@ import java.util.*
 
 class SpiralContactViewModel(
     private val database: MillingDao,
-    item: DatabaseSpiralContactLength?
-): ViewModel() {
+    item: DatabaseSpiralContactLength?,
+    private val app: Application
+): AndroidViewModel(app) {
 
     private val _result = MutableLiveData<String>()
     val result: LiveData<String>
@@ -50,32 +49,27 @@ class SpiralContactViewModel(
         }
     }
 
-    @Suppress("UNUSED_PARAMETER")
-    fun result(v: View) {
-        if (!checkInput()) return
+    fun result(): Boolean {
+        if (!checkInput()) return false
 
-        val diameter = diameter.value!!
-        val spiralAngle = spiralAngle.value!!
-        val cuttingHeight = cuttingHeight.value!!
-        val cuttingWidth = cuttingWidth.value!!
-        val fluteCount = fluteCount.value!!
-        val flutePosition = flutePosition.value!!
         val result = calculateSpiralContact(
-            diameter,
-            spiralAngle,
-            cuttingHeight,
-            cuttingWidth,
-            fluteCount,
-            flutePosition
+            diameter.value!!,
+            spiralAngle.value!!,
+            cuttingHeight.value!!,
+            cuttingWidth.value!!,
+            fluteCount.value!!,
+            flutePosition.value!!
         )
 
-        //TODO: make ViewModel an AndroidViewModel and extract this to string resources
-        _result.value = "${result.formatResult()} mm"
+        _result.value = app.applicationContext.getString(
+            R.string.result, result
+        )
 
         viewModelScope.launch {
             writeToDatabase(result = result)
         }
 
+        return true
     }
 
     private fun checkInput(): Boolean {

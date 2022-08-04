@@ -50,7 +50,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/text_layout_radius"
-                    style="?attr/textInputFilledStyle"
+                    style="?attr/textInputOutlinedStyle"
                     app:suffixText="@string/text_input_suffix_mm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -58,6 +58,7 @@
                     android:layout_marginTop="@dimen/margin_default"
                     android:layout_marginEnd="@dimen/margin_default"
                     android:hint="@string/hint_tool_radius"
+                    app:expandedHintEnabled="false"
                     app:layout_constraintTop_toBottomOf="@+id/divider">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -71,7 +72,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/text_layout_rounding_radius"
-                    style="?attr/textInputFilledStyle"
+                    style="?attr/textInputOutlinedStyle"
                     app:suffixText="@string/text_input_suffix_mm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -79,6 +80,7 @@
                     android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_default"
                     android:hint="@string/hint_path_rouding_radius"
+                    app:expandedHintEnabled="false"
                     app:layout_constraintTop_toBottomOf="@+id/text_layout_radius">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -92,7 +94,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/text_layout_trochoid_step"
-                    style="?attr/textInputFilledStyle"
+                    style="?attr/textInputOutlinedStyle"
                     app:suffixText="@string/text_input_suffix_mm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -100,6 +102,7 @@
                     android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_default"
                     android:hint="@string/hint_trochoid_step"
+                    app:expandedHintEnabled="false"
                     app:layout_constraintTop_toBottomOf="@+id/text_layout_rounding_radius">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -123,7 +126,6 @@
             android:layout_gravity="bottom|end"
             android:layout_marginEnd="@dimen/margin_default"
             android:layout_marginBottom="@dimen/margin_default"
-            android:onClick="@{viewModel::result}"
             android:text="@string/button_result_text"
             app:elevation="12dp"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

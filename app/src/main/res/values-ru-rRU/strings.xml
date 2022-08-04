@@ -28,4 +28,5 @@
     <string name="display_trochoid_step">Шаг трохоиды: %,.3f мм</string>
     <string name="text_input_suffix_mm">мм</string>
     <string name="text_input_suffix_degrees">град</string>
+    <string name="result">%,.3f мм</string>
 </resources>
