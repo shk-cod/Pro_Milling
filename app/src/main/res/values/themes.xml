@@ -1,19 +1,57 @@
 <resources>
     <!-- Base application theme. -->
     <style name="Theme.ProMilling" parent="Theme.Material3.Light.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/orange</item>
         <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorPrimaryContainer">?attr/colorPrimary</item>
+        <item name="colorOnPrimaryContainer">?attr/colorOnPrimary</item>
+        <item name="colorSurface">?attr/colorOnPrimary</item>
+        <item name="colorSurfaceVariant">?attr/colorOnPrimary</item>
+        <item name="colorOnSecondaryContainer">?attr/colorOnPrimary</item>
+        <item name="android:windowBackground">@color/gray</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryContainer</item>
         <!-- Customize your theme here. -->
         <item name="android:textAppearance">?attr/textAppearanceBody2</item>
         <item name="android:fontFamily">@font/roboto_light</item>
         <item name="android:windowTranslucentStatus">false</item>
+        <item name="appBarLayoutStyle">@style/CustomAppBarLayout</item>
+        <item name="toolbarStyle">@style/CustomMaterialToolbar</item>
+        <item name="textInputStyle">@style/CustomTextInputStyle</item>
+        <item name="bottomNavigationStyle">@style/CustomNavigationBar</item>
+    </style>
+
+    <style name="CustomAppBarLayout" parent="Widget.Material3.AppBarLayout">
+        <item name="android:background">?attr/colorPrimaryContainer</item>
+    </style>
+
+    <style name="CustomMaterialToolbar" parent="Widget.Material3.Toolbar">
+        <item name="titleTextColor">?attr/colorOnPrimaryContainer</item>
+        <item name="titleCentered">true</item>
+    </style>
+
+    <style name="CustomNavigationBar" parent="Widget.Material3.BottomNavigationView">
+        <item name="backgroundTint">?attr/colorOnPrimary</item>
+        <item name="itemIconTint">@color/custom_bottom_navigation_icon_colors</item>
+        <item name="itemTextColor">?attr/colorPrimary</item>
+        <item name="itemActiveIndicatorStyle">@style/CustomActiveIndicator</item>
+    </style>
+
+    <style name="CustomActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">?attr/colorOnPrimary</item>
+    </style>
+
+    <style name="CustomTextInputStyle" parent="Widget.Material3.TextInputLayout.FilledBox">
+        <item name="boxStrokeColor">?attr/colorPrimary</item>
+        <item name="boxBackgroundColor">?attr/colorOnPrimary</item>
+        <item name="hintTextColor">?attr/colorPrimary</item>
+        <item name="hintTextAppearance">?attr/textAppearanceBody2</item>
+        <item name="expandedHintEnabled">false</item>
+        <item name="shapeAppearance">?attr/shapeAppearanceLargeComponent</item>
+    </style>
+
+    <style name="CustomEditTextStyleForTextInputLayout">
+        <item name="android:paddingTop">@dimen/padding_top_for_edit_text</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 </resources>

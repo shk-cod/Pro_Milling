@@ -33,9 +33,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_default"
                     android:fontFamily="@font/roboto_light"
-                    android:textStyle="bold"
                     android:text="@{viewModel.result}"
                     android:textSize="@dimen/text_size_result"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -53,19 +53,18 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/text_layout_diameter"
-                    style="?attr/textInputOutlinedStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_default"
                     android:layout_marginTop="@dimen/margin_default"
                     android:layout_marginEnd="@dimen/margin_default"
                     android:hint="@string/hint_tool_diameter"
-                    app:suffixText="@string/text_input_suffix_mm"
-                    app:expandedHintEnabled="false"
-                    app:layout_constraintTop_toBottomOf="@id/divider">
+                    app:layout_constraintTop_toBottomOf="@id/divider"
+                    app:suffixText="@string/text_input_suffix_mm">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/text_input_diameter"
+                        style="@style/CustomEditTextStyleForTextInputLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="numberDecimal"
@@ -75,19 +74,18 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/text_layout_spiral_angle"
-                    style="?attr/textInputOutlinedStyle"
-                    app:suffixText="@string/text_input_suffix_degrees"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_default"
                     android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_default"
                     android:hint="@string/hint_spiral_angle"
-                    app:expandedHintEnabled="false"
-                    app:layout_constraintTop_toBottomOf="@+id/text_layout_diameter">
+                    app:layout_constraintTop_toBottomOf="@+id/text_layout_diameter"
+                    app:suffixText="@string/text_input_suffix_degrees">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/text_input_spiral_angle"
+                        style="@style/CustomEditTextStyleForTextInputLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="numberDecimal"
@@ -97,19 +95,18 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/text_layout_cutting_height"
-                    style="?attr/textInputOutlinedStyle"
-                    app:suffixText="@string/text_input_suffix_mm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_default"
                     android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_default"
                     android:hint="@string/hint_cutting_height"
-                    app:expandedHintEnabled="false"
-                    app:layout_constraintTop_toBottomOf="@+id/text_layout_spiral_angle">
+                    app:layout_constraintTop_toBottomOf="@+id/text_layout_spiral_angle"
+                    app:suffixText="@string/text_input_suffix_mm">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/text_input_cutting_height"
+                        style="@style/CustomEditTextStyleForTextInputLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="numberDecimal"
@@ -119,19 +116,18 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/text_layout_cutting_width"
-                    style="?attr/textInputOutlinedStyle"
-                    app:suffixText="@string/text_input_suffix_mm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_default"
                     android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_default"
                     android:hint="@string/hint_cutting_width"
-                    app:expandedHintEnabled="false"
-                    app:layout_constraintTop_toBottomOf="@+id/text_layout_cutting_height">
+                    app:layout_constraintTop_toBottomOf="@+id/text_layout_cutting_height"
+                    app:suffixText="@string/text_input_suffix_mm">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/text_input_cutting_width"
+                        style="@style/CustomEditTextStyleForTextInputLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="numberDecimal"
@@ -141,18 +137,17 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/text_layout_flute_count"
-                    style="?attr/textInputOutlinedStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_default"
                     android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginEnd="@dimen/margin_default"
                     android:hint="@string/hint_flute_count"
-                    app:expandedHintEnabled="false"
                     app:layout_constraintTop_toBottomOf="@+id/text_layout_cutting_width">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/text_input_flute_count"
+                        style="@style/CustomEditTextStyleForTextInputLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="numberSigned"
@@ -162,8 +157,6 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/text_layout_flute_position"
-                    style="?attr/textInputOutlinedStyle"
-                    app:suffixText="@string/text_input_suffix_degrees"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_default"
@@ -171,11 +164,12 @@
                     android:layout_marginEnd="@dimen/margin_default"
                     android:layout_marginBottom="@dimen/margin_default"
                     android:hint="@string/hint_flute_position"
-                    app:expandedHintEnabled="false"
-                    app:layout_constraintTop_toBottomOf="@+id/text_layout_flute_count">
+                    app:layout_constraintTop_toBottomOf="@+id/text_layout_flute_count"
+                    app:suffixText="@string/text_input_suffix_degrees">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/text_input_flute_position"
+                        style="@style/CustomEditTextStyleForTextInputLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="numberDecimal"
