@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.ProMilling" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">?attr/colorPrimary</item>
+        <item name="colorOnPrimaryContainer">?attr/colorOnPrimary</item>
+        <item name="colorSurface">?attr/colorOnPrimary</item>
+        <item name="colorSurfaceVariant">?attr/colorOnPrimary</item>
+        <item name="colorOnSecondaryContainer">?attr/colorOnPrimary</item>
+        <item name="android:windowBackground">@color/gray</item>
+        <item name="android:windowSplashScreenBackground">?attr/colorPrimary</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryContainer</item>
+        <!-- Customize your theme here. -->
+        <item name="android:textAppearance">?attr/textAppearanceBody2</item>
+        <item name="android:fontFamily">@font/roboto_light</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="appBarLayoutStyle">@style/CustomAppBarLayout</item>
+        <item name="toolbarStyle">@style/CustomMaterialToolbar</item>
+        <item name="textInputStyle">@style/CustomTextInputStyle</item>
+        <item name="bottomNavigationStyle">@style/CustomNavigationBar</item>
+    </style>
+</resources>
