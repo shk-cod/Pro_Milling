@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
 import com.kou.promilling.database.*
 import com.kou.promilling.databinding.FragmentResultsBinding
 
@@ -20,7 +19,7 @@ class ResultsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentResultsBinding.inflate(inflater)
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
         val application = requireNotNull(this.activity).application
         val dataSource = getDatabase(application).millingDao
@@ -31,16 +30,17 @@ class ResultsFragment : Fragment() {
         viewModel.navigateToItemDetail.observe(viewLifecycleOwner) { item ->
             item?.let {
                 val navController = this.findNavController()
-                when (it) {
-                    is DatabaseSpiralContactLength -> {
+                when (it.type) {
+                    EntityType.TYPE_SPIRAL_CONTACT -> {
                         navController.navigate(ResultsFragmentDirections.actionResultsToSpiralContactDetailFragment(it))
                     }
-                    is DatabaseCuttingWidth -> {
+                    EntityType.TYPE_CUTTING_WIDTH -> {
                         navController.navigate(ResultsFragmentDirections.actionResultsToCuttingWidthDetailFragment(it))
                     }
-                    is DatabaseTrochoidWidth -> {
+                    EntityType.TYPE_TROCHOID_WIDTH -> {
                         navController.navigate(ResultsFragmentDirections.actionResultsToTrochoidWidthDetailFragment(it))
                     }
+                    else -> throw Exception("Wrong type")
                 }
                 viewModel.displayItemDetailComplete()
             }
@@ -52,34 +52,11 @@ class ResultsFragment : Fragment() {
         }, application)
         binding.resultsList.adapter = adapter
 
-        viewModel.spiral.observe(viewLifecycleOwner) {
-            adapter.submitData(buildList())
+        viewModel.items.observe(viewLifecycleOwner) {
+            adapter.submitData(it)
         }
-
-        viewModel.cutting.observe(viewLifecycleOwner) {
-            adapter.submitData(buildList())
-        }
-
-        viewModel.trochoid.observe(viewLifecycleOwner) {
-            adapter.submitData(buildList())
-        }
-
 
 
         return binding.root
     }
-
-    private fun buildList(): List<ResultItem> {
-        val list = mutableListOf<ResultItem>()
-        viewModel.spiral.value?.let { list.addAll(it) }
-        viewModel.cutting.value?.let { list.addAll(it) }
-        viewModel.trochoid.value?.let { list.addAll(it) }
-
-        list.sortByDescending { it.date }
-
-
-        return list
-    }
-
-
 }

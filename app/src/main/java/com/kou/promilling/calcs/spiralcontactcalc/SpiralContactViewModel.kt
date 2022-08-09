@@ -3,12 +3,15 @@
 package com.kou.promilling.calcs.spiralcontactcalc
 
 import android.app.Application
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.kou.promilling.R
 import com.kou.promilling.calculateSpiralContact
-import com.kou.promilling.database.DatabaseSpiralContactLength
+import com.kou.promilling.database.EntityType
 import com.kou.promilling.database.MillingDao
-import com.kou.promilling.formatResult
+import com.kou.promilling.database.ResultItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -16,7 +19,7 @@ import java.util.*
 
 class SpiralContactViewModel(
     private val database: MillingDao,
-    item: DatabaseSpiralContactLength?,
+    item: ResultItem?,
     private val app: Application
 ): AndroidViewModel(app) {
 
@@ -34,9 +37,9 @@ class SpiralContactViewModel(
 
 
     //TODO: add field errors
-    private val _cuttingHeightError = MutableLiveData<String>()
-    val cuttingHeightError: LiveData<String>
-        get() = _cuttingHeightError
+//    private val _cuttingHeightError = MutableLiveData<String>()
+//    val cuttingHeightError: LiveData<String>
+//        get() = _cuttingHeightError
 
     init {
         item?.let {
@@ -98,7 +101,7 @@ class SpiralContactViewModel(
         flutePosition: Double = this.flutePosition.value!!,
         result: Double
     ) {
-        val entry = DatabaseSpiralContactLength(
+        val entry = ResultItem(
             date = Date(timeMillis),
             toolDiameter = diameter,
             spiralAngle = spiralAngle,
@@ -107,7 +110,7 @@ class SpiralContactViewModel(
             fluteCount = fluteCount,
             flutePosition = flutePosition,
             result = result
-        )
+        ).apply { this.type = EntityType.TYPE_SPIRAL_CONTACT }
         withContext(Dispatchers.IO) {
             database.insertEntry(entry)
         }

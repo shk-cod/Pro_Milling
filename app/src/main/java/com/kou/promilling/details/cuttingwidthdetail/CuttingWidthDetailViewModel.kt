@@ -6,13 +6,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.kou.promilling.R
-import com.kou.promilling.database.DatabaseCuttingWidth
+import com.kou.promilling.database.ResultItem
 
 class CuttingWidthDetailViewModel(
-    item: DatabaseCuttingWidth,
+    item: ResultItem,
     app: Application
 ): AndroidViewModel(app) {
-    private val selectedItem = MutableLiveData<DatabaseCuttingWidth>()
+    private val selectedItem = MutableLiveData<ResultItem>()
 
     init {
         selectedItem.value = item
@@ -46,8 +46,8 @@ class CuttingWidthDetailViewModel(
     val navigateToResults: LiveData<Boolean>
         get() = _navigateToResults
 
-    private val _navigateToCalc = MutableLiveData<DatabaseCuttingWidth>()
-    val navigateToCalc: LiveData<DatabaseCuttingWidth>
+    private val _navigateToCalc = MutableLiveData<ResultItem>()
+    val navigateToCalc: LiveData<ResultItem>
         get() = _navigateToCalc
 
     fun onClose() {

@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_spiral_contact">
         <argument
             android:name="item"
-            app:argType="com.kou.promilling.database.DatabaseSpiralContactLength"
+            app:argType="com.kou.promilling.database.ResultItem"
             app:nullable="true"
             android:defaultValue="@null"/>
     </fragment>
@@ -23,7 +23,7 @@
         tools:layout="@layout/fragment_cutting_width">
         <argument
             android:name="item"
-            app:argType="com.kou.promilling.database.DatabaseCuttingWidth"
+            app:argType="com.kou.promilling.database.ResultItem"
             app:nullable="true"
             android:defaultValue="@null"/>
     </fragment>
@@ -34,7 +34,7 @@
         tools:layout="@layout/fragment_trochoid_width">
         <argument
             android:name="item"
-            app:argType="com.kou.promilling.database.DatabaseTrochoidWidth"
+            app:argType="com.kou.promilling.database.ResultItem"
             app:nullable="true"
             android:defaultValue="@null"/>
     </fragment>
@@ -63,7 +63,7 @@
             app:popUpToInclusive="true" />
         <argument
             android:name="item"
-            app:argType="com.kou.promilling.database.DatabaseCuttingWidth" />
+            app:argType="com.kou.promilling.database.ResultItem" />
         <action
             android:id="@+id/action_cuttingWidthDetailFragment_to_results"
             app:destination="@id/results"
@@ -81,7 +81,7 @@
             app:popUpToInclusive="true" />
         <argument
             android:name="item"
-            app:argType="com.kou.promilling.database.DatabaseTrochoidWidth" />
+            app:argType="com.kou.promilling.database.ResultItem" />
         <action
             android:id="@+id/action_trochoidWidthDetailFragment_to_results"
             app:destination="@id/results"
@@ -99,7 +99,7 @@
             app:popUpToInclusive="true" />
         <argument
             android:name="item"
-            app:argType="com.kou.promilling.database.DatabaseSpiralContactLength" />
+            app:argType="com.kou.promilling.database.ResultItem" />
         <action
             android:id="@+id/action_spiralContactDetailFragment_to_results"
             app:destination="@id/results"

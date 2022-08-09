@@ -77,6 +77,7 @@ class ViewHolder private constructor(val binding: ResultItemViewBinding): Recycl
             EntityType.TYPE_TROCHOID_WIDTH -> context.getString(
                 R.string.trochoid_width_menu_title
             )
+            else -> throw Exception("Wrong type")
         }
         binding.executePendingBindings()
     }

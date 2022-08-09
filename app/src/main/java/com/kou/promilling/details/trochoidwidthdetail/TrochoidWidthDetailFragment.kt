@@ -17,7 +17,7 @@ class TrochoidWidthDetailFragment : Fragment() {
     ): View {
         val app = requireNotNull(activity).application
         val binding = TrochoidWidthItemDetailBinding.inflate(inflater)
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
         val item = TrochoidWidthDetailFragmentArgs.fromBundle(arguments!!).item
         val viewModelFactory = TrochoidWidthDetailViewModelFactory(item, app)

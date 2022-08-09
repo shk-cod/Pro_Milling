@@ -6,13 +6,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.kou.promilling.R
-import com.kou.promilling.database.DatabaseTrochoidWidth
+import com.kou.promilling.database.ResultItem
 
 class TrochoidWidthDetailViewModel(
-    item: DatabaseTrochoidWidth,
+    item: ResultItem,
     app: Application
 ) : AndroidViewModel(app) {
-    private val selectedItem = MutableLiveData<DatabaseTrochoidWidth>()
+    private val selectedItem = MutableLiveData<ResultItem>()
 
     init {
         selectedItem.value = item
@@ -46,8 +46,8 @@ class TrochoidWidthDetailViewModel(
     val navigateToResults: LiveData<Boolean>
         get() = _navigateToResults
 
-    private val _navigateToCalc = MutableLiveData<DatabaseTrochoidWidth>()
-    val navigateToCalc: LiveData<DatabaseTrochoidWidth>
+    private val _navigateToCalc = MutableLiveData<ResultItem>()
+    val navigateToCalc: LiveData<ResultItem>
         get() = _navigateToCalc
 
     fun onClose() {

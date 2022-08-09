@@ -1,13 +1,15 @@
 package com.kou.promilling.calcs.cuttingwidthcalc
 
 import android.app.Application
-import android.view.View
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.kou.promilling.R
 import com.kou.promilling.calculateCuttingWidth
-import com.kou.promilling.database.DatabaseCuttingWidth
+import com.kou.promilling.database.EntityType
 import com.kou.promilling.database.MillingDao
-import com.kou.promilling.formatResult
+import com.kou.promilling.database.ResultItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -15,7 +17,7 @@ import java.util.*
 
 class CuttingWidthViewModel(
     private val database: MillingDao,
-    item: DatabaseCuttingWidth?,
+    item: ResultItem?,
     private val app: Application
 ): AndroidViewModel(app) {
     private val _result = MutableLiveData<String>()
@@ -72,13 +74,13 @@ class CuttingWidthViewModel(
         cuttingWidth: Double = this.cuttingWidth.value!!,
         result: Double
     ) {
-        val entry = DatabaseCuttingWidth(
+        val entry = ResultItem(
             date = Date(timeMillis),
             toolRadius = radius,
             curvatureRadius = roundingRadius,
             cuttingWidth = cuttingWidth,
             result = result
-        )
+        ).apply { this.type = EntityType.TYPE_CUTTING_WIDTH }
         withContext(Dispatchers.IO) {
             database.insertEntry(entry)
         }

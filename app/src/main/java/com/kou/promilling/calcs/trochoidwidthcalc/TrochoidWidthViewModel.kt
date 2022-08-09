@@ -1,13 +1,15 @@
 package com.kou.promilling.calcs.trochoidwidthcalc
 
 import android.app.Application
-import android.view.View
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.kou.promilling.R
 import com.kou.promilling.calculateTrochoidWidth
-import com.kou.promilling.database.DatabaseTrochoidWidth
+import com.kou.promilling.database.EntityType
 import com.kou.promilling.database.MillingDao
-import com.kou.promilling.formatResult
+import com.kou.promilling.database.ResultItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -15,7 +17,7 @@ import java.util.*
 
 class TrochoidWidthViewModel(
     private val database: MillingDao,
-    item: DatabaseTrochoidWidth?,
+    item: ResultItem?,
     private val app: Application
 ): AndroidViewModel(app) {
 
@@ -73,13 +75,13 @@ class TrochoidWidthViewModel(
         trochoidStep: Double = this.trochoidStep.value!!,
         result: Double
     ) {
-        val entry = DatabaseTrochoidWidth(
+        val entry = ResultItem(
             date = Date(timeMillis),
             toolRadius = radius,
             curvatureRadius = roundingRadius,
             trochoidStep = trochoidStep,
             result = result
-        )
+        ).apply { this.type = EntityType.TYPE_TROCHOID_WIDTH }
         withContext(Dispatchers.IO) {
             database.insertEntry(entry)
         }

@@ -18,7 +18,7 @@ class SpiralContactFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentSpiralContactBinding.inflate(inflater)
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
         val application = requireNotNull(this.activity).application
         val dataSource = getDatabase(application).millingDao

@@ -3,12 +3,12 @@ package com.kou.promilling.calcs.trochoidwidthcalc
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.kou.promilling.database.DatabaseTrochoidWidth
 import com.kou.promilling.database.MillingDao
+import com.kou.promilling.database.ResultItem
 
 class TrochoidWidthViewModelFactory(
     private val dataSource: MillingDao,
-    private val item: DatabaseTrochoidWidth?,
+    private val item: ResultItem?,
     private val app: Application
 ): ViewModelProvider.Factory {
     @Suppress("unchecked_cast")

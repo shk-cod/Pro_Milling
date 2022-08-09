@@ -17,7 +17,7 @@ class SpiralContactDetailFragment : Fragment() {
     ): View {
         val app = requireNotNull(activity).application
         val binding = SpiralContactItemDetailBinding.inflate(inflater)
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
         val item = SpiralContactDetailFragmentArgs.fromBundle(arguments!!).item
         val viewModelFactory = SpiralContactDetailViewModelFactory(item, app)

@@ -7,9 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
 @Database(entities = [
-    DatabaseSpiralContactLength::class,
-    DatabaseCuttingWidth::class,
-    DatabaseTrochoidWidth::class
+    ResultItem::class
 ], version = 1, exportSchema = false)
 @TypeConverters(DatabaseTypeConverters::class)
 abstract class MillingDatabase: RoomDatabase() {

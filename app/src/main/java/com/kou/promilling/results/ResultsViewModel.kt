@@ -7,9 +7,7 @@ import com.kou.promilling.database.ResultItem
 class ResultsViewModel(
     database: MillingDao
 ) : ViewModel() {
-    val spiral = database.getSpiralContactEntries()
-    val cutting = database.getCuttingWidthEntries()
-    val trochoid = database.getTrochoidWidthEntries()
+    val items = database.getEntries()
 
     private val _navigateToItemDetail = MutableLiveData<ResultItem>()
     val navigateToItemDetail: LiveData<ResultItem>

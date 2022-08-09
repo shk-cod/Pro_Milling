@@ -18,7 +18,7 @@ class CuttingWidthFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentCuttingWidthBinding.inflate(inflater)
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
         val application = requireNotNull(this.activity).application
         val dataSource = getDatabase(application).millingDao

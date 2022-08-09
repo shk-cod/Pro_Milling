@@ -3,10 +3,10 @@ package com.kou.promilling.details.trochoidwidthdetail
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.kou.promilling.database.DatabaseTrochoidWidth
+import com.kou.promilling.database.ResultItem
 
 class TrochoidWidthDetailViewModelFactory(
-    private val item: DatabaseTrochoidWidth,
+    private val item: ResultItem,
     private val app: Application
 ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")

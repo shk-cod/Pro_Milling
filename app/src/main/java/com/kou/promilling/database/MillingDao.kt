@@ -8,30 +8,12 @@ import androidx.room.Query
 
 @Dao
 interface MillingDao {
-    @Query("select * from databasespiralcontactlength")
-    fun getSpiralContactEntries(): LiveData<List<DatabaseSpiralContactLength>>
-
-    @Query("select * from databasecuttingwidth")
-    fun getCuttingWidthEntries(): LiveData<List<DatabaseCuttingWidth>>
-
-    @Query("select * from databasetrochoidwidth")
-    fun getTrochoidWidthEntries(): LiveData<List<DatabaseTrochoidWidth>>
+    @Query("select * from resultitem order by date desc")
+    fun getEntries(): LiveData<List<ResultItem>>
 
     @Insert
-    fun insertEntry(entry: DatabaseSpiralContactLength)
-
-    @Insert
-    fun insertEntry(entry: DatabaseCuttingWidth)
-
-    @Insert
-    fun insertEntry(entry: DatabaseTrochoidWidth)
+    fun insertEntry(entry: ResultItem)
 
     @Delete
-    fun deleteEntry(entry: DatabaseSpiralContactLength)
-
-    @Delete
-    fun deleteEntry(entry: DatabaseCuttingWidth)
-
-    @Delete
-    fun deleteEntry(entry: DatabaseTrochoidWidth)
+    fun deleteEntry(entry: ResultItem)
 }

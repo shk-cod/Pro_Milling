@@ -3,13 +3,13 @@ package com.kou.promilling.details.spiralcontactdetail
 import android.app.Application
 import androidx.lifecycle.*
 import com.kou.promilling.R
-import com.kou.promilling.database.DatabaseSpiralContactLength
+import com.kou.promilling.database.ResultItem
 
 class SpiralContactDetailViewModel(
-    item: DatabaseSpiralContactLength,
+    item: ResultItem,
     app: Application
 ) : AndroidViewModel(app) {
-    private val selectedItem = MutableLiveData<DatabaseSpiralContactLength>()
+    private val selectedItem = MutableLiveData<ResultItem>()
 
     init {
         selectedItem.value = item
@@ -61,8 +61,8 @@ class SpiralContactDetailViewModel(
     val navigateToResults: LiveData<Boolean>
         get() = _navigateToResults
 
-    private val _navigateToCalc = MutableLiveData<DatabaseSpiralContactLength>()
-    val navigateToCalc: LiveData<DatabaseSpiralContactLength>
+    private val _navigateToCalc = MutableLiveData<ResultItem>()
+    val navigateToCalc: LiveData<ResultItem>
         get() = _navigateToCalc
 
     fun onClose() {

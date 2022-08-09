@@ -3,10 +3,10 @@ package com.kou.promilling.details.cuttingwidthdetail
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.kou.promilling.database.DatabaseCuttingWidth
+import com.kou.promilling.database.ResultItem
 
 class CuttingWidthDetailViewModelFactory(
-    private val item: DatabaseCuttingWidth,
+    private val item: ResultItem,
     private val app: Application
 ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")

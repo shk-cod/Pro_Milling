@@ -6,63 +6,37 @@ import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 import java.util.*
 
-enum class EntityType {
-    TYPE_SPIRAL_CONTACT,
-    TYPE_CUTTING_WIDTH,
-    TYPE_TROCHOID_WIDTH
+class EntityType {
+    companion object {
+        const val TYPE_SPIRAL_CONTACT = 1
+        const val TYPE_CUTTING_WIDTH = 2
+        const val TYPE_TROCHOID_WIDTH = 3
+    }
 }
 
-interface ResultItem {
-    val id: Long
-    val type: EntityType
-    val date: Date
-    val result: Double
-}
+
 
 @Entity
 @Parcelize
-data class DatabaseSpiralContactLength(
+data class ResultItem(
     @PrimaryKey(autoGenerate = true)
-    override val id: Long = 0L,
-    override val date: Date,
-    @ColumnInfo(name = "tool_diameter") val toolDiameter: Double,
-    @ColumnInfo(name = "spiral_angle") val spiralAngle: Double,
-    @ColumnInfo(name = "cutting_depth") val cuttingDepth: Double,
-    @ColumnInfo(name = "cutting_width") val cuttingWidth: Double,
-    @ColumnInfo(name = "flute_count") val fluteCount: Int,
-    @ColumnInfo(name = "flute_position") val flutePosition: Double,
-    override val result: Double
-): ResultItem, Parcelable {
-    @Ignore @IgnoredOnParcel override val type = EntityType.TYPE_SPIRAL_CONTACT
+    val id: Long = 0L,
+    val date: Date,
+    @ColumnInfo(name = "tool_diameter") val toolDiameter: Double = 0.0,
+    @ColumnInfo(name = "tool_radius") val toolRadius: Double = 0.0,
+    @ColumnInfo(name = "spiral_angle") val spiralAngle: Double = 0.0,
+    @ColumnInfo(name = "cutting_depth") val cuttingDepth: Double = 0.0,
+    @ColumnInfo(name = "cutting_width") val cuttingWidth: Double = 0.0,
+    @ColumnInfo(name = "curvature_radius") val curvatureRadius: Double = 0.0,
+    @ColumnInfo(name = "trochoid_step") val trochoidStep: Double = 0.0,
+    @ColumnInfo(name = "flute_count") val fluteCount: Int = 0,
+    @ColumnInfo(name = "flute_position") val flutePosition: Double = 0.0,
+    val result: Double,
+    var type: Int = 0
+): Parcelable {
+
 }
 
-@Entity
-@Parcelize
-data class DatabaseCuttingWidth(
-    @PrimaryKey(autoGenerate = true)
-    override val id: Long = 0L,
-    override val date: Date,
-    @ColumnInfo(name = "tool_radius") val toolRadius: Double,
-    @ColumnInfo(name = "curvature_radius") val curvatureRadius: Double,
-    @ColumnInfo(name = "cutting_width") val cuttingWidth: Double,
-    override val result: Double
-): ResultItem, Parcelable {
-    @Ignore @IgnoredOnParcel override val type = EntityType.TYPE_CUTTING_WIDTH
-}
-
-@Entity
-@Parcelize
-data class DatabaseTrochoidWidth(
-    @PrimaryKey(autoGenerate = true)
-    override val id: Long = 0L,
-    override val date: Date,
-    @ColumnInfo(name = "tool_radius") val toolRadius: Double,
-    @ColumnInfo(name = "curvature_radius") val curvatureRadius: Double,
-    @ColumnInfo(name = "trochoid_step") val trochoidStep: Double,
-    override val result: Double
-): ResultItem, Parcelable {
-    @Ignore @IgnoredOnParcel override val type = EntityType.TYPE_TROCHOID_WIDTH
-}
 
 class DatabaseTypeConverters {
     @TypeConverter

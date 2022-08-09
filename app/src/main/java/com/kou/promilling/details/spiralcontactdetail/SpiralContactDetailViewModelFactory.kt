@@ -3,10 +3,10 @@ package com.kou.promilling.details.spiralcontactdetail
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.kou.promilling.database.DatabaseSpiralContactLength
+import com.kou.promilling.database.ResultItem
 
 class SpiralContactDetailViewModelFactory(
-    private val item: DatabaseSpiralContactLength,
+    private val item: ResultItem,
     private val app: Application
 ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")

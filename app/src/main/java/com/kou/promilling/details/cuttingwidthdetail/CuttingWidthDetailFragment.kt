@@ -19,7 +19,7 @@ class CuttingWidthDetailFragment: Fragment() {
     ): View {
         val app = requireNotNull(activity).application
         val binding = CuttingWidthItemDetailBinding.inflate(inflater)
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
         val item = CuttingWidthDetailFragmentArgs.fromBundle(arguments!!).item
         val viewModelFactory = CuttingWidthDetailViewModelFactory(item, app)
