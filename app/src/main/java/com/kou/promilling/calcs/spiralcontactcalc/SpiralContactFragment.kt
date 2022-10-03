@@ -2,16 +2,42 @@ package com.kou.promilling.calcs.spiralcontactcalc
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.kou.promilling.R
 import com.kou.promilling.database.getDatabase
 import com.kou.promilling.databinding.FragmentSpiralContactBinding
 
+@Suppress("Deprecation")
 class SpiralContactFragment : Fragment() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    @Deprecated("Deprecated in Java",
+        ReplaceWith("inflater.inflate(R.menu.top_app_bar, menu)", "com.kou.promilling.R")
+    )
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.top_app_bar, menu)
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.description -> {
+                this.findNavController().navigate(
+                    SpiralContactFragmentDirections.actionSpiralContactToSpiralContactDescriptionFragment()
+                )
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

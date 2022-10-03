@@ -14,6 +14,7 @@
         <entry key="..\:/Users/konst/AndroidStudioProjects/ProMilling/app/src/main/res/layout/fragment_cutting_width.xml" value="0.358695652173913" />
         <entry key="..\:/Users/konst/AndroidStudioProjects/ProMilling/app/src/main/res/layout/fragment_results.xml" value="0.358695652173913" />
         <entry key="..\:/Users/konst/AndroidStudioProjects/ProMilling/app/src/main/res/layout/fragment_spiral_contact.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/konst/AndroidStudioProjects/ProMilling/app/src/main/res/layout/fragment_spiral_contact_description.xml" value="0.2975630611372381" />
         <entry key="..\:/Users/konst/AndroidStudioProjects/ProMilling/app/src/main/res/layout/fragment_trochoid_width.xml" value="0.358695652173913" />
         <entry key="..\:/Users/konst/AndroidStudioProjects/ProMilling/app/src/main/res/layout/header_navigation_layout.xml" value="0.358695652173913" />
         <entry key="..\:/Users/konst/AndroidStudioProjects/ProMilling/app/src/main/res/layout/result_item_view.xml" value="0.67" />
@@ -21,6 +22,7 @@
         <entry key="..\:/Users/konst/AndroidStudioProjects/ProMilling/app/src/main/res/layout/text_item_view.xml" value="0.2975630611372381" />
         <entry key="..\:/Users/konst/AndroidStudioProjects/ProMilling/app/src/main/res/layout/trochoid_width_item_detail.xml" value="0.2975630611372381" />
         <entry key="..\:/Users/konst/AndroidStudioProjects/ProMilling/app/src/main/res/menu/drawer_menu.xml" value="0.3625" />
+        <entry key="..\:/Users/konst/AndroidStudioProjects/ProMilling/app/src/main/res/menu/top_app_bar.xml" value="0.2975630611372381" />
         <entry key="..\:/Users/konst/AndroidStudioProjects/ProMilling/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2995" />
         <entry key="..\:/Users/konst/AndroidStudioProjects/ProMilling/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1935" />
       </map>

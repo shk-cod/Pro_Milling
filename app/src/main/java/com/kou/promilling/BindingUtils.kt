@@ -1,7 +1,11 @@
 package com.kou.promilling
 
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseMethod
+import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputEditText
+import timber.log.Timber
 
 object Converter {
     @InverseMethod("stringToDouble")
@@ -57,4 +61,14 @@ object Converter {
             if (value.isBlank()) Int.MIN_VALUE else oldValue
         }
     }
+}
+
+@BindingAdapter("android:src")
+fun setImageViewResource(view: ImageView, imageId: Int?) {
+    imageId?.let {
+        Glide.with(view.context)
+            .load(imageId)
+            .into(view)
+    }
+    Timber.i("Glide binding image", imageId, view.toString())
 }

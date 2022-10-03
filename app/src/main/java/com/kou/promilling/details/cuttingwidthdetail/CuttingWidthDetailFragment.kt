@@ -1,4 +1,4 @@
-@file:Suppress("ReplaceGetOrSet", "ReplaceGetOrSet", "ReplaceGetOrSet")
+@file:Suppress("ReplaceGetOrSet")
 
 package com.kou.promilling.details.cuttingwidthdetail
 
@@ -21,7 +21,7 @@ class CuttingWidthDetailFragment: Fragment() {
         val binding = CuttingWidthItemDetailBinding.inflate(inflater)
         binding.lifecycleOwner = viewLifecycleOwner
 
-        val item = CuttingWidthDetailFragmentArgs.fromBundle(arguments!!).item
+        val item = CuttingWidthDetailFragmentArgs.fromBundle(requireArguments()).item
         val viewModelFactory = CuttingWidthDetailViewModelFactory(item, app)
         val viewModel = ViewModelProvider(this, viewModelFactory)
             .get(CuttingWidthDetailViewModel::class.java)

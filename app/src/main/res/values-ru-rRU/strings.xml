@@ -29,4 +29,26 @@
     <string name="text_input_suffix_mm">мм</string>
     <string name="text_input_suffix_degrees">град</string>
     <string name="result">%,.3f мм</string>
+    <string name="test_html_string">
+        <![CDATA[<!DOCTYPE html>
+        <html>
+            <body>
+                <p>
+                    <b>D</b> - диаметр
+                </p>
+                <p>
+                    <b>w</b> - ширина съема
+                </p>
+                <p>
+                    <b>h</b> - высота съема
+                </p>
+                <p>
+                    <b>α</b> - угол наклона спирали
+                </p>
+            </body>
+        </html>]]>
+    </string>
+    <string name="image_spiral_contact_content_description">схема контакта спирали</string>
+    <string name="menu_item_description" translatable="false">Описание</string>
+    <string name="spiral_contact_description_screen_label">Схема расчета</string>
 </resources>
