@@ -29,6 +29,9 @@
             app:argType="com.kou.promilling.database.ResultItem"
             app:nullable="true"
             android:defaultValue="@null"/>
+        <action
+            android:id="@+id/action_cutting_width_to_cuttingWidthDescriptionFragment"
+            app:destination="@id/cuttingWidthDescriptionFragment" />
     </fragment>
     <fragment
         android:id="@+id/trochoid_width"
@@ -40,6 +43,9 @@
             app:argType="com.kou.promilling.database.ResultItem"
             app:nullable="true"
             android:defaultValue="@null"/>
+        <action
+            android:id="@+id/action_trochoid_width_to_trochoidWidthDescriptionFragment"
+            app:destination="@id/trochoidWidthDescriptionFragment" />
     </fragment>
     <fragment
         android:id="@+id/results"
@@ -112,5 +118,13 @@
     <fragment
         android:id="@+id/spiralContactDescriptionFragment"
         android:name="com.kou.promilling.descriptions.spiralcontactdescription.SpiralContactDescriptionFragment"
-        android:label="@string/spiral_contact_description_screen_label" />
+        android:label="@string/calculator_description_screen_label" />
+    <fragment
+        android:id="@+id/cuttingWidthDescriptionFragment"
+        android:name="com.kou.promilling.descriptions.cuttingwidthdescription.CuttingWidthDescriptionFragment"
+        android:label="@string/calculator_description_screen_label" />
+    <fragment
+        android:id="@+id/trochoidWidthDescriptionFragment"
+        android:name="com.kou.promilling.descriptions.trochoidwidthdescription.TrochoidWidthDescriptionFragment"
+        android:label="@string/calculator_description_screen_label" />
 </navigation>

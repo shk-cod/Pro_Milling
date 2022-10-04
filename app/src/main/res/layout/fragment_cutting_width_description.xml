@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.kou.promilling.descriptions.spiralcontactdescription.SpiralContactDescriptionViewModel" />
+            type="com.kou.promilling.descriptions.cuttingwidthdescription.CuttingWidthDescriptionViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -36,7 +36,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/image_spiral_contact_content_description" />
+                android:contentDescription="@string/image_trochoid_width_content_description" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>

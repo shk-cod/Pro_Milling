@@ -6,6 +6,7 @@ import android.view.*
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.kou.promilling.R
 import com.kou.promilling.database.getDatabase
 import com.kou.promilling.databinding.FragmentTrochoidWidthBinding
@@ -30,7 +31,9 @@ class TrochoidWidthFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.description -> {
-                //navigate to description screen
+                this.findNavController().navigate(
+                    TrochoidWidthFragmentDirections.actionTrochoidWidthToTrochoidWidthDescriptionFragment()
+                )
                 true
             }
             else -> super.onOptionsItemSelected(item)

@@ -31,26 +31,60 @@
     <string name="text_input_suffix_mm">mm</string>
     <string name="text_input_suffix_degrees">dg</string>
     <string name="result">%,.3f mm</string>
-    <string name="test_html_string">
+    <string name="spiral_contact_scheme_html_string">
         <![CDATA[<!DOCTYPE html>
         <html>
             <body>
                 <p>
-                    <b>D</b> - diameter
+                    <b>D</b> - tool diameter
                 </p>
                 <p>
-                    <b>w</b> - cutting width
+                    <b>α</b> - spiral angle
                 </p>
                 <p>
                     <b>h</b> - cutting height
                 </p>
                 <p>
-                    <b>α</b> - spiral angle
+                    <b>w</b> - cutting width
+                </p>
+            </body>
+        </html>]]>
+    </string>
+    <string name="cutting_width_scheme_html_string">
+        <![CDATA[<!DOCTYPE html>
+        <html>
+            <body>
+                <p>
+                    <b>R</b> - tool radius
+                </p>
+                <p>
+                    <b>r</b> - path rounding radius
+                </p>
+                <p>
+                    <b>w</b> - cutting width
+                </p>
+                <p>
+                    <b>w max</b> - cutting width in corner
+                </p>
+            </body>
+        </html>]]>
+    </string>
+    <string name="trochoid_width_scheme_html_string">
+        <![CDATA[<!DOCTYPE html>
+        <html>
+            <body>
+                <p>
+                    <b>R</b> - tool radius
+                </p>
+                <p>
+                    <b>w max</b> - trochoid max cutting width
                 </p>
             </body>
         </html>]]>
     </string>
     <string name="image_spiral_contact_content_description">spiral contact scheme</string>
     <string name="menu_item_description">Description</string>
-    <string name="spiral_contact_description_screen_label">Scheme for calculation</string>
+    <string name="calculator_description_screen_label">Scheme for calculation</string>
+    <string name="image_cutting_width_content_description">cutting width scheme</string>
+    <string name="image_trochoid_width_content_description">trochoid width scheme</string>
 </resources>
