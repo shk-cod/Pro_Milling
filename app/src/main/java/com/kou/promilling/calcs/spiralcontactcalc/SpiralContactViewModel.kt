@@ -36,11 +36,6 @@ class SpiralContactViewModel(
     val flutePosition = MutableLiveData(Double.MIN_VALUE)
 
 
-    //TODO: add field errors
-//    private val _cuttingHeightError = MutableLiveData<String>()
-//    val cuttingHeightError: LiveData<String>
-//        get() = _cuttingHeightError
-
     init {
         item?.let {
             diameter.value = it.toolDiameter
