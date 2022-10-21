@@ -46,8 +46,8 @@ class TrochoidWidthDetailViewModel(
     val navigateToResults: LiveData<Boolean>
         get() = _navigateToResults
 
-    private val _navigateToCalc = MutableLiveData<ResultItem>()
-    val navigateToCalc: LiveData<ResultItem>
+    private val _navigateToCalc = MutableLiveData<ResultItem?>()
+    val navigateToCalc: LiveData<ResultItem?>
         get() = _navigateToCalc
 
     fun onClose() {

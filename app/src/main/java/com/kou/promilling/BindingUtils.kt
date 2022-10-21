@@ -5,7 +5,6 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseMethod
 import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputEditText
-import timber.log.Timber
 
 object Converter {
     @InverseMethod("stringToDouble")
@@ -70,5 +69,4 @@ fun setImageViewResource(view: ImageView, imageId: Int?) {
             .load(imageId)
             .into(view)
     }
-    Timber.i("Glide binding image", imageId, view.toString())
 }

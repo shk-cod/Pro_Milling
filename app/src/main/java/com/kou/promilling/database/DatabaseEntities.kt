@@ -2,7 +2,6 @@ package com.kou.promilling.database
 
 import android.os.Parcelable
 import androidx.room.*
-import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 import java.util.*
 
@@ -33,9 +32,7 @@ data class ResultItem(
     @ColumnInfo(name = "flute_position") val flutePosition: Double = 0.0,
     val result: Double,
     var type: Int = 0
-): Parcelable {
-
-}
+): Parcelable
 
 
 class DatabaseTypeConverters {

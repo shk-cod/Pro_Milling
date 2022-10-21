@@ -9,8 +9,8 @@ class ResultsViewModel(
 ) : ViewModel() {
     val items = database.getEntries()
 
-    private val _navigateToItemDetail = MutableLiveData<ResultItem>()
-    val navigateToItemDetail: LiveData<ResultItem>
+    private val _navigateToItemDetail = MutableLiveData<ResultItem?>()
+    val navigateToItemDetail: LiveData<ResultItem?>
         get() = _navigateToItemDetail
 
     fun displayItemDetail(item: ResultItem) {

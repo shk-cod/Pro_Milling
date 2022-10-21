@@ -19,10 +19,9 @@ class SpiralContactDetailFragment : Fragment() {
         val binding = SpiralContactItemDetailBinding.inflate(inflater)
         binding.lifecycleOwner = viewLifecycleOwner
 
-        val item = SpiralContactDetailFragmentArgs.fromBundle(arguments!!).item
+        val item = SpiralContactDetailFragmentArgs.fromBundle(requireArguments()).item
         val viewModelFactory = SpiralContactDetailViewModelFactory(item, app)
-        val viewModel = ViewModelProvider(this, viewModelFactory)
-            .get(SpiralContactDetailViewModel::class.java)
+        val viewModel = ViewModelProvider(this, viewModelFactory)[SpiralContactDetailViewModel::class.java]
         binding.viewModel = viewModel
 
         viewModel.navigateToResults.observe(viewLifecycleOwner) {
