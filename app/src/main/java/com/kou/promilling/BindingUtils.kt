@@ -1,5 +1,6 @@
 package com.kou.promilling
 
+import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseMethod
@@ -63,10 +64,10 @@ object Converter {
 }
 
 @BindingAdapter("android:src")
-fun setImageViewResource(view: ImageView, imageId: Int?) {
-    imageId?.let {
+fun setImageViewResource(view: ImageView, imageRes: Drawable?) {
+    imageRes?.let {
         Glide.with(view.context)
-            .load(imageId)
+            .load(imageRes)
             .into(view)
     }
 }

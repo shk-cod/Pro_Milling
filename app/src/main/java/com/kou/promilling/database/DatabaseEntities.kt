@@ -1,10 +1,16 @@
 package com.kou.promilling.database
 
 import android.os.Parcelable
-import androidx.room.*
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverter
 import kotlinx.parcelize.Parcelize
 import java.util.*
 
+/**
+ * This class contains constants of [ResultItem] types.
+ */
 class EntityType {
     companion object {
         const val TYPE_SPIRAL_CONTACT = 1
@@ -14,7 +20,13 @@ class EntityType {
 }
 
 
-
+/**
+ * Room database entity for the result of calculation.
+ * Use the property [type] (constants defined in [EntityType])
+ * to indicate what calculation is performed.
+ *
+ * @property type Used to indicate what calculation is performed.
+ */
 @Entity
 @Parcelize
 data class ResultItem(

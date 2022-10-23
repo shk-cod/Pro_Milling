@@ -1,7 +1,10 @@
 package com.kou.promilling.details.spiralcontactdetail
 
 import android.app.Application
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.kou.promilling.R
 import com.kou.promilling.database.ResultItem
 
@@ -65,10 +68,16 @@ class SpiralContactDetailViewModel(
     val navigateToCalc: LiveData<ResultItem?>
         get() = _navigateToCalc
 
+    /**
+     * Called on "close" button click
+     */
     fun onClose() {
         _navigateToResults.value = true
     }
 
+    /**
+     * Called on "reuse" button click
+     */
     fun onReuse() {
         _navigateToCalc.value = selectedItem.value
     }

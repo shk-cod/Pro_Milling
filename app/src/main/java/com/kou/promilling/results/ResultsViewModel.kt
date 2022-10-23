@@ -1,12 +1,15 @@
 package com.kou.promilling.results
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.kou.promilling.database.MillingDao
 import com.kou.promilling.database.ResultItem
 
 class ResultsViewModel(
     database: MillingDao
 ) : ViewModel() {
+
     val items = database.getEntries()
 
     private val _navigateToItemDetail = MutableLiveData<ResultItem?>()

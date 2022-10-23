@@ -3,10 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
-        <variable
-            name="viewModel"
-            type="com.kou.promilling.descriptions.trochoidwidthdescription.TrochoidWidthDescriptionViewModel" />
+        <import type="android.text.Html" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -23,16 +20,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_large"
+                android:text="@{Html.fromHtml(@string/trochoid_width_scheme_html_string, Html.FROM_HTML_MODE_LEGACY)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/image_view" />
 
+            <!--Note that binding adapters works only with valid binding expressions-->
+            <!--="@drawable/image" refers to a resource in app-->
+            <!--surrounding the resource with @{} makes it a valid binding expression -->
             <ImageView
                 android:id="@+id/image_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_large"
-                android:src="@{viewModel.image}"
+                android:src="@{@drawable/trochoid_width}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

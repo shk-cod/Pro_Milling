@@ -11,6 +11,9 @@ import com.kou.promilling.R
 import com.kou.promilling.database.getDatabase
 import com.kou.promilling.databinding.FragmentTrochoidWidthBinding
 
+/**
+ * Fragment of trochoid width calculator screen.
+ */
 @Suppress("Deprecation")
 class TrochoidWidthFragment : Fragment() {
 
@@ -19,8 +22,9 @@ class TrochoidWidthFragment : Fragment() {
         setHasOptionsMenu(true)
     }
 
-
-    @Deprecated("Deprecated in Java",
+    //TODO: deal with deprecated options menu
+    @Deprecated(
+        "Deprecated in Java",
         ReplaceWith("inflater.inflate(R.menu.top_app_bar, menu)", "com.kou.promilling.R")
     )
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -30,6 +34,7 @@ class TrochoidWidthFragment : Fragment() {
     @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            //Navigates to the description screen
             R.id.description -> {
                 this.findNavController().navigate(
                     TrochoidWidthFragmentDirections.actionTrochoidWidthToTrochoidWidthDescriptionFragment()
@@ -51,9 +56,14 @@ class TrochoidWidthFragment : Fragment() {
         val dataSource = getDatabase(application).millingDao
         val item = arguments?.let { TrochoidWidthFragmentArgs.fromBundle(it).item }
         val viewModelFactory = TrochoidWidthViewModelFactory(dataSource, item, application)
-        val viewModel = ViewModelProvider(this, viewModelFactory)[TrochoidWidthViewModel::class.java]
+        val viewModel =
+            ViewModelProvider(this, viewModelFactory)[TrochoidWidthViewModel::class.java]
         binding.viewModel = viewModel
 
+        /*
+        When the "calculate" button is pressed (only if the input checking was successful),
+        scrolls to the top of the screen, hides the keyboard and clears the focus.
+         */
         binding.buttonResult.setOnClickListener {
             if (!viewModel.result()) return@setOnClickListener
             binding.scrollView.scrollTo(0, binding.textViewResult.scrollY)

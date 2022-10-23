@@ -37,7 +37,7 @@ class SpiralContactViewModel(
 
 
     init {
-        item?.let {
+        item?.let { //if navigates from the details screen
             diameter.value = it.toolDiameter
             spiralAngle.value = it.spiralAngle
             cuttingHeight.value = it.cuttingDepth
@@ -47,6 +47,12 @@ class SpiralContactViewModel(
         }
     }
 
+    /**
+     * Writes calculated result to the database.
+     *
+     * @return false if checking the input has failed,
+     * otherwise true.
+     */
     fun result(): Boolean {
         if (!checkInput()) return false
 
@@ -59,6 +65,7 @@ class SpiralContactViewModel(
             flutePosition.value!!
         )
 
+        //formatting the result
         _result.value = app.applicationContext.getString(
             R.string.result, result
         )
@@ -70,6 +77,12 @@ class SpiralContactViewModel(
         return true
     }
 
+    /**
+     * Checks if the input is valid or not.
+     *
+     * @return true if input is valid,
+     * otherwise false.
+     */
     private fun checkInput(): Boolean {
         if (
             diameter.value == Double.MIN_VALUE ||
@@ -104,8 +117,10 @@ class SpiralContactViewModel(
             cuttingWidth = cuttingWidth,
             fluteCount = fluteCount,
             flutePosition = flutePosition,
-            result = result
-        ).apply { this.type = EntityType.TYPE_SPIRAL_CONTACT }
+            result = result,
+            type = EntityType.TYPE_SPIRAL_CONTACT
+        )
+
         withContext(Dispatchers.IO) {
             database.insertEntry(entry)
         }

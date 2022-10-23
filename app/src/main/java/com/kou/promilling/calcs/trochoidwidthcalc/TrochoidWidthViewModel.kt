@@ -31,13 +31,19 @@ class TrochoidWidthViewModel(
     val trochoidStep = MutableLiveData(Double.MIN_VALUE)
 
     init {
-        item?.let {
+        item?.let { //if navigates from the details screen
             radius.value = it.toolRadius
             roundingRadius.value = it.curvatureRadius
             trochoidStep.value = it.trochoidStep
         }
     }
 
+    /**
+     * Writes calculated result to the database.
+     *
+     * @return false if checking the input has failed,
+     * otherwise true.
+     */
     fun result(): Boolean {
         if (!checkInput()) return false
 
@@ -47,6 +53,7 @@ class TrochoidWidthViewModel(
             trochoidStep.value!!
         )
 
+        //formatting the result
         _result.value = app.applicationContext.getString(
             R.string.result, result
         )
@@ -58,6 +65,12 @@ class TrochoidWidthViewModel(
         return true
     }
 
+    /**
+     * Checks if the input is valid or not.
+     *
+     * @return true if input is valid,
+     * otherwise false.
+     */
     private fun checkInput(): Boolean {
         if (
             radius.value == Double.MIN_VALUE ||
@@ -80,8 +93,10 @@ class TrochoidWidthViewModel(
             toolRadius = radius,
             curvatureRadius = roundingRadius,
             trochoidStep = trochoidStep,
-            result = result
-        ).apply { this.type = EntityType.TYPE_TROCHOID_WIDTH }
+            result = result,
+            type = EntityType.TYPE_TROCHOID_WIDTH
+        )
+
         withContext(Dispatchers.IO) {
             database.insertEntry(entry)
         }

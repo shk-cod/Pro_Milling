@@ -9,6 +9,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.kou.promilling.databinding.TrochoidWidthItemDetailBinding
 
+/**
+ * Fragment of trochoid width calculation result detail screen.
+ */
 class TrochoidWidthDetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,7 +28,7 @@ class TrochoidWidthDetailFragment : Fragment() {
         binding.viewModel = viewModel
 
         viewModel.navigateToResults.observe(viewLifecycleOwner) {
-            if (it == true) {
+            if (it == true) { //navigate back to the calculation results list screen
                 this.findNavController().navigate(
                     TrochoidWidthDetailFragmentDirections.actionTrochoidWidthDetailFragmentToResults()
                 )
@@ -34,7 +37,7 @@ class TrochoidWidthDetailFragment : Fragment() {
         }
 
         viewModel.navigateToCalc.observe(viewLifecycleOwner) { trochoidItem ->
-            trochoidItem?.let {
+            trochoidItem?.let { //navigate to the calculator by reusing calculation parameters
                 this.findNavController().navigate(
                     TrochoidWidthDetailFragmentDirections.actionTrochoidWidthDetailFragmentToTrochoidWidth2(
                         it
