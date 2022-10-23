@@ -16,6 +16,7 @@ The app provides three unique calculators for different milling purposes.
 - MVVM
 - Room
 - Glide
+- Timber
 - Data Binding
 - LiveData
 - RecyclerView
