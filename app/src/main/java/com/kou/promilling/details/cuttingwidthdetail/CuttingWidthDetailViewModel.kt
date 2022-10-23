@@ -46,14 +46,20 @@ class CuttingWidthDetailViewModel(
     val navigateToResults: LiveData<Boolean>
         get() = _navigateToResults
 
-    private val _navigateToCalc = MutableLiveData<ResultItem>()
-    val navigateToCalc: LiveData<ResultItem>
+    private val _navigateToCalc = MutableLiveData<ResultItem?>()
+    val navigateToCalc: LiveData<ResultItem?>
         get() = _navigateToCalc
 
+    /**
+     * Called on "close" button click
+     */
     fun onClose() {
         _navigateToResults.value = true
     }
 
+    /**
+     * Called on "reuse" button click
+     */
     fun onReuse() {
         _navigateToCalc.value = selectedItem.value
     }

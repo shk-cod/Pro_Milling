@@ -50,10 +50,16 @@ class TrochoidWidthDetailViewModel(
     val navigateToCalc: LiveData<ResultItem?>
         get() = _navigateToCalc
 
+    /**
+     * Called on "close" button click
+     */
     fun onClose() {
         _navigateToResults.value = true
     }
 
+    /**
+     * Called on "reuse" button click
+     */
     fun onReuse() {
         _navigateToCalc.value = selectedItem.value
     }

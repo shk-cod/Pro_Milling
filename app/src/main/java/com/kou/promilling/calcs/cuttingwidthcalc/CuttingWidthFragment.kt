@@ -11,6 +11,9 @@ import com.kou.promilling.R
 import com.kou.promilling.database.getDatabase
 import com.kou.promilling.databinding.FragmentCuttingWidthBinding
 
+/**
+ * Fragment of cutting width calculator screen.
+ */
 @Suppress("Deprecation")
 class CuttingWidthFragment : Fragment() {
 
@@ -20,8 +23,9 @@ class CuttingWidthFragment : Fragment() {
     }
 
 
-
-    @Deprecated("Deprecated in Java",
+    //TODO: deal with deprecated options menu
+    @Deprecated(
+        "Deprecated in Java",
         ReplaceWith("inflater.inflate(R.menu.top_app_bar, menu)", "com.kou.promilling.R")
     )
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -31,6 +35,7 @@ class CuttingWidthFragment : Fragment() {
     @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            //Navigates to the description screen
             R.id.description -> {
                 this.findNavController().navigate(
                     CuttingWidthFragmentDirections.actionCuttingWidthToCuttingWidthDescriptionFragment()
@@ -55,6 +60,10 @@ class CuttingWidthFragment : Fragment() {
         val viewModel = ViewModelProvider(this, viewModelFactory)[CuttingWidthViewModel::class.java]
         binding.viewModel = viewModel
 
+        /*
+        When the "calculate" button is pressed (only if the input checking was successful),
+        scrolls to the top of the screen, hides the keyboard and clears the focus.
+         */
         binding.buttonResult.setOnClickListener {
             if (!viewModel.result()) return@setOnClickListener
             binding.scrollView.scrollTo(0, binding.textViewResult.scrollY)

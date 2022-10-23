@@ -9,6 +9,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.kou.promilling.databinding.SpiralContactItemDetailBinding
 
+/**
+ * Fragment of spiral contact length calculation result detail screen.
+ */
 class SpiralContactDetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,7 +28,7 @@ class SpiralContactDetailFragment : Fragment() {
         binding.viewModel = viewModel
 
         viewModel.navigateToResults.observe(viewLifecycleOwner) {
-            if (it == true) {
+            if (it == true) { //navigate back to the calculation results list screen
                 this.findNavController().navigate(
                     SpiralContactDetailFragmentDirections.actionSpiralContactDetailFragmentToResults()
                 )
@@ -34,7 +37,7 @@ class SpiralContactDetailFragment : Fragment() {
         }
 
         viewModel.navigateToCalc.observe(viewLifecycleOwner) { spiralItem ->
-            spiralItem?.let {
+            spiralItem?.let { //navigate to the calculator by reusing calculation parameters
                 this.findNavController().navigate(
                     SpiralContactDetailFragmentDirections.actionSpiralContactDetailFragmentToSpiralContact2(
                         it

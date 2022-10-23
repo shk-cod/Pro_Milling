@@ -7,9 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.kou.promilling.database.*
+import com.kou.promilling.database.EntityType
+import com.kou.promilling.database.getDatabase
 import com.kou.promilling.databinding.FragmentResultsBinding
 
+/**
+ * Fragment of calculation results list screen.
+ */
 class ResultsFragment : Fragment() {
 
     private lateinit var viewModel: ResultsViewModel
@@ -30,15 +34,27 @@ class ResultsFragment : Fragment() {
         viewModel.navigateToItemDetail.observe(viewLifecycleOwner) { item ->
             item?.let {
                 val navController = this.findNavController()
-                when (it.type) {
+                when (it.type) { //navigate to the details screen depending on calculation type
                     EntityType.TYPE_SPIRAL_CONTACT -> {
-                        navController.navigate(ResultsFragmentDirections.actionResultsToSpiralContactDetailFragment(it))
+                        navController.navigate(
+                            ResultsFragmentDirections.actionResultsToSpiralContactDetailFragment(
+                                it
+                            )
+                        )
                     }
                     EntityType.TYPE_CUTTING_WIDTH -> {
-                        navController.navigate(ResultsFragmentDirections.actionResultsToCuttingWidthDetailFragment(it))
+                        navController.navigate(
+                            ResultsFragmentDirections.actionResultsToCuttingWidthDetailFragment(
+                                it
+                            )
+                        )
                     }
                     EntityType.TYPE_TROCHOID_WIDTH -> {
-                        navController.navigate(ResultsFragmentDirections.actionResultsToTrochoidWidthDetailFragment(it))
+                        navController.navigate(
+                            ResultsFragmentDirections.actionResultsToTrochoidWidthDetailFragment(
+                                it
+                            )
+                        )
                     }
                     else -> throw Exception("Wrong type")
                 }

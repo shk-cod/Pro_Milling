@@ -7,6 +7,9 @@ import kotlin.math.tan
 
 const val FULL_ROTATION_DEGREES = 360.0
 
+/**
+ * Calculated spiral contact length.
+ */
 fun calculateSpiralContact(
     diameter: Double,
     spiralAngle: Double,
@@ -29,6 +32,9 @@ fun calculateSpiralContact(
     return result
 }
 
+/**
+ * Calculated cutting width.
+ */
 fun calculateCuttingWidth(r1: Double, r: Double, ae: Double): Double {
     val eps = 0.00005
     var a = acos((r1 - ae) / r1)
@@ -56,6 +62,9 @@ fun calculateCuttingWidth(r1: Double, r: Double, ae: Double): Double {
     return r1 - cos(c) * r1
 }
 
+/**
+ * Calculated trochoid width.
+ */
 fun calculateTrochoidWidth(r1: Double, r: Double, ae: Double): Double {
     val eps = 0.00005
     var a = acos((r1 - ae) / r1)

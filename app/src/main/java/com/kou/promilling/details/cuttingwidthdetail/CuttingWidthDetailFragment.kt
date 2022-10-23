@@ -11,6 +11,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.kou.promilling.databinding.CuttingWidthItemDetailBinding
 
+/**
+ * Fragment of cutting width calculation result detail screen.
+ */
 class CuttingWidthDetailFragment: Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,7 +31,7 @@ class CuttingWidthDetailFragment: Fragment() {
         binding.viewModel = viewModel
 
         viewModel.navigateToResults.observe(viewLifecycleOwner) {
-            if (it == true) {
+            if (it == true) { //navigate back to the calculation results list screen
                 this.findNavController().navigate(
                     CuttingWidthDetailFragmentDirections.actionCuttingWidthDetailFragmentToResults()
                 )
@@ -37,7 +40,7 @@ class CuttingWidthDetailFragment: Fragment() {
         }
 
         viewModel.navigateToCalc.observe(viewLifecycleOwner) { cuttingItem ->
-            cuttingItem?.let {
+            cuttingItem?.let { //navigate to the calculator by reusing calculation parameters
                 this.findNavController().navigate(
                     CuttingWidthDetailFragmentDirections.actionCuttingWidthDetailFragmentToCuttingWidth2(
                         it
