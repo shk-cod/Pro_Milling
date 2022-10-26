@@ -4,18 +4,28 @@ import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.InputMethodManager
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.kou.promilling.R
 import com.kou.promilling.database.getDatabase
 import com.kou.promilling.databinding.FragmentCuttingWidthBinding
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
 /**
  * Fragment of cutting width calculator screen.
  */
+@AndroidEntryPoint
 @Suppress("Deprecation")
 class CuttingWidthFragment : Fragment() {
+
+//    @Inject lateinit var dataSource: MillingDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +70,15 @@ class CuttingWidthFragment : Fragment() {
         val viewModel = ViewModelProvider(this, viewModelFactory)[CuttingWidthViewModel::class.java]
         binding.viewModel = viewModel
 
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.roundingRadiusErrorFlow.collect { error ->
+                    Timber.i("flow collected")
+                    binding.textInputRoundingRadius.error = error
+                }
+            }
+        }
+
         /*
         When the "calculate" button is pressed (only if the input checking was successful),
         scrolls to the top of the screen, hides the keyboard and clears the focus.
@@ -70,6 +89,20 @@ class CuttingWidthFragment : Fragment() {
             val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(activity?.currentFocus?.windowToken, 0)
             activity?.currentFocus?.clearFocus()
+        }
+
+        binding.textInputRoundingRadius.doOnTextChanged { text, _, _, _ ->
+            Timber.i("doOnTextChanged")
+            if (
+                text.isNullOrBlank() ||
+                binding.textInputRadius.text.isNullOrBlank()
+            ) return@doOnTextChanged
+
+            val roundingRadius = text.toString().toDouble()
+            val toolRadius = binding.textInputRadius.text.toString().toDouble()
+
+            Timber.i("$roundingRadius, $toolRadius")
+            viewModel.checkRoundingRadius(roundingRadius, toolRadius)
         }
 
         return binding.root

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="com.kou.promilling.Converter" />
 
         <variable
@@ -58,6 +57,7 @@
                     android:layout_marginEnd="@dimen/margin_default"
                     android:hint="@string/hint_tool_radius"
                     app:layout_constraintTop_toBottomOf="@+id/divider"
+                    app:errorEnabled="true"
                     app:suffixText="@string/text_input_suffix_mm">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -79,6 +79,7 @@
                     android:layout_marginEnd="@dimen/margin_default"
                     android:hint="@string/hint_path_rouding_radius"
                     app:layout_constraintTop_toBottomOf="@+id/text_layout_radius"
+                    app:errorEnabled="true"
                     app:suffixText="@string/text_input_suffix_mm">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -100,6 +101,7 @@
                     android:layout_marginEnd="@dimen/margin_default"
                     android:hint="@string/hint_cutting_width"
                     app:layout_constraintTop_toBottomOf="@+id/text_layout_rounding_radius"
+                    app:errorEnabled="true"
                     app:suffixText="@string/text_input_suffix_mm">
 
                     <com.google.android.material.textfield.TextInputEditText
