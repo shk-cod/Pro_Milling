@@ -4,15 +4,15 @@
     <string name="cutting_width_menu_title">Ширина съема в углу</string>
     <string name="trochoid_width_menu_title">Ширина съема трохоиды</string>
     <string name="calculations_list_menu_title">Список вычислений</string>
-    <string name="hint_tool_diameter">Диаметр инструмента</string>
-    <string name="hint_spiral_angle">Угол наклона спирали</string>
-    <string name="hint_cutting_height">Высота съема</string>
-    <string name="hint_cutting_width">Ширина съема</string>
+    <string name="hint_tool_diameter">Диаметр инструмента, мм</string>
+    <string name="hint_spiral_angle">Угол наклона спирали, град</string>
+    <string name="hint_cutting_height">Высота съема, мм</string>
+    <string name="hint_cutting_width">Ширина съема, мм</string>
     <string name="hint_flute_count">Количество зубьев</string>
-    <string name="hint_flute_position">Угол положения зуба</string>
-    <string name="hint_tool_radius">Радиус инструмента</string>
-    <string name="hint_path_rouding_radius">Радиус скругления траектории</string>
-    <string name="hint_trochoid_step">Шаг трохоиды</string>
+    <string name="hint_flute_position">Угол положения зуба, град</string>
+    <string name="hint_tool_radius">Радиус инструмента, мм</string>
+    <string name="hint_path_rouding_radius">Радиус скругления траектории, мм</string>
+    <string name="hint_trochoid_step">Шаг трохоиды, мм</string>
     <string name="button_result_text">Вычислить</string>
     <string name="button_close_text">Закрыть</string>
     <string name="button_reuse_text">Повторить</string>
@@ -85,4 +85,11 @@
     <string name="calculator_description_screen_label">Схема расчета</string>
     <string name="image_cutting_width_content_description">схема ширины съема</string>
     <string name="image_trochoid_width_content_description">схема ширины трохоиды</string>
+    <string name="error_tool_radius_zero">Радиус инструмента должен быть больше нуля</string>
+    <string name="error_tool_radius_rounding_radius">Радиус инструмента не может быть больше радиуса скругления</string>
+    <string name="error_tool_radius_cutting_width">Диаметр инструмента не может быть меньше ширины съема</string>
+    <string name="error_rounding_radius_zero">Радиус скругления должен быть больше нуля</string>
+    <string name="error_rounding_radius_tool_radius">Радиус скругления не может быть меньше радиуса инструмента</string>
+    <string name="error_cutting_width_zero">Ширина съема должна быть больше нуля</string>
+    <string name="error_cutting_width_tool_radius">Ширина съема не может быть больше диаметра инструмента</string>
 </resources>
