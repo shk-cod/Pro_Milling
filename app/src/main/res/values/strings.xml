@@ -100,4 +100,7 @@
     <string name="error_cutting_height_zero">Cutting height must be bigger than zero</string>
     <string name="error_flute_count_zero">Flute count must be bigger than zero and smaller than 300</string>
     <string name="error_flute_position_zero">Flute position must be bigger or equals zero and smaller than 360</string>
+    <string name="error_trochoid_step_zero">Trochoid step must be bigger than zero</string>
+    <string name="error_trochoid_step_tool_diameter">Trochoid step cannot be bigger than tool diameter</string>
+    <string name="error_tool_radius_trochoid_step">Tool diameter cannot be smaller than trochoid step</string>
 </resources>

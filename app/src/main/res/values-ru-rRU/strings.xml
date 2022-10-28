@@ -98,4 +98,7 @@
     <string name="error_cutting_height_zero">Высота съема должна быть больше нуля</string>
     <string name="error_flute_count_zero">Кол-во зубьев должно быть больше нуля и меньше 300</string>
     <string name="error_flute_position_zero">Угол положения зуба должен быть больше или равен нулю и меньше 360 градусов</string>
+    <string name="error_trochoid_step_zero">Шаг трохоиды должен быть больше нуля</string>
+    <string name="error_trochoid_step_tool_diameter">Шаг трохоиды не может быть больше диаметра инструмента</string>
+    <string name="error_tool_radius_trochoid_step">Диаметр инструмента не может быть меньше шага трохоиды</string>
 </resources>
