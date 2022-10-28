@@ -92,4 +92,10 @@
     <string name="error_rounding_radius_tool_radius">Радиус скругления не может быть меньше радиуса инструмента</string>
     <string name="error_cutting_width_zero">Ширина съема должна быть больше нуля</string>
     <string name="error_cutting_width_tool_radius">Ширина съема не может быть больше диаметра инструмента</string>
+    <string name="error_tool_diameter_zero">Диаметр инструмента должен быть больше нуля</string>
+    <string name="error_tool_diameter_cutting_width">Диаметр инструмента не может быть меньше ширины съема</string>
+    <string name="error_spiral_angle_zero">Угол наклона спирали должен быть больше нуля и меньше 90 градусов</string>
+    <string name="error_cutting_height_zero">Высота съема должна быть больше нуля</string>
+    <string name="error_flute_count_zero">Кол-во зубьев должно быть больше нуля и меньше 300</string>
+    <string name="error_flute_position_zero">Угол положения зуба должен быть больше или равен нулю и меньше 360 градусов</string>
 </resources>

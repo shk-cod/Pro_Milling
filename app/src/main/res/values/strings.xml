@@ -94,4 +94,10 @@
     <string name="error_rounding_radius_tool_radius">Rounding radius cannot be smaller than tool radius</string>
     <string name="error_cutting_width_zero">Cutting width must be bigger than zero</string>
     <string name="error_cutting_width_tool_radius">Cutting width cannot be bigger than tool diameter</string>
+    <string name="error_tool_diameter_zero">Tool diameter must be bigger than zero</string>
+    <string name="error_tool_diameter_cutting_width">Tool diameter cannot be smaller than cutting width</string>
+    <string name="error_spiral_angle_zero">Spiral angle must be bigger than zero and smaller than 90 degrees</string>
+    <string name="error_cutting_height_zero">Cutting height must be bigger than zero</string>
+    <string name="error_flute_count_zero">Flute count must be bigger than zero and smaller than 300</string>
+    <string name="error_flute_position_zero">Flute position must be bigger or equals zero and smaller than 360</string>
 </resources>

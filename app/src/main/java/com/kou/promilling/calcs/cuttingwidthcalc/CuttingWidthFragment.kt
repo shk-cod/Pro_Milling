@@ -71,6 +71,7 @@ class CuttingWidthFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory)[CuttingWidthViewModel::class.java]
         binding.viewModel = viewModel
 
+
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.toolRadiusErrorFlow.collect { error ->

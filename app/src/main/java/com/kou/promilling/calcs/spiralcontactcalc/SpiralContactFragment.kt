@@ -4,18 +4,26 @@ import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.InputMethodManager
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.kou.promilling.R
 import com.kou.promilling.database.getDatabase
 import com.kou.promilling.databinding.FragmentSpiralContactBinding
+import kotlinx.coroutines.launch
 
 /**
  * Fragment of spiral contact length calculator screen.
  */
 @Suppress("Deprecation")
 class SpiralContactFragment : Fragment() {
+
+    private lateinit var binding: FragmentSpiralContactBinding
+    private lateinit var viewModel: SpiralContactViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,16 +57,64 @@ class SpiralContactFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentSpiralContactBinding.inflate(inflater)
+        binding = FragmentSpiralContactBinding.inflate(inflater)
         binding.lifecycleOwner = viewLifecycleOwner
 
         val application = requireNotNull(this.activity).application
         val dataSource = getDatabase(application).millingDao
         val item = arguments?.let { SpiralContactFragmentArgs.fromBundle(it).item }
         val viewModelFactory = SpiralContactViewModelFactory(dataSource, item, application)
-        val viewModel =
-            ViewModelProvider(this, viewModelFactory)[SpiralContactViewModel::class.java]
+        viewModel = ViewModelProvider(this, viewModelFactory)[SpiralContactViewModel::class.java]
         binding.viewModel = viewModel
+
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.toolDiameterErrorFlow.collect { error ->
+                    binding.textInputDiameter.error = error
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.spiralAngleErrorFlow.collect { error ->
+                    binding.textInputSpiralAngle.error = error
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.cuttingHeightErrorFlow.collect { error ->
+                    binding.textInputCuttingHeight.error = error
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.cuttingWidthErrorFlow.collect { error ->
+                    binding.textInputCuttingWidth.error = error
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.fluteCountErrorFlow.collect { error ->
+                    binding.textInputFluteCount.error = error
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.flutePositionErrorFlow.collect { error ->
+                    binding.textInputFlutePosition.error = error
+                }
+            }
+        }
 
 
         /*
@@ -73,8 +129,62 @@ class SpiralContactFragment : Fragment() {
             activity?.currentFocus?.clearFocus()
         }
 
+        binding.textInputDiameter.doOnTextChanged { _, _, _, _ ->
+            checkTextFields()
+        }
+
+        binding.textInputSpiralAngle.doOnTextChanged { _, _, _, _ ->
+            checkTextFields()
+        }
+
+        binding.textInputCuttingHeight.doOnTextChanged { _, _, _, _ ->
+            checkTextFields()
+        }
+
+        binding.textInputCuttingWidth.doOnTextChanged { _, _, _, _ ->
+            checkTextFields()
+        }
+
+        binding.textInputFluteCount.doOnTextChanged { _, _, _, _ ->
+            checkTextFields()
+        }
+
+        binding.textInputFlutePosition.doOnTextChanged { _, _, _, _ ->
+            checkTextFields()
+        }
+
         return binding.root
     }
 
+    private fun checkTextFields() {
+        val toolDiameterText = binding.textInputDiameter.text
+        val spiralAngleText = binding.textInputSpiralAngle.text
+        val cuttingHeightText = binding.textInputCuttingHeight.text
+        val cuttingWidthText = binding.textInputCuttingWidth.text
+        val fluteCountText = binding.textInputFluteCount.text
+        val flutePositionText = binding.textInputFlutePosition.text
 
+        if (
+            toolDiameterText.isNullOrBlank() ||
+            spiralAngleText.isNullOrBlank() ||
+            cuttingHeightText.isNullOrBlank() ||
+            cuttingWidthText.isNullOrBlank() ||
+            fluteCountText.isNullOrBlank() ||
+            flutePositionText.isNullOrBlank()
+        ) return
+
+        val toolDiameter = toolDiameterText.toString().toDouble()
+        val spiralAngle = spiralAngleText.toString().toDouble()
+        val cuttingHeight = cuttingHeightText.toString().toDouble()
+        val cuttingWidth = cuttingWidthText.toString().toDouble()
+        val fluteCount = fluteCountText.toString().toInt()
+        val flutePosition = flutePositionText.toString().toDouble()
+
+        viewModel.checkToolDiameter(toolDiameter, cuttingWidth)
+        viewModel.checkSpiralAngle(spiralAngle)
+        viewModel.checkCuttingHeight(cuttingHeight)
+        viewModel.checkCuttingWidth(cuttingWidth, toolDiameter)
+        viewModel.checkFluteCount(fluteCount)
+        viewModel.checkFlutePosition(flutePosition)
+    }
 }
