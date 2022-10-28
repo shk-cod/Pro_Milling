@@ -4,15 +4,15 @@
     <string name="cutting_width_menu_title">Cutting width in corner</string>
     <string name="trochoid_width_menu_title">Trochoid cutting width</string>
     <string name="calculations_list_menu_title">Calculations list</string>
-    <string name="hint_tool_diameter">Tool diameter</string>
-    <string name="hint_spiral_angle">Spiral angle</string>
-    <string name="hint_cutting_height">Cutting height</string>
-    <string name="hint_cutting_width">Cutting width</string>
+    <string name="hint_tool_diameter">Tool diameter, mm</string>
+    <string name="hint_spiral_angle">Spiral angle, dg</string>
+    <string name="hint_cutting_height">Cutting height, mm</string>
+    <string name="hint_cutting_width">Cutting width, mm</string>
     <string name="hint_flute_count">Flute count</string>
-    <string name="hint_flute_position">Flute position</string>
-    <string name="hint_tool_radius">Tool radius</string>
-    <string name="hint_path_rouding_radius">Path rouding radius</string>
-    <string name="hint_trochoid_step">Trochoid step</string>
+    <string name="hint_flute_position">Flute position angle, dg</string>
+    <string name="hint_tool_radius">Tool radius, mm</string>
+    <string name="hint_path_rouding_radius">Path rouding radius, mm</string>
+    <string name="hint_trochoid_step">Trochoid step, mm</string>
     <string name="drawer_header_title" translatable="false">Pro Milling</string>
     <string name="drawer_body_title" translatable="false">Milling calculators</string>
     <string name="button_result_text">Calculate</string>
@@ -87,4 +87,20 @@
     <string name="calculator_description_screen_label">Scheme for calculation</string>
     <string name="image_cutting_width_content_description">cutting width scheme</string>
     <string name="image_trochoid_width_content_description">trochoid width scheme</string>
+    <string name="error_tool_radius_zero">Tool radius must be bigger than zero</string>
+    <string name="error_tool_radius_rounding_radius">Tool radius cannot be bigger than rounding radius</string>
+    <string name="error_tool_radius_cutting_width">Tool diameter cannot be smaller than cutting width</string>
+    <string name="error_rounding_radius_zero">Rounding radius must be bigger than zero</string>
+    <string name="error_rounding_radius_tool_radius">Rounding radius cannot be smaller than tool radius</string>
+    <string name="error_cutting_width_zero">Cutting width must be bigger than zero</string>
+    <string name="error_cutting_width_tool_radius">Cutting width cannot be bigger than tool diameter</string>
+    <string name="error_tool_diameter_zero">Tool diameter must be bigger than zero</string>
+    <string name="error_tool_diameter_cutting_width">Tool diameter cannot be smaller than cutting width</string>
+    <string name="error_spiral_angle_zero">Spiral angle must be bigger than zero and smaller than 90 degrees</string>
+    <string name="error_cutting_height_zero">Cutting height must be bigger than zero</string>
+    <string name="error_flute_count_zero">Flute count must be bigger than zero and smaller than 300</string>
+    <string name="error_flute_position_zero">Flute position must be bigger or equals zero and smaller than 360</string>
+    <string name="error_trochoid_step_zero">Trochoid step must be bigger than zero</string>
+    <string name="error_trochoid_step_tool_diameter">Trochoid step cannot be bigger than tool diameter</string>
+    <string name="error_tool_radius_trochoid_step">Tool diameter cannot be smaller than trochoid step</string>
 </resources>

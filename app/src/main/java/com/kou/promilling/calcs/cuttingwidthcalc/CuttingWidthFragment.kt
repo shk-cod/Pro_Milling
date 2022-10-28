@@ -4,18 +4,29 @@ import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.InputMethodManager
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.kou.promilling.R
 import com.kou.promilling.database.getDatabase
 import com.kou.promilling.databinding.FragmentCuttingWidthBinding
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 /**
  * Fragment of cutting width calculator screen.
  */
+@AndroidEntryPoint
 @Suppress("Deprecation")
 class CuttingWidthFragment : Fragment() {
+
+    //    @Inject lateinit var dataSource: MillingDao
+    private lateinit var binding: FragmentCuttingWidthBinding
+    private lateinit var viewModel: CuttingWidthViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,15 +61,40 @@ class CuttingWidthFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentCuttingWidthBinding.inflate(inflater)
+        binding = FragmentCuttingWidthBinding.inflate(inflater)
         binding.lifecycleOwner = viewLifecycleOwner
 
         val application = requireNotNull(this.activity).application
         val dataSource = getDatabase(application).millingDao
         val item = arguments?.let { CuttingWidthFragmentArgs.fromBundle(it).item }
         val viewModelFactory = CuttingWidthViewModelFactory(dataSource, item, application)
-        val viewModel = ViewModelProvider(this, viewModelFactory)[CuttingWidthViewModel::class.java]
+        viewModel = ViewModelProvider(this, viewModelFactory)[CuttingWidthViewModel::class.java]
         binding.viewModel = viewModel
+
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.toolRadiusErrorFlow.collect { error ->
+                    binding.textInputRadius.error = error
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.roundingRadiusErrorFlow.collect { error ->
+                    binding.textInputRoundingRadius.error = error
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.cuttingWidthErrorFlow.collect { error ->
+                    binding.textInputCuttingWidth.error = error
+                }
+            }
+        }
 
         /*
         When the "calculate" button is pressed (only if the input checking was successful),
@@ -72,8 +108,38 @@ class CuttingWidthFragment : Fragment() {
             activity?.currentFocus?.clearFocus()
         }
 
+        binding.textInputRadius.doOnTextChanged { _, _, _, _ ->
+            checkTextFields()
+        }
+
+        binding.textInputRoundingRadius.doOnTextChanged { _, _, _, _ ->
+            checkTextFields()
+        }
+
+        binding.textInputCuttingWidth.doOnTextChanged { _, _, _, _ ->
+            checkTextFields()
+        }
+
         return binding.root
     }
 
+    private fun checkTextFields() {
+        val toolRadiusText = binding.textInputRadius.text
+        val roundingRadiusText = binding.textInputRoundingRadius.text
+        val cuttingWidthText = binding.textInputCuttingWidth.text
 
+        if (
+            toolRadiusText.isNullOrBlank() ||
+            roundingRadiusText.isNullOrBlank() ||
+            cuttingWidthText.isNullOrBlank()
+        ) return
+
+        val toolRadius = toolRadiusText.toString().toDouble()
+        val roundingRadius = roundingRadiusText.toString().toDouble()
+        val cuttingWidth = cuttingWidthText.toString().toDouble()
+
+        viewModel.checkToolRadius(toolRadius, roundingRadius, cuttingWidth)
+        viewModel.checkRoundingRadius(roundingRadius, toolRadius)
+        viewModel.checkCuttingWidth(cuttingWidth, toolRadius)
+    }
 }

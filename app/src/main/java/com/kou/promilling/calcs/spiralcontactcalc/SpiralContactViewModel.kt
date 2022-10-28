@@ -13,6 +13,9 @@ import com.kou.promilling.database.EntityType
 import com.kou.promilling.database.MillingDao
 import com.kou.promilling.database.ResultItem
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
@@ -22,10 +25,59 @@ class SpiralContactViewModel(
     item: ResultItem?,
     private val app: Application
 ): AndroidViewModel(app) {
+    private var toolDiameterError: String? = null
+    private var spiralAngleError: String? = null
+    private var cuttingHeightError: String? = null
+    private var cuttingWidthError: String? = null
+    private var fluteCountError: String? = null
+    private var flutePositionError: String? = null
 
     private val _result = MutableLiveData<String>()
     val result: LiveData<String>
         get() = _result
+
+
+    private val _toolDiameterErrorFlow = MutableSharedFlow<String?>(
+        replay = 1,
+        onBufferOverflow = BufferOverflow.DROP_LATEST
+    )
+    val toolDiameterErrorFlow: SharedFlow<String?>
+        get() = _toolDiameterErrorFlow
+
+    private val _spiralAngleErrorFlow = MutableSharedFlow<String?>(
+        replay = 1,
+        onBufferOverflow = BufferOverflow.DROP_LATEST
+    )
+    val spiralAngleErrorFlow: SharedFlow<String?>
+        get() = _spiralAngleErrorFlow
+
+    private val _cuttingHeightErrorFlow = MutableSharedFlow<String?>(
+        replay = 1,
+        onBufferOverflow = BufferOverflow.DROP_LATEST
+    )
+    val cuttingHeightErrorFlow: SharedFlow<String?>
+        get() = _cuttingHeightErrorFlow
+
+    private val _cuttingWidthErrorFlow = MutableSharedFlow<String?>(
+        replay = 1,
+        onBufferOverflow = BufferOverflow.DROP_LATEST
+    )
+    val cuttingWidthErrorFlow: SharedFlow<String?>
+        get() = _cuttingWidthErrorFlow
+
+    private val _fluteCountErrorFlow = MutableSharedFlow<String?>(
+        replay = 1,
+        onBufferOverflow = BufferOverflow.DROP_LATEST
+    )
+    val fluteCountErrorFlow: SharedFlow<String?>
+        get() = _fluteCountErrorFlow
+
+    private val _flutePositionErrorFlow = MutableSharedFlow<String?>(
+        replay = 1,
+        onBufferOverflow = BufferOverflow.DROP_LATEST
+    )
+    val flutePositionErrorFlow: SharedFlow<String?>
+        get() = _flutePositionErrorFlow
 
     //Two-way data binding
     val diameter = MutableLiveData(Double.MIN_VALUE)
@@ -90,12 +142,15 @@ class SpiralContactViewModel(
             cuttingHeight.value == Double.MIN_VALUE ||
             cuttingWidth.value == Double.MIN_VALUE ||
             fluteCount.value == Int.MIN_VALUE ||
-            flutePosition.value == Double.MIN_VALUE
+            flutePosition.value == Double.MIN_VALUE ||
+            toolDiameterError != null ||
+            spiralAngleError != null ||
+            cuttingHeightError != null ||
+            cuttingWidthError != null ||
+            fluteCountError != null ||
+            flutePositionError != null
         ) return false
 
-//        if (cuttingHeight.value > _diameter.value) {
-
-//        }
         return true
     }
 
@@ -123,6 +178,92 @@ class SpiralContactViewModel(
 
         withContext(Dispatchers.IO) {
             database.insertEntry(entry)
+        }
+    }
+
+    fun checkToolDiameter(toolDiameter: Double, cuttingWidth: Double) {
+        when {
+            toolDiameter <= 0 -> {
+                toolDiameterError = app.getString(R.string.error_tool_diameter_zero)
+                _toolDiameterErrorFlow.tryEmit(toolDiameterError)
+            }
+            toolDiameter < cuttingWidth -> {
+                toolDiameterError = app.getString(R.string.error_tool_diameter_cutting_width)
+                _toolDiameterErrorFlow.tryEmit(toolDiameterError)
+            }
+            else -> {
+                toolDiameterError = null
+                _toolDiameterErrorFlow.tryEmit(null)
+            }
+        }
+    }
+
+    fun checkSpiralAngle(spiralAngle: Double) {
+        when {
+            (spiralAngle <= 0 || spiralAngle >= 90) -> {
+                spiralAngleError = app.getString(R.string.error_spiral_angle_zero)
+                _spiralAngleErrorFlow.tryEmit(spiralAngleError)
+            }
+            else -> {
+                spiralAngleError = null
+                _spiralAngleErrorFlow.tryEmit(null)
+            }
+        }
+    }
+
+    fun checkCuttingHeight(cuttingHeight: Double) {
+        when {
+            cuttingHeight <= 0 -> {
+                cuttingHeightError = app.getString(R.string.error_cutting_height_zero)
+                _cuttingHeightErrorFlow.tryEmit(cuttingHeightError)
+            }
+            else -> {
+                cuttingHeightError = null
+                _cuttingHeightErrorFlow.tryEmit(null)
+            }
+        }
+    }
+
+    fun checkCuttingWidth(cuttingWidth: Double, toolDiameter: Double) {
+        when {
+            cuttingWidth <= 0 -> {
+                cuttingWidthError = app.getString(R.string.error_cutting_width_zero)
+                _cuttingWidthErrorFlow.tryEmit(cuttingWidthError)
+            }
+            cuttingWidth > toolDiameter -> {
+                cuttingWidthError = app.getString(R.string.error_cutting_width_tool_radius)
+                _cuttingWidthErrorFlow.tryEmit(cuttingWidthError)
+            }
+            else -> {
+                cuttingWidthError = null
+                _cuttingWidthErrorFlow.tryEmit(null)
+            }
+        }
+    }
+
+    fun checkFluteCount(fluteCount: Int) {
+        when {
+            (fluteCount <= 0 || fluteCount >= 300) -> {
+                fluteCountError = app.getString(R.string.error_flute_count_zero)
+                _fluteCountErrorFlow.tryEmit(fluteCountError)
+            }
+            else -> {
+                fluteCountError = null
+                _fluteCountErrorFlow.tryEmit(null)
+            }
+        }
+    }
+
+    fun checkFlutePosition(flutePosition: Double) {
+        when {
+            (flutePosition < 0 || flutePosition >= 360) -> {
+                flutePositionError = app.getString(R.string.error_flute_position_zero)
+                _flutePositionErrorFlow.tryEmit(flutePositionError)
+            }
+            else -> {
+                flutePositionError = null
+                _flutePositionErrorFlow.tryEmit(null)
+            }
         }
     }
 }
