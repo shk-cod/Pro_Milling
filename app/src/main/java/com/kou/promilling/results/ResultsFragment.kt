@@ -8,14 +8,20 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.kou.promilling.database.EntityType
-import com.kou.promilling.database.getDatabase
+import com.kou.promilling.database.MillingDao
 import com.kou.promilling.databinding.FragmentResultsBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 /**
  * Fragment of calculation results list screen.
  */
+@AndroidEntryPoint
 class ResultsFragment : Fragment() {
 
+
+    @Inject
+    lateinit var dataSource: MillingDao
     private lateinit var viewModel: ResultsViewModel
 
     override fun onCreateView(
@@ -26,7 +32,6 @@ class ResultsFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         val application = requireNotNull(this.activity).application
-        val dataSource = getDatabase(application).millingDao
         val viewModelFactory = ResultsViewModelFactory(dataSource)
         viewModel = ViewModelProvider(this, viewModelFactory)[ResultsViewModel::class.java]
         binding.viewModel = viewModel

@@ -12,10 +12,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.kou.promilling.R
-import com.kou.promilling.database.getDatabase
+import com.kou.promilling.database.MillingDao
 import com.kou.promilling.databinding.FragmentCuttingWidthBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * Fragment of cutting width calculator screen.
@@ -24,7 +25,8 @@ import kotlinx.coroutines.launch
 @Suppress("Deprecation")
 class CuttingWidthFragment : Fragment() {
 
-    //    @Inject lateinit var dataSource: MillingDao
+    @Inject
+    lateinit var dataSource: MillingDao
     private lateinit var binding: FragmentCuttingWidthBinding
     private lateinit var viewModel: CuttingWidthViewModel
 
@@ -65,7 +67,6 @@ class CuttingWidthFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         val application = requireNotNull(this.activity).application
-        val dataSource = getDatabase(application).millingDao
         val item = arguments?.let { CuttingWidthFragmentArgs.fromBundle(it).item }
         val viewModelFactory = CuttingWidthViewModelFactory(dataSource, item, application)
         viewModel = ViewModelProvider(this, viewModelFactory)[CuttingWidthViewModel::class.java]

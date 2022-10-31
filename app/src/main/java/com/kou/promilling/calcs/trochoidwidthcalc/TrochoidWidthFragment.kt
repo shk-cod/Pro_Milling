@@ -12,16 +12,21 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.kou.promilling.R
-import com.kou.promilling.database.getDatabase
+import com.kou.promilling.database.MillingDao
 import com.kou.promilling.databinding.FragmentTrochoidWidthBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * Fragment of trochoid width calculator screen.
  */
 @Suppress("Deprecation")
+@AndroidEntryPoint
 class TrochoidWidthFragment : Fragment() {
 
+    @Inject
+    lateinit var dataSource: MillingDao
     private lateinit var binding: FragmentTrochoidWidthBinding
     private lateinit var viewModel: TrochoidWidthViewModel
 
@@ -61,7 +66,6 @@ class TrochoidWidthFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         val application = requireNotNull(this.activity).application
-        val dataSource = getDatabase(application).millingDao
         val item = arguments?.let { TrochoidWidthFragmentArgs.fromBundle(it).item }
         val viewModelFactory = TrochoidWidthViewModelFactory(dataSource, item, application)
         viewModel = ViewModelProvider(this, viewModelFactory)[TrochoidWidthViewModel::class.java]

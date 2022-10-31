@@ -12,16 +12,21 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.kou.promilling.R
-import com.kou.promilling.database.getDatabase
+import com.kou.promilling.database.MillingDao
 import com.kou.promilling.databinding.FragmentSpiralContactBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * Fragment of spiral contact length calculator screen.
  */
 @Suppress("Deprecation")
+@AndroidEntryPoint
 class SpiralContactFragment : Fragment() {
 
+    @Inject
+    lateinit var dataSource: MillingDao
     private lateinit var binding: FragmentSpiralContactBinding
     private lateinit var viewModel: SpiralContactViewModel
 
@@ -61,7 +66,6 @@ class SpiralContactFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         val application = requireNotNull(this.activity).application
-        val dataSource = getDatabase(application).millingDao
         val item = arguments?.let { SpiralContactFragmentArgs.fromBundle(it).item }
         val viewModelFactory = SpiralContactViewModelFactory(dataSource, item, application)
         viewModel = ViewModelProvider(this, viewModelFactory)[SpiralContactViewModel::class.java]
