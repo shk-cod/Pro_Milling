@@ -21,6 +21,7 @@ The app provides three unique calculators for different milling purposes.
 - Timber
 - Data Binding
 - LiveData
+- Flow
 - RecyclerView
 - Navigation component
 - Hilt
