@@ -23,6 +23,7 @@ The app provides three unique calculators for different milling purposes.
 - LiveData
 - RecyclerView
 - Navigation component
+- Hilt
 
 ## Privacy Policy
 
