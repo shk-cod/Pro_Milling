@@ -2,32 +2,38 @@
 
 package com.kou.promilling.details.cuttingwidthdetail
 
+import android.app.Application
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.kou.promilling.databinding.CuttingWidthItemDetailBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 /**
  * Fragment of cutting width calculation result detail screen.
  */
+@AndroidEntryPoint
 class CuttingWidthDetailFragment: Fragment() {
+
+    @Inject lateinit var application: Application
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val app = requireNotNull(activity).application
         val binding = CuttingWidthItemDetailBinding.inflate(inflater)
         binding.lifecycleOwner = viewLifecycleOwner
 
         val item = CuttingWidthDetailFragmentArgs.fromBundle(requireArguments()).item
-        val viewModelFactory = CuttingWidthDetailViewModelFactory(item, app)
-        val viewModel = ViewModelProvider(this, viewModelFactory)
-            .get(CuttingWidthDetailViewModel::class.java)
+        val viewModel: CuttingWidthDetailViewModel by viewModels {
+            CuttingWidthDetailViewModelFactory(item, application)
+        }
         binding.viewModel = viewModel
 
         viewModel.navigateToResults.observe(viewLifecycleOwner) {

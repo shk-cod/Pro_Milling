@@ -1,5 +1,6 @@
 package com.kou.promilling.calcs.cuttingwidthcalc
 
+import android.app.Application
 import android.content.Context
 import android.os.Bundle
 import android.view.*
@@ -25,8 +26,9 @@ import javax.inject.Inject
 @Suppress("Deprecation")
 class CuttingWidthFragment : Fragment() {
 
-    @Inject
-    lateinit var dataSource: MillingDao
+    @Inject lateinit var dataSource: MillingDao
+    @Inject lateinit var application: Application
+
     private lateinit var binding: FragmentCuttingWidthBinding
     private lateinit var viewModel: CuttingWidthViewModel
 
@@ -66,7 +68,6 @@ class CuttingWidthFragment : Fragment() {
         binding = FragmentCuttingWidthBinding.inflate(inflater)
         binding.lifecycleOwner = viewLifecycleOwner
 
-        val application = requireNotNull(this.activity).application
         val item = arguments?.let { CuttingWidthFragmentArgs.fromBundle(it).item }
         val viewModelFactory = CuttingWidthViewModelFactory(dataSource, item, application)
         viewModel = ViewModelProvider(this, viewModelFactory)[CuttingWidthViewModel::class.java]

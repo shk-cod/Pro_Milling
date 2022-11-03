@@ -1,5 +1,6 @@
 package com.kou.promilling.calcs.spiralcontactcalc
 
+import android.app.Application
 import android.content.Context
 import android.os.Bundle
 import android.view.*
@@ -25,8 +26,9 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class SpiralContactFragment : Fragment() {
 
-    @Inject
-    lateinit var dataSource: MillingDao
+    @Inject lateinit var dataSource: MillingDao
+    @Inject lateinit var application: Application
+
     private lateinit var binding: FragmentSpiralContactBinding
     private lateinit var viewModel: SpiralContactViewModel
 
@@ -65,7 +67,6 @@ class SpiralContactFragment : Fragment() {
         binding = FragmentSpiralContactBinding.inflate(inflater)
         binding.lifecycleOwner = viewLifecycleOwner
 
-        val application = requireNotNull(this.activity).application
         val item = arguments?.let { SpiralContactFragmentArgs.fromBundle(it).item }
         val viewModelFactory = SpiralContactViewModelFactory(dataSource, item, application)
         viewModel = ViewModelProvider(this, viewModelFactory)[SpiralContactViewModel::class.java]

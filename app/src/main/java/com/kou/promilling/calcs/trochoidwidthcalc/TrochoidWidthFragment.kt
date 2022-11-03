@@ -1,5 +1,6 @@
 package com.kou.promilling.calcs.trochoidwidthcalc
 
+import android.app.Application
 import android.content.Context
 import android.os.Bundle
 import android.view.*
@@ -25,8 +26,9 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class TrochoidWidthFragment : Fragment() {
 
-    @Inject
-    lateinit var dataSource: MillingDao
+    @Inject lateinit var dataSource: MillingDao
+    @Inject lateinit var application: Application
+
     private lateinit var binding: FragmentTrochoidWidthBinding
     private lateinit var viewModel: TrochoidWidthViewModel
 
@@ -65,7 +67,6 @@ class TrochoidWidthFragment : Fragment() {
         binding = FragmentTrochoidWidthBinding.inflate(inflater)
         binding.lifecycleOwner = viewLifecycleOwner
 
-        val application = requireNotNull(this.activity).application
         val item = arguments?.let { TrochoidWidthFragmentArgs.fromBundle(it).item }
         val viewModelFactory = TrochoidWidthViewModelFactory(dataSource, item, application)
         viewModel = ViewModelProvider(this, viewModelFactory)[TrochoidWidthViewModel::class.java]

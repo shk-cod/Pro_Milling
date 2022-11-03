@@ -1,11 +1,12 @@
 package com.kou.promilling.results
 
+import android.app.Application
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.kou.promilling.database.EntityType
 import com.kou.promilling.database.MillingDao
@@ -20,9 +21,8 @@ import javax.inject.Inject
 class ResultsFragment : Fragment() {
 
 
-    @Inject
-    lateinit var dataSource: MillingDao
-    private lateinit var viewModel: ResultsViewModel
+    @Inject lateinit var dataSource: MillingDao
+    @Inject lateinit var application: Application
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,9 +31,9 @@ class ResultsFragment : Fragment() {
         val binding = FragmentResultsBinding.inflate(inflater)
         binding.lifecycleOwner = viewLifecycleOwner
 
-        val application = requireNotNull(this.activity).application
-        val viewModelFactory = ResultsViewModelFactory(dataSource)
-        viewModel = ViewModelProvider(this, viewModelFactory)[ResultsViewModel::class.java]
+        val viewModel: ResultsViewModel by viewModels {
+            ResultsViewModelFactory(dataSource)
+        }
         binding.viewModel = viewModel
 
         viewModel.navigateToItemDetail.observe(viewLifecycleOwner) { item ->
