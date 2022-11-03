@@ -18,6 +18,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
 
+//TODO: move app context away from the view model
 class CuttingWidthViewModel(
     private val database: MillingDao,
     item: ResultItem?,
