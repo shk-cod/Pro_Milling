@@ -1,9 +1,8 @@
 package com.kou.promilling.calcs.cuttingwidthcalc
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kou.promilling.R
 import com.kou.promilling.calculateCuttingWidth
@@ -18,40 +17,38 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
 
-//TODO: move app context away from the view model
 class CuttingWidthViewModel(
     private val database: MillingDao,
-    item: ResultItem?,
-    private val app: Application
-) : AndroidViewModel(app) {
-    private var toolRadiusError: String? = null
-    private var roundingRadiusError: String? = null
-    private var cuttingWidthError: String? = null
+    item: ResultItem?
+) : ViewModel() {
+    private var toolRadiusError: Int? = null
+    private var roundingRadiusError: Int? = null
+    private var cuttingWidthError: Int? = null
 
-    private val _result = MutableLiveData<String>()
-    val result: LiveData<String>
+    private val _result = MutableLiveData<Double>()
+    val result: LiveData<Double>
         get() = _result
 
 
-    private val _toolRadiusErrorFlow = MutableSharedFlow<String?>(
+    private val _toolRadiusErrorFlow = MutableSharedFlow<Int?>(
         replay = 1,
         onBufferOverflow = BufferOverflow.DROP_LATEST
     )
-    val toolRadiusErrorFlow: SharedFlow<String?>
+    val toolRadiusErrorFlow: SharedFlow<Int?>
         get() = _toolRadiusErrorFlow
 
-    private val _roundingRadiusErrorFlow = MutableSharedFlow<String?>(
+    private val _roundingRadiusErrorFlow = MutableSharedFlow<Int?>(
         replay = 1,
         onBufferOverflow = BufferOverflow.DROP_LATEST
     )
-    val roundingRadiusErrorFlow: SharedFlow<String?>
+    val roundingRadiusErrorFlow: SharedFlow<Int?>
         get() = _roundingRadiusErrorFlow
 
-    private val _cuttingWidthErrorFlow = MutableSharedFlow<String?>(
+    private val _cuttingWidthErrorFlow = MutableSharedFlow<Int?>(
         replay = 1,
         onBufferOverflow = BufferOverflow.DROP_LATEST
     )
-    val cuttingWidthErrorFlow: SharedFlow<String?>
+    val cuttingWidthErrorFlow: SharedFlow<Int?>
         get() = _cuttingWidthErrorFlow
 
 
@@ -85,9 +82,7 @@ class CuttingWidthViewModel(
         )
 
         //formatting the result
-        _result.value = app.applicationContext.getString(
-            R.string.result, result
-        )
+        _result.value = result
 
         viewModelScope.launch {
             writeToDatabase(result = result)
@@ -139,15 +134,15 @@ class CuttingWidthViewModel(
     fun checkToolRadius(toolRadius: Double, roundingRadius: Double, cuttingWidth: Double) {
         when {
             toolRadius <= 0 -> {
-                toolRadiusError = app.getString(R.string.error_tool_radius_zero)
+                toolRadiusError = R.string.error_tool_radius_zero
                 _toolRadiusErrorFlow.tryEmit(toolRadiusError)
             }
             toolRadius > roundingRadius -> {
-                toolRadiusError = app.getString(R.string.error_tool_radius_rounding_radius)
+                toolRadiusError = R.string.error_tool_radius_rounding_radius
                 _toolRadiusErrorFlow.tryEmit(toolRadiusError)
             }
             (toolRadius * 2) < cuttingWidth -> {
-                toolRadiusError = app.getString(R.string.error_tool_radius_cutting_width)
+                toolRadiusError = R.string.error_tool_radius_cutting_width
                 _toolRadiusErrorFlow.tryEmit(toolRadiusError)
             }
             else -> {
@@ -160,11 +155,11 @@ class CuttingWidthViewModel(
     fun checkRoundingRadius(roundingRadius: Double, toolRadius: Double) {
         when {
             roundingRadius <= 0 -> {
-                roundingRadiusError = app.getString(R.string.error_rounding_radius_zero)
+                roundingRadiusError = R.string.error_rounding_radius_zero
                 _roundingRadiusErrorFlow.tryEmit(roundingRadiusError)
             }
             roundingRadius < toolRadius -> {
-                roundingRadiusError = app.getString(R.string.error_rounding_radius_tool_radius)
+                roundingRadiusError = R.string.error_rounding_radius_tool_radius
                 _roundingRadiusErrorFlow.tryEmit(roundingRadiusError)
             }
 
@@ -178,11 +173,11 @@ class CuttingWidthViewModel(
     fun checkCuttingWidth(cuttingWidth: Double, toolRadius: Double) {
         when {
             cuttingWidth <= 0 -> {
-                cuttingWidthError = app.getString(R.string.error_cutting_width_zero)
+                cuttingWidthError = R.string.error_cutting_width_zero
                 _cuttingWidthErrorFlow.tryEmit(cuttingWidthError)
             }
             cuttingWidth > (toolRadius * 2) -> {
-                cuttingWidthError = app.getString(R.string.error_cutting_width_tool_radius)
+                cuttingWidthError = R.string.error_cutting_width_tool_radius
                 _cuttingWidthErrorFlow.tryEmit(cuttingWidthError)
             }
             else -> {
