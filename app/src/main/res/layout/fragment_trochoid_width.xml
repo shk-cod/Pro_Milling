@@ -31,7 +31,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_default"
-                    android:text="@{viewModel.result}"
+                    android:text="@{viewModel.result != null ? @string/result(viewModel.result) : viewModel.result}"
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     android:textSize="@dimen/text_size_result"
                     android:textStyle="bold"

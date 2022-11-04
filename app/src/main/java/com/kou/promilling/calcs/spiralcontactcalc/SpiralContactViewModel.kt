@@ -2,11 +2,7 @@
 
 package com.kou.promilling.calcs.spiralcontactcalc
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.kou.promilling.R
 import com.kou.promilling.calculateSpiralContact
 import com.kou.promilling.database.EntityType
@@ -22,61 +18,60 @@ import java.util.*
 
 class SpiralContactViewModel(
     private val database: MillingDao,
-    item: ResultItem?,
-    private val app: Application
-): AndroidViewModel(app) {
-    private var toolDiameterError: String? = null
-    private var spiralAngleError: String? = null
-    private var cuttingHeightError: String? = null
-    private var cuttingWidthError: String? = null
-    private var fluteCountError: String? = null
-    private var flutePositionError: String? = null
+    item: ResultItem?
+): ViewModel() {
+    private var toolDiameterError: Int? = null
+    private var spiralAngleError: Int? = null
+    private var cuttingHeightError: Int? = null
+    private var cuttingWidthError: Int? = null
+    private var fluteCountError: Int? = null
+    private var flutePositionError: Int? = null
 
-    private val _result = MutableLiveData<String>()
-    val result: LiveData<String>
+    private val _result = MutableLiveData<Double>()
+    val result: LiveData<Double>
         get() = _result
 
 
-    private val _toolDiameterErrorFlow = MutableSharedFlow<String?>(
+    private val _toolDiameterErrorFlow = MutableSharedFlow<Int?>(
         replay = 1,
         onBufferOverflow = BufferOverflow.DROP_LATEST
     )
-    val toolDiameterErrorFlow: SharedFlow<String?>
+    val toolDiameterErrorFlow: SharedFlow<Int?>
         get() = _toolDiameterErrorFlow
 
-    private val _spiralAngleErrorFlow = MutableSharedFlow<String?>(
+    private val _spiralAngleErrorFlow = MutableSharedFlow<Int?>(
         replay = 1,
         onBufferOverflow = BufferOverflow.DROP_LATEST
     )
-    val spiralAngleErrorFlow: SharedFlow<String?>
+    val spiralAngleErrorFlow: SharedFlow<Int?>
         get() = _spiralAngleErrorFlow
 
-    private val _cuttingHeightErrorFlow = MutableSharedFlow<String?>(
+    private val _cuttingHeightErrorFlow = MutableSharedFlow<Int?>(
         replay = 1,
         onBufferOverflow = BufferOverflow.DROP_LATEST
     )
-    val cuttingHeightErrorFlow: SharedFlow<String?>
+    val cuttingHeightErrorFlow: SharedFlow<Int?>
         get() = _cuttingHeightErrorFlow
 
-    private val _cuttingWidthErrorFlow = MutableSharedFlow<String?>(
+    private val _cuttingWidthErrorFlow = MutableSharedFlow<Int?>(
         replay = 1,
         onBufferOverflow = BufferOverflow.DROP_LATEST
     )
-    val cuttingWidthErrorFlow: SharedFlow<String?>
+    val cuttingWidthErrorFlow: SharedFlow<Int?>
         get() = _cuttingWidthErrorFlow
 
-    private val _fluteCountErrorFlow = MutableSharedFlow<String?>(
+    private val _fluteCountErrorFlow = MutableSharedFlow<Int?>(
         replay = 1,
         onBufferOverflow = BufferOverflow.DROP_LATEST
     )
-    val fluteCountErrorFlow: SharedFlow<String?>
+    val fluteCountErrorFlow: SharedFlow<Int?>
         get() = _fluteCountErrorFlow
 
-    private val _flutePositionErrorFlow = MutableSharedFlow<String?>(
+    private val _flutePositionErrorFlow = MutableSharedFlow<Int?>(
         replay = 1,
         onBufferOverflow = BufferOverflow.DROP_LATEST
     )
-    val flutePositionErrorFlow: SharedFlow<String?>
+    val flutePositionErrorFlow: SharedFlow<Int?>
         get() = _flutePositionErrorFlow
 
     //Two-way data binding
@@ -116,11 +111,7 @@ class SpiralContactViewModel(
             fluteCount.value!!,
             flutePosition.value!!
         )
-
-        //formatting the result
-        _result.value = app.applicationContext.getString(
-            R.string.result, result
-        )
+        _result.value = result
 
         viewModelScope.launch {
             writeToDatabase(result = result)
@@ -184,11 +175,11 @@ class SpiralContactViewModel(
     fun checkToolDiameter(toolDiameter: Double, cuttingWidth: Double) {
         when {
             toolDiameter <= 0 -> {
-                toolDiameterError = app.getString(R.string.error_tool_diameter_zero)
+                toolDiameterError = R.string.error_tool_diameter_zero
                 _toolDiameterErrorFlow.tryEmit(toolDiameterError)
             }
             toolDiameter < cuttingWidth -> {
-                toolDiameterError = app.getString(R.string.error_tool_diameter_cutting_width)
+                toolDiameterError = R.string.error_tool_diameter_cutting_width
                 _toolDiameterErrorFlow.tryEmit(toolDiameterError)
             }
             else -> {
@@ -201,7 +192,7 @@ class SpiralContactViewModel(
     fun checkSpiralAngle(spiralAngle: Double) {
         when {
             (spiralAngle <= 0 || spiralAngle >= 90) -> {
-                spiralAngleError = app.getString(R.string.error_spiral_angle_zero)
+                spiralAngleError = R.string.error_spiral_angle_zero
                 _spiralAngleErrorFlow.tryEmit(spiralAngleError)
             }
             else -> {
@@ -214,7 +205,7 @@ class SpiralContactViewModel(
     fun checkCuttingHeight(cuttingHeight: Double) {
         when {
             cuttingHeight <= 0 -> {
-                cuttingHeightError = app.getString(R.string.error_cutting_height_zero)
+                cuttingHeightError = R.string.error_cutting_height_zero
                 _cuttingHeightErrorFlow.tryEmit(cuttingHeightError)
             }
             else -> {
@@ -227,11 +218,11 @@ class SpiralContactViewModel(
     fun checkCuttingWidth(cuttingWidth: Double, toolDiameter: Double) {
         when {
             cuttingWidth <= 0 -> {
-                cuttingWidthError = app.getString(R.string.error_cutting_width_zero)
+                cuttingWidthError = R.string.error_cutting_width_zero
                 _cuttingWidthErrorFlow.tryEmit(cuttingWidthError)
             }
             cuttingWidth > toolDiameter -> {
-                cuttingWidthError = app.getString(R.string.error_cutting_width_tool_radius)
+                cuttingWidthError = R.string.error_cutting_width_tool_radius
                 _cuttingWidthErrorFlow.tryEmit(cuttingWidthError)
             }
             else -> {
@@ -244,7 +235,7 @@ class SpiralContactViewModel(
     fun checkFluteCount(fluteCount: Int) {
         when {
             (fluteCount <= 0 || fluteCount >= 300) -> {
-                fluteCountError = app.getString(R.string.error_flute_count_zero)
+                fluteCountError = R.string.error_flute_count_zero
                 _fluteCountErrorFlow.tryEmit(fluteCountError)
             }
             else -> {
@@ -257,7 +248,7 @@ class SpiralContactViewModel(
     fun checkFlutePosition(flutePosition: Double) {
         when {
             (flutePosition < 0 || flutePosition >= 360) -> {
-                flutePositionError = app.getString(R.string.error_flute_position_zero)
+                flutePositionError = R.string.error_flute_position_zero
                 _flutePositionErrorFlow.tryEmit(flutePositionError)
             }
             else -> {

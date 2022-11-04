@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_default"
                     android:fontFamily="@font/roboto_light"
-                    android:text="@{viewModel.result != null ? @string/result(viewModel.result) : viewModel.result }"
+                    android:text="@{viewModel.result != null ? @string/result(viewModel.result) : viewModel.result}"
                     android:textSize="@dimen/text_size_result"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"

@@ -1,6 +1,5 @@
 package com.kou.promilling.details.trochoidwidthdetail
 
-import android.app.Application
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,15 +9,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.kou.promilling.databinding.TrochoidWidthItemDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 /**
  * Fragment of trochoid width calculation result detail screen.
  */
 @AndroidEntryPoint
 class TrochoidWidthDetailFragment : Fragment() {
-
-    @Inject lateinit var application: Application
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,7 +26,7 @@ class TrochoidWidthDetailFragment : Fragment() {
 
         val item = TrochoidWidthDetailFragmentArgs.fromBundle(requireArguments()).item
         val viewModel: TrochoidWidthDetailViewModel by viewModels {
-            TrochoidWidthDetailViewModelFactory(item, application)
+            TrochoidWidthDetailViewModelFactory(item)
         }
         binding.viewModel = viewModel
 

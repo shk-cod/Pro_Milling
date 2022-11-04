@@ -68,7 +68,7 @@ class SpiralContactFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         val item = arguments?.let { SpiralContactFragmentArgs.fromBundle(it).item }
-        val viewModelFactory = SpiralContactViewModelFactory(dataSource, item, application)
+        val viewModelFactory = SpiralContactViewModelFactory(dataSource, item)
         viewModel = ViewModelProvider(this, viewModelFactory)[SpiralContactViewModel::class.java]
         binding.viewModel = viewModel
 
@@ -76,7 +76,10 @@ class SpiralContactFragment : Fragment() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.toolDiameterErrorFlow.collect { error ->
-                    binding.textInputDiameter.error = error
+                    binding.textInputDiameter.error = when  {
+                        error != null -> application.getString(error)
+                        else -> null
+                    }
                 }
             }
         }
@@ -84,7 +87,10 @@ class SpiralContactFragment : Fragment() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.spiralAngleErrorFlow.collect { error ->
-                    binding.textInputSpiralAngle.error = error
+                    binding.textInputSpiralAngle.error = when  {
+                        error != null -> application.getString(error)
+                        else -> null
+                    }
                 }
             }
         }
@@ -92,7 +98,10 @@ class SpiralContactFragment : Fragment() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.cuttingHeightErrorFlow.collect { error ->
-                    binding.textInputCuttingHeight.error = error
+                    binding.textInputCuttingHeight.error = when  {
+                        error != null -> application.getString(error)
+                        else -> null
+                    }
                 }
             }
         }
@@ -100,7 +109,10 @@ class SpiralContactFragment : Fragment() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.cuttingWidthErrorFlow.collect { error ->
-                    binding.textInputCuttingWidth.error = error
+                    binding.textInputCuttingWidth.error = when  {
+                        error != null -> application.getString(error)
+                        else -> null
+                    }
                 }
             }
         }
@@ -108,7 +120,10 @@ class SpiralContactFragment : Fragment() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.fluteCountErrorFlow.collect { error ->
-                    binding.textInputFluteCount.error = error
+                    binding.textInputFluteCount.error = when  {
+                        error != null -> application.getString(error)
+                        else -> null
+                    }
                 }
             }
         }
@@ -116,7 +131,10 @@ class SpiralContactFragment : Fragment() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.flutePositionErrorFlow.collect { error ->
-                    binding.textInputFlutePosition.error = error
+                    binding.textInputFlutePosition.error = when  {
+                        error != null -> application.getString(error)
+                        else -> null
+                    }
                 }
             }
         }

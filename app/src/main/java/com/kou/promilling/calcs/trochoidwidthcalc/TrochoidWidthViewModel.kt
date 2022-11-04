@@ -1,9 +1,8 @@
 package com.kou.promilling.calcs.trochoidwidthcalc
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kou.promilling.R
 import com.kou.promilling.calculateTrochoidWidth
@@ -20,36 +19,35 @@ import java.util.*
 
 class TrochoidWidthViewModel(
     private val database: MillingDao,
-    item: ResultItem?,
-    private val app: Application
-): AndroidViewModel(app) {
-    private var toolRadiusError: String? = null
-    private var roundingRadiusError: String? = null
-    private var trochoidStepError: String? = null
+    item: ResultItem?
+): ViewModel() {
+    private var toolRadiusError: Int? = null
+    private var roundingRadiusError: Int? = null
+    private var trochoidStepError: Int? = null
 
-    private val _result = MutableLiveData<String>()
-    val result: LiveData<String>
+    private val _result = MutableLiveData<Double>()
+    val result: LiveData<Double>
         get() = _result
 
-    private val _toolRadiusErrorFlow = MutableSharedFlow<String?>(
+    private val _toolRadiusErrorFlow = MutableSharedFlow<Int?>(
         replay = 1,
         onBufferOverflow = BufferOverflow.DROP_LATEST
     )
-    val toolRadiusErrorFlow: SharedFlow<String?>
+    val toolRadiusErrorFlow: SharedFlow<Int?>
         get() = _toolRadiusErrorFlow
 
-    private val _roundingRadiusErrorFlow = MutableSharedFlow<String?>(
+    private val _roundingRadiusErrorFlow = MutableSharedFlow<Int?>(
         replay = 1,
         onBufferOverflow = BufferOverflow.DROP_LATEST
     )
-    val roundingRadiusErrorFlow: SharedFlow<String?>
+    val roundingRadiusErrorFlow: SharedFlow<Int?>
         get() = _roundingRadiusErrorFlow
 
-    private val _trochoidStepErrorFlow = MutableSharedFlow<String?>(
+    private val _trochoidStepErrorFlow = MutableSharedFlow<Int?>(
         replay = 1,
         onBufferOverflow = BufferOverflow.DROP_LATEST
     )
-    val trochoidStepErrorFlow: SharedFlow<String?>
+    val trochoidStepErrorFlow: SharedFlow<Int?>
         get() = _trochoidStepErrorFlow
 
 
@@ -80,11 +78,7 @@ class TrochoidWidthViewModel(
             roundingRadius.value!!,
             trochoidStep.value!!
         )
-
-        //formatting the result
-        _result.value = app.applicationContext.getString(
-            R.string.result, result
-        )
+        _result.value = result
 
         viewModelScope.launch {
             writeToDatabase(result = result)
@@ -136,11 +130,11 @@ class TrochoidWidthViewModel(
     fun checkToolRadius(toolRadius: Double, trochoidStep: Double) {
         when {
             toolRadius <= 0 -> {
-                toolRadiusError = app.getString(R.string.error_tool_radius_zero)
+                toolRadiusError = R.string.error_tool_radius_zero
                 _toolRadiusErrorFlow.tryEmit(toolRadiusError)
             }
             (toolRadius * 2) < trochoidStep -> {
-                toolRadiusError = app.getString(R.string.error_tool_radius_trochoid_step)
+                toolRadiusError = R.string.error_tool_radius_trochoid_step
                 _toolRadiusErrorFlow.tryEmit(toolRadiusError)
             }
             else -> {
@@ -153,7 +147,7 @@ class TrochoidWidthViewModel(
     fun checkRoundingRadius(roundingRadius: Double) {
         when {
             roundingRadius <= 0 -> {
-                roundingRadiusError = app.getString(R.string.error_rounding_radius_zero)
+                roundingRadiusError = R.string.error_rounding_radius_zero
                 _roundingRadiusErrorFlow.tryEmit(roundingRadiusError)
             }
             else -> {
@@ -166,11 +160,11 @@ class TrochoidWidthViewModel(
     fun checkTrochoidStep(trochoidStep: Double, toolRadius: Double) {
         when {
             trochoidStep <= 0 -> {
-                trochoidStepError = app.getString(R.string.error_trochoid_step_zero)
+                trochoidStepError = R.string.error_trochoid_step_zero
                 _trochoidStepErrorFlow.tryEmit(trochoidStepError)
             }
             trochoidStep > (toolRadius * 2) -> {
-                trochoidStepError = app.getString(R.string.error_trochoid_step_tool_diameter)
+                trochoidStepError = R.string.error_trochoid_step_tool_diameter
                 _trochoidStepErrorFlow.tryEmit(trochoidStepError)
             }
             else -> {

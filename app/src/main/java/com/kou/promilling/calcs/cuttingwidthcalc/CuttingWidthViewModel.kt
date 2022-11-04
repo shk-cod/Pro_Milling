@@ -80,8 +80,6 @@ class CuttingWidthViewModel(
             roundingRadius.value!!,
             cuttingWidth.value!!
         )
-
-        //formatting the result
         _result.value = result
 
         viewModelScope.launch {

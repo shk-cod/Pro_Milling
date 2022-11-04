@@ -68,7 +68,7 @@ class TrochoidWidthFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         val item = arguments?.let { TrochoidWidthFragmentArgs.fromBundle(it).item }
-        val viewModelFactory = TrochoidWidthViewModelFactory(dataSource, item, application)
+        val viewModelFactory = TrochoidWidthViewModelFactory(dataSource, item)
         viewModel = ViewModelProvider(this, viewModelFactory)[TrochoidWidthViewModel::class.java]
         binding.viewModel = viewModel
 
@@ -76,7 +76,10 @@ class TrochoidWidthFragment : Fragment() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.toolRadiusErrorFlow.collect { error ->
-                    binding.textInputRadius.error = error
+                    binding.textInputRadius.error = when {
+                        error != null -> application.getString(error)
+                        else -> null
+                    }
                 }
             }
         }
@@ -84,7 +87,10 @@ class TrochoidWidthFragment : Fragment() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.roundingRadiusErrorFlow.collect { error ->
-                    binding.textInputRoundingRadius.error = error
+                    binding.textInputRoundingRadius.error = when {
+                        error != null -> application.getString(error)
+                        else -> null
+                    }
                 }
             }
         }
@@ -92,7 +98,10 @@ class TrochoidWidthFragment : Fragment() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.trochoidStepErrorFlow.collect { error ->
-                    binding.textInputTrochoidStep.error = error
+                    binding.textInputTrochoidStep.error = when {
+                        error != null -> application.getString(error)
+                        else -> null
+                    }
                 }
             }
         }

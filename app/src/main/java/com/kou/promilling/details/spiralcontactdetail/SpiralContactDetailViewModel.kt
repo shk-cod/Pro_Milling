@@ -1,64 +1,27 @@
 package com.kou.promilling.details.spiralcontactdetail
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import com.kou.promilling.R
+import androidx.lifecycle.ViewModel
 import com.kou.promilling.database.ResultItem
 
 class SpiralContactDetailViewModel(
-    item: ResultItem,
-    app: Application
-) : AndroidViewModel(app) {
+    item: ResultItem
+) : ViewModel() {
     private val selectedItem = MutableLiveData<ResultItem>()
 
     init {
         selectedItem.value = item
     }
 
-    val displayToolDiameter: LiveData<String> = Transformations.map(selectedItem) {
-        app.applicationContext.getString(
-            R.string.display_tool_diameter, it.toolDiameter
-        )
-    }
-
-    val displaySpiralAngle: LiveData<String> = Transformations.map(selectedItem) {
-        app.applicationContext.getString(
-            R.string.display_spiral_angle, it.spiralAngle
-        )
-    }
-
-    val displayCuttingHeight: LiveData<String> = Transformations.map(selectedItem) {
-        app.applicationContext.getString(
-            R.string.display_cutting_height, it.cuttingDepth
-        )
-    }
-
-    val displayCuttingWidth: LiveData<String> = Transformations.map(selectedItem) {
-        app.applicationContext.getString(
-            R.string.display_cutting_width, it.cuttingWidth
-        )
-    }
-
-    val displayFluteCount: LiveData<String> = Transformations.map(selectedItem) {
-        app.applicationContext.getString(
-            R.string.display_flute_count, it.fluteCount
-        )
-    }
-
-    val displayFLutePosition: LiveData<String> = Transformations.map(selectedItem) {
-        app.applicationContext.getString(
-            R.string.display_flute_position, it.flutePosition
-        )
-    }
-
-    val displayResult: LiveData<String> = Transformations.map(selectedItem) {
-        app.applicationContext.getString(
-            R.string.display_result, it.result
-        )
-    }
+    val displayToolDiameter: LiveData<Double> = Transformations.map(selectedItem) { it.toolDiameter }
+    val displaySpiralAngle: LiveData<Double> = Transformations.map(selectedItem) { it.spiralAngle }
+    val displayCuttingHeight: LiveData<Double> = Transformations.map(selectedItem) { it.cuttingDepth }
+    val displayCuttingWidth: LiveData<Double> = Transformations.map(selectedItem) { it.cuttingWidth }
+    val displayFluteCount: LiveData<Int> = Transformations.map(selectedItem) { it.fluteCount }
+    val displayFLutePosition: LiveData<Double> = Transformations.map(selectedItem) { it.flutePosition }
+    val displayResult: LiveData<Double> = Transformations.map(selectedItem) { it.result }
 
     private val _navigateToResults = MutableLiveData(false)
     val navigateToResults: LiveData<Boolean>

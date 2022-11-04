@@ -1,6 +1,5 @@
 package com.kou.promilling.details.spiralcontactdetail
 
-import android.app.Application
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,15 +9,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.kou.promilling.databinding.SpiralContactItemDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 /**
  * Fragment of spiral contact length calculation result detail screen.
  */
 @AndroidEntryPoint
 class SpiralContactDetailFragment : Fragment() {
-
-    @Inject lateinit var application: Application
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,7 +26,7 @@ class SpiralContactDetailFragment : Fragment() {
 
         val item = SpiralContactDetailFragmentArgs.fromBundle(requireArguments()).item
         val viewModel: SpiralContactDetailViewModel by viewModels {
-            SpiralContactDetailViewModelFactory(item, application)
+            SpiralContactDetailViewModelFactory(item)
         }
         binding.viewModel = viewModel
 
