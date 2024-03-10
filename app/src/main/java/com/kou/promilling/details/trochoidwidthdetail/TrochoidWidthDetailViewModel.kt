@@ -2,8 +2,8 @@ package com.kou.promilling.details.trochoidwidthdetail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.map
 import com.kou.promilling.database.ResultItem
 
 class TrochoidWidthDetailViewModel(
@@ -15,10 +15,10 @@ class TrochoidWidthDetailViewModel(
         selectedItem.value = item
     }
 
-    val displayToolRadius: LiveData<Double> = Transformations.map(selectedItem) { it.toolRadius }
-    val displayRoundingRadius: LiveData<Double> = Transformations.map(selectedItem) { it.curvatureRadius }
-    val displayTrochoidStep: LiveData<Double> = Transformations.map(selectedItem) { it.trochoidStep }
-    val displayResult: LiveData<Double> = Transformations.map(selectedItem) { it.result }
+    val displayToolRadius: LiveData<Double> = selectedItem.map { it.toolRadius }
+    val displayRoundingRadius: LiveData<Double> = selectedItem.map { it.curvatureRadius }
+    val displayTrochoidStep: LiveData<Double> = selectedItem.map { it.trochoidStep }
+    val displayResult: LiveData<Double> = selectedItem.map { it.result }
 
     private val _navigateToResults = MutableLiveData(false)
     val navigateToResults: LiveData<Boolean>

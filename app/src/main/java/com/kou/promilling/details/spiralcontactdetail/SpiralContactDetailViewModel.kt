@@ -2,8 +2,8 @@ package com.kou.promilling.details.spiralcontactdetail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.map
 import com.kou.promilling.database.ResultItem
 
 class SpiralContactDetailViewModel(
@@ -15,13 +15,13 @@ class SpiralContactDetailViewModel(
         selectedItem.value = item
     }
 
-    val displayToolDiameter: LiveData<Double> = Transformations.map(selectedItem) { it.toolDiameter }
-    val displaySpiralAngle: LiveData<Double> = Transformations.map(selectedItem) { it.spiralAngle }
-    val displayCuttingHeight: LiveData<Double> = Transformations.map(selectedItem) { it.cuttingDepth }
-    val displayCuttingWidth: LiveData<Double> = Transformations.map(selectedItem) { it.cuttingWidth }
-    val displayFluteCount: LiveData<Int> = Transformations.map(selectedItem) { it.fluteCount }
-    val displayFLutePosition: LiveData<Double> = Transformations.map(selectedItem) { it.flutePosition }
-    val displayResult: LiveData<Double> = Transformations.map(selectedItem) { it.result }
+    val displayToolDiameter: LiveData<Double> = selectedItem.map { it.toolDiameter }
+    val displaySpiralAngle: LiveData<Double> = selectedItem.map { it.spiralAngle }
+    val displayCuttingHeight: LiveData<Double> = selectedItem.map { it.cuttingDepth }
+    val displayCuttingWidth: LiveData<Double> = selectedItem.map { it.cuttingWidth }
+    val displayFluteCount: LiveData<Int> = selectedItem.map { it.fluteCount }
+    val displayFLutePosition: LiveData<Double> = selectedItem.map { it.flutePosition }
+    val displayResult: LiveData<Double> = selectedItem.map { it.result }
 
     private val _navigateToResults = MutableLiveData(false)
     val navigateToResults: LiveData<Boolean>
