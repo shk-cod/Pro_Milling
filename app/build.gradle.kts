@@ -10,7 +10,7 @@ plugins {
 
 val versionMajor = 0
 val versionMinor = 8
-val versionPatch = 1
+val versionPatch = 2
 
 android {
     namespace = "com.kou.promilling"
